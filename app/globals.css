@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 255 252 248; 
+    --foreground: 41 37 36; 
+    --primary: 94 234 212; 
+    --font-serif: "Playfair Display", serif;
+    --font-sans: "Lato", sans-serif;
+  }
+
+  /* RESET DE SEGURIDAD */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    min-width: 0; 
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* CORRECCIÓN CRÍTICA: */
+    /* Se elimina max-width: 100vw. */
+    /* Se mantiene overflow-x: hidden para evitar scroll horizontal accidental */
+    overflow-x: hidden; 
+    width: 100%;
+  }
+
+  body {
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    /* CORRECCIÓN CRÍTICA: */
+    /* Se elimina max-width: 100vw. */
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+    min-height: 100vh;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    color: #44403c;
+    font-weight: 500;
+  }
+
+  p, span, a, li {
+    font-family: var(--font-sans);
+    color: #57534e;
+  }
+}
+
+/* UTILIDAD DE EMERGENCIA (Opcional, pero segura si se usa en secciones internas, NO en body) */
+@layer utilities {
+  .clip-content {
+    overflow: hidden;
+    /* max-width: 100%; usar % es más seguro que vw aquí también */
+    max-width: 100%; 
+  }
+}
