@@ -2,7 +2,6 @@
 
 import { MouseEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
-// TAREA: Sube la foto de Janet sin fondo a la carpeta assets y asegúrate de que el nombre coincida aquí.
 import HeroJanet from '@/app/assets/HeroJanet.webp'; 
 
 export default function Hero() {
@@ -22,30 +21,22 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-32 md:pt-20 overflow-hidden w-full bg-transparent">
+    <section className="relative min-h-[90vh] flex items-center pt-48 md:pt-40 lg:pt-32 pb-20 overflow-hidden w-full bg-transparent">
       
       {/* OPTIMIZACIÓN SAFARI 1: Luces de fondo con translate3d para evitar parpadeos (flickering) en iOS */}
       <div className="absolute top-1/2 right-0 md:right-20 -translate-y-1/2 w-[80vw] md:w-[600px] h-[600px] bg-[#4a675e]/10 rounded-full blur-[100px] -z-10 pointer-events-none transform-gpu translate-z-0" />
       <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-amber-500/10 rounded-full blur-[120px] -z-10 pointer-events-none transform-gpu translate-z-0" />
 
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
             
-            {/* COLUMNA 1: TEXTO (Ahora a la izquierda en escritorio) */}
+            {/* COLUMNA 1: TEXTO */}
             <div className={`text-center md:text-left z-10 relative transition-all duration-1000 ease-out transform-gpu ${
               isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
                 
-                {/* Etiqueta / Badge */}
-                <div className="inline-flex items-center gap-2 mb-6 mt-4 md:mt-0 px-5 py-2 rounded-full border border-amber-200/50 bg-white/70 shadow-sm backdrop-blur-md">
-                    <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-                    <span className="text-xs md:text-sm font-bold text-[#4a675e] tracking-widest uppercase font-sans">
-                        Psicóloga Clínica y Psicoterapeuta
-                    </span>
-                </div>
-                
                 {/* Título Principal */}
-                <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-[4rem] font-medium tracking-tight text-stone-800 mb-6 leading-[1.15] font-serif">
+                <h1 className="text-5xl md:text-5xl lg:text-6xl xl:text-[4.5rem] font-medium tracking-tight text-stone-800 mb-6 leading-[1.15] font-serif">
                     Encuentra el equilibrio y transforma tu forma de <br className="hidden lg:block" />
                     <span className="relative inline-block text-[#4a675e] italic mt-2 md:mt-0">
                         vivir el presente
@@ -73,15 +64,15 @@ export default function Hero() {
                         href="https://wa.link/6vc76u" 
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group relative px-8 py-4 rounded-full bg-[#4a675e] text-white font-bold text-lg overflow-hidden shadow-xl shadow-[#4a675e]/20 w-full sm:w-auto text-center cursor-pointer transition-transform hover:-translate-y-1 active:translate-y-0"
+                        className="group relative px-8 py-4 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-[#2b3d38] font-bold text-lg overflow-hidden shadow-xl shadow-amber-500/20 w-full sm:w-auto text-center cursor-pointer transition-transform hover:-translate-y-1 active:translate-y-0"
                     >
                         <span className="relative z-10 flex items-center justify-center gap-2">
                             Agendar mi primera sesión
-                            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1 text-[#2b3d38]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                             </svg>
                         </span>
-                        <div className="absolute inset-0 h-full w-full scale-0 rounded-full transition-all duration-300 group-hover:scale-150 group-hover:bg-[#3a524a]/50"></div>
+                        <div className="absolute inset-0 h-full w-full scale-0 rounded-full transition-all duration-300 group-hover:scale-150 group-hover:bg-amber-300/50"></div>
                     </a>
                     
                     <a 
@@ -95,7 +86,6 @@ export default function Hero() {
             </div>
 
             {/* COLUMNA 2: IMAGEN */}
-            {/* OPTIMIZACIÓN SAFARI 2: Se eliminó el mix de blur + mask-image complejo en el mismo contenedor */}
             <div className={`relative flex justify-center lg:justify-end transition-all duration-1000 delay-300 ease-out transform-gpu ${
               isMounted ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
             }`}>
@@ -105,7 +95,7 @@ export default function Hero() {
 
                 <div className="relative w-full max-w-[450px] aspect-[4/5] md:aspect-auto md:h-[600px]"> 
                     <Image
-                        src={HeroJanet} // Asegúrate de cambiar esto si no tienes la imagen importada
+                        src={HeroJanet} 
                         alt="Psicóloga Janet Duque"
                         fill
                         className="object-contain object-bottom drop-shadow-2xl [-webkit-mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)] mask-image-safe" 
