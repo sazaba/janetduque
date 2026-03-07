@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { Activity, Cloud, Flame, Moon, Waves } from 'lucide-react';
 
 // --- DATOS CURADOS CON TAMAÑOS ASIMÉTRICOS (BENTO GRID) ---
@@ -11,7 +11,7 @@ const painPoints = [
     icon: Activity, 
     title: "Ansiedad y Pánico", 
     desc: "Esa sensación de alerta permanente, miedos repentinos o una opresión en el pecho que aparece sin aviso. El cuerpo reacciona a un peligro que la mente no puede apagar.",
-    colSpan: "md:col-span-2", // Tarjeta ancha
+    colSpan: "md:col-span-2", 
     layout: "horizontal"
   },
   { 
@@ -19,7 +19,7 @@ const painPoints = [
     icon: Cloud, 
     title: "Depresión y Vacío", 
     desc: "Falta de vitalidad, desconexión profunda con lo que antes disfrutabas o una tristeza que cuesta explicar con palabras.",
-    colSpan: "md:col-span-1", // Tarjeta cuadrada
+    colSpan: "md:col-span-1", 
     layout: "vertical"
   },
   { 
@@ -27,7 +27,7 @@ const painPoints = [
     icon: Flame, 
     title: "Estrés y Burnout", 
     desc: "Sientes que las demandas te superan. El agotamiento físico y mental no desaparece ni siquiera después de intentar descansar.",
-    colSpan: "md:col-span-1", // Tarjeta cuadrada
+    colSpan: "md:col-span-1", 
     layout: "vertical"
   },
   { 
@@ -35,7 +35,7 @@ const painPoints = [
     icon: Moon, 
     title: "Insomnio y Rumiación", 
     desc: "La mente no se apaga de noche. Das vueltas a los mismos pensamientos una y otra vez, impidiendo que alcances un sueño verdaderamente reparador.",
-    colSpan: "md:col-span-2", // Tarjeta ancha
+    colSpan: "md:col-span-2", 
     layout: "horizontal"
   },
   { 
@@ -43,13 +43,13 @@ const painPoints = [
     icon: Waves, 
     title: "Desregulación Emocional", 
     desc: "Tus emociones toman el control rápidamente. Reaccionas con una intensidad que te sorprende y te cuesta mucho volver a tu centro de calma.",
-    colSpan: "md:col-span-3 lg:col-span-3", // Tarjeta ultra ancha (Hero card)
+    colSpan: "md:col-span-3 lg:col-span-3", 
     layout: "horizontal"
   },
 ];
 
-// --- VARIANTES DE ANIMACIÓN ESTILO APPLE (Suaves y elásticas) ---
-const containerVariants = {
+// --- VARIANTES DE ANIMACIÓN ESTILO APPLE (Ahora con tipado estricto) ---
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -57,7 +57,7 @@ const containerVariants = {
   },
 };
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { y: 40, opacity: 0, scale: 0.95 },
   visible: {
     y: 0,
@@ -69,7 +69,6 @@ const cardVariants = {
 
 export default function PainPoints() {
   return (
-    // Fondo ultra oscuro para generar un contraste dramático y premium
     <section className="py-32 relative z-10 w-full bg-[#1a2521] overflow-hidden">
       
       {/* Luces de ambiente (Glow effects traseros) */}
@@ -85,7 +84,7 @@ export default function PainPoints() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} // Curva de aceleración Apple
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} 
           >
             Las señales de que <br className="hidden md:block"/>
             es momento de <span className="text-amber-400 italic">pausar.</span>
