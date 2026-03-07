@@ -10,16 +10,16 @@ const drawViewportConfig = { once: true, amount: 0.2 };
 // --- ICONO PREMIUM CENTRADO CON LATIDO DORADO ---
 const IconWrapper = ({ Icon }: { Icon: React.ElementType }) => (
   <div className="w-20 h-20 mb-8 mx-auto relative flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-500 ease-out">
-    {/* Latido exterior sutil (Dorado suave) */}
+    {/* Latido exterior sutil */}
     <motion.div 
         animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.4, 0.15] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         className="absolute inset-0 bg-amber-300/40 rounded-full" 
         style={{ willChange: "transform, opacity" }} 
     />
-    {/* Esfera dorada sólida (Dorado intenso a suave) */}
+    {/* Esfera dorada sólida */}
     <div className="absolute inset-2.5 bg-gradient-to-tr from-amber-500 to-amber-200 rounded-full shadow-[0_4px_12px_rgba(251,191,36,0.3)] border border-amber-100/50"></div>
-    {/* Icono Lucide (Verde oscuro para contraste) */}
+    {/* Icono Lucide */}
     <Icon className="w-7 h-7 text-[#2b3d38] relative z-10" strokeWidth={2} />
   </div>
 );
@@ -38,37 +38,31 @@ export default function PainPoints() {
 
   const scroll = (direction: 'left' | 'right') => {
     if (carouselRef.current) {
-      // Movimiento responsive suave
       const scrollAmount = window.innerWidth < 768 ? window.innerWidth * 0.82 + 20 : 360;
       carouselRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
     }
   };
 
   return (
-    // CONTENEDOR RAIZ: bg-transparent para que la onda beige funcione
     <div className="relative z-10 w-full bg-transparent overflow-hidden">
       
-      {/* --- 1. SEPARADOR DE ONDA BRUTAL (Parte Superior) --- */}
-      {/* Esta onda debe ser rellenada con el color beige de tu layout para 'comerse' el inicio del bloque verde */}
-      <div className="relative w-full overflow-hidden" style={{ lineHeight: '0' }}>
+      {/* --- 1. SEPARADOR DE ONDA (AHORA EN VERDE OSCURO) --- */}
+      {/* Esta onda se dibuja hacia arriba, creando la ilusión perfecta de corte orgánico */}
+      <div className="w-full leading-[0] border-none -mb-[1px]">
         <svg
           viewBox="0 0 1440 120"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="none"
-          className="w-full h-20 md:h-28 lg:h-32" // Smart responsive height
+          className="w-full h-16 md:h-24 lg:h-36 block"
         >
           <path
-            // Trazado SVG asimétrico y orgánico (Pintado con el color beige del layout: #fffcf8)
-            d="M0 64C480 224 960 -32 1440 64V120H0V64Z"
-            fill="#fffcf8" // Color de fondo del layout beige para que la onda se vea
+            d="M0,64L48,58.7C96,53,192,43,288,48C384,53,480,75,576,80C672,85,768,75,864,64C960,53,1056,43,1152,48C1248,53,1344,75,1392,85.3L1440,96L1440,121L1392,121C1344,121,1248,121,1152,121C1056,121,960,121,864,121C768,121,672,121,576,121C480,121,384,121,288,121C192,121,96,121,48,121L0,121Z"
+            fill="#4a675e"
           />
         </svg>
       </div>
 
-      {/* --- 2. BLOQUE OSCURO INMERSIVO (bg-[#4a675e]) --- */}
-      <section className="pb-24 md:pb-32 w-full bg-[#4a675e] -mt-px relative">
-         {/* -mt-px asegura que no haya una línea de luz entre la onda y el bloque */}
+      {/* --- 2. BLOQUE OSCURO INMERSIVO --- */}
+      <section className="pb-24 md:pb-32 w-full bg-[#4a675e] relative pt-6 md:pt-10">
 
         {/* Estilo para ocultar scrollbar nativa */}
         <style dangerouslySetInnerHTML={{__html: `
@@ -78,7 +72,7 @@ export default function PainPoints() {
 
         <div className="max-w-[1400px] mx-auto px-4 md:px-8">
             
-            {/* CABECERA (Oscura para contraste) */}
+            {/* CABECERA */}
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                 <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0">
                     <motion.h2
@@ -103,7 +97,7 @@ export default function PainPoints() {
                     </motion.p>
                 </div>
 
-                {/* BOTONES DE NAVEGACIÓN ( Desktop ) */}
+                {/* BOTONES DE NAVEGACIÓN */}
                 <div className="hidden md:flex gap-4">
                     <button onClick={() => scroll('left')} aria-label="Anterior" className="w-14 h-14 rounded-full border border-amber-400/30 flex items-center justify-center text-amber-400 hover:bg-amber-400 hover:text-[#4a675e] transition-colors duration-300 active:scale-95">
                         <ChevronLeft size={28} />
@@ -114,9 +108,8 @@ export default function PainPoints() {
                 </div>
             </div>
 
-            {/* CARRUSEL HORIZONTAL CON SCROLL SNAP NATIVO (Safari Safe) */}
+            {/* CARRUSEL HORIZONTAL */}
             <div className="relative -mx-4 md:mx-0">
-                {/* Sombras laterales para indicar scroll */}
                 <div className="absolute top-0 left-0 w-8 md:w-20 h-full bg-gradient-to-r from-[#4a675e] to-transparent z-10 pointer-events-none"></div>
                 <div className="absolute top-0 right-0 w-8 md:w-32 h-full bg-gradient-to-l from-[#4a675e] to-transparent z-10 pointer-events-none"></div>
 
