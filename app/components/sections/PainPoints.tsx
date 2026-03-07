@@ -1,145 +1,152 @@
 "use client";
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Activity, Cloud, Flame, Moon, Waves } from 'lucide-react';
+import { Activity, Cloud, Flame, Moon, Waves } from 'lucide-react';
 
-// --- CONFIGURACIÓN DE ACTIVACIÓN ---
-const drawViewportConfig = { once: true, amount: 0.2 };
-
-// --- ICONO PREMIUM CENTRADO CON LATIDO DORADO ---
-const IconWrapper = ({ Icon }: { Icon: React.ElementType }) => (
-  <div className="w-20 h-20 mb-8 mx-auto relative flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-500 ease-out">
-    {/* Latido exterior sutil */}
-    <motion.div 
-        animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.4, 0.15] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute inset-0 bg-amber-300/40 rounded-full" 
-        style={{ willChange: "transform, opacity" }} 
-    />
-    {/* Esfera dorada sólida */}
-    <div className="absolute inset-2.5 bg-gradient-to-tr from-amber-500 to-amber-200 rounded-full shadow-[0_4px_12px_rgba(251,191,36,0.3)] border border-amber-100/50"></div>
-    {/* Icono Lucide */}
-    <Icon className="w-7 h-7 text-[#2b3d38] relative z-10" strokeWidth={2} />
-  </div>
-);
-
-// --- DATOS CURADOS (5 Motivos Clave) ---
+// --- DATOS CURADOS CON TAMAÑOS ASIMÉTRICOS (BENTO GRID) ---
 const painPoints = [
-  { icon: Activity, title: "Ansiedad y Pánico", desc: "Sensación de alerta permanente, miedos repentinos o una opresión en el pecho que aparece sin aviso previo." },
-  { icon: Cloud, title: "Depresión y Vacío", desc: "Falta de vitalidad, desconexión profunda con lo que antes disfrutabas o una tristeza que cuesta explicar." },
-  { icon: Flame, title: "Estrés y Burnout", desc: "Sientes que las demandas te superan. El agotamiento físico y mental no desaparece ni siquiera al descansar." },
-  { icon: Moon, title: "Insomnio y Rumiación", desc: "La mente no se apaga de noche. Das vueltas a los mismos pensamientos una y otra vez, impidiendo dormir." },
-  { icon: Waves, title: "Desregulación Emocional", desc: "Tus emociones toman el control rápidamente. Reaccionas con intensidad y te cuesta mucho volver a la calma." },
+  { 
+    id: "ansiedad",
+    icon: Activity, 
+    title: "Ansiedad y Pánico", 
+    desc: "Esa sensación de alerta permanente, miedos repentinos o una opresión en el pecho que aparece sin aviso. El cuerpo reacciona a un peligro que la mente no puede apagar.",
+    colSpan: "md:col-span-2", // Tarjeta ancha
+    layout: "horizontal"
+  },
+  { 
+    id: "depresion",
+    icon: Cloud, 
+    title: "Depresión y Vacío", 
+    desc: "Falta de vitalidad, desconexión profunda con lo que antes disfrutabas o una tristeza que cuesta explicar con palabras.",
+    colSpan: "md:col-span-1", // Tarjeta cuadrada
+    layout: "vertical"
+  },
+  { 
+    id: "burnout",
+    icon: Flame, 
+    title: "Estrés y Burnout", 
+    desc: "Sientes que las demandas te superan. El agotamiento físico y mental no desaparece ni siquiera después de intentar descansar.",
+    colSpan: "md:col-span-1", // Tarjeta cuadrada
+    layout: "vertical"
+  },
+  { 
+    id: "insomnio",
+    icon: Moon, 
+    title: "Insomnio y Rumiación", 
+    desc: "La mente no se apaga de noche. Das vueltas a los mismos pensamientos una y otra vez, impidiendo que alcances un sueño verdaderamente reparador.",
+    colSpan: "md:col-span-2", // Tarjeta ancha
+    layout: "horizontal"
+  },
+  { 
+    id: "desregulacion",
+    icon: Waves, 
+    title: "Desregulación Emocional", 
+    desc: "Tus emociones toman el control rápidamente. Reaccionas con una intensidad que te sorprende y te cuesta mucho volver a tu centro de calma.",
+    colSpan: "md:col-span-3 lg:col-span-3", // Tarjeta ultra ancha (Hero card)
+    layout: "horizontal"
+  },
 ];
 
+// --- VARIANTES DE ANIMACIÓN ESTILO APPLE (Suaves y elásticas) ---
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+  },
+};
+
+const cardVariants = {
+  hidden: { y: 40, opacity: 0, scale: 0.95 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    scale: 1,
+    transition: { type: "spring", stiffness: 60, damping: 15, mass: 1 },
+  },
+};
+
 export default function PainPoints() {
-  const carouselRef = useRef<HTMLDivElement>(null);
-
-  const scroll = (direction: 'left' | 'right') => {
-    if (carouselRef.current) {
-      const scrollAmount = window.innerWidth < 768 ? window.innerWidth * 0.82 + 20 : 360;
-      carouselRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
-    }
-  };
-
   return (
-    <div className="relative z-10 w-full bg-transparent overflow-hidden">
+    // Fondo ultra oscuro para generar un contraste dramático y premium
+    <section className="py-32 relative z-10 w-full bg-[#1a2521] overflow-hidden">
       
-      {/* --- 1. SEPARADOR DE ONDA (AHORA EN VERDE OSCURO) --- */}
-      {/* Esta onda se dibuja hacia arriba, creando la ilusión perfecta de corte orgánico */}
-      <div className="w-full leading-[0] border-none -mb-[1px]">
-        <svg
-          viewBox="0 0 1440 120"
-          preserveAspectRatio="none"
-          className="w-full h-16 md:h-24 lg:h-36 block"
-        >
-          <path
-            d="M0,64L48,58.7C96,53,192,43,288,48C384,53,480,75,576,80C672,85,768,75,864,64C960,53,1056,43,1152,48C1248,53,1344,75,1392,85.3L1440,96L1440,121L1392,121C1344,121,1248,121,1152,121C1056,121,960,121,864,121C768,121,672,121,576,121C480,121,384,121,288,121C192,121,96,121,48,121L0,121Z"
-            fill="#4a675e"
-          />
-        </svg>
-      </div>
+      {/* Luces de ambiente (Glow effects traseros) */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[500px] bg-[#4a675e]/20 rounded-[100%] blur-[120px] pointer-events-none mix-blend-screen"></div>
+      <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-amber-500/10 rounded-full blur-[150px] pointer-events-none mix-blend-screen"></div>
 
-      {/* --- 2. BLOQUE OSCURO INMERSIVO --- */}
-      <section className="pb-24 md:pb-32 w-full bg-[#4a675e] relative pt-6 md:pt-10">
-
-        {/* Estilo para ocultar scrollbar nativa */}
-        <style dangerouslySetInnerHTML={{__html: `
-            .hide-scrollbar::-webkit-scrollbar { display: none; }
-            .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        `}} />
-
-        <div className="max-w-[1400px] mx-auto px-4 md:px-8">
-            
-            {/* CABECERA */}
-            <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-                <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0">
-                    <motion.h2
-                        className="text-4xl md:text-5xl lg:text-6xl font-medium font-serif text-white mb-4 tracking-tight leading-tight"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                    >
-                        ¿Te identificas con <span className="text-amber-400 italic">esto?</span>
-                    </motion.h2>
-                    
-                    <motion.p
-                        className="text-lg md:text-xl text-stone-300 font-sans font-light leading-relaxed"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                    >
-                        Reconocer el agotamiento es el primer paso. <br className="hidden md:block"/>
-                        <span className="text-white font-bold font-serif mt-2 inline-block">Validemos lo que sientes.</span>
-                    </motion.p>
-                </div>
-
-                {/* BOTONES DE NAVEGACIÓN */}
-                <div className="hidden md:flex gap-4">
-                    <button onClick={() => scroll('left')} aria-label="Anterior" className="w-14 h-14 rounded-full border border-amber-400/30 flex items-center justify-center text-amber-400 hover:bg-amber-400 hover:text-[#4a675e] transition-colors duration-300 active:scale-95">
-                        <ChevronLeft size={28} />
-                    </button>
-                    <button onClick={() => scroll('right')} aria-label="Siguiente" className="w-14 h-14 rounded-full bg-amber-500 flex items-center justify-center text-[#2b3d38] hover:bg-amber-400 transition-colors duration-300 shadow-[0_4px_12px_rgba(251,191,36,0.3)] active:scale-95">
-                        <ChevronRight size={28} />
-                    </button>
-                </div>
-            </div>
-
-            {/* CARRUSEL HORIZONTAL */}
-            <div className="relative -mx-4 md:mx-0">
-                <div className="absolute top-0 left-0 w-8 md:w-20 h-full bg-gradient-to-r from-[#4a675e] to-transparent z-10 pointer-events-none"></div>
-                <div className="absolute top-0 right-0 w-8 md:w-32 h-full bg-gradient-to-l from-[#4a675e] to-transparent z-10 pointer-events-none"></div>
-
-                <motion.div 
-                    ref={carouselRef}
-                    className="flex gap-5 md:gap-8 overflow-x-auto snap-x snap-mandatory hide-scrollbar px-4 md:px-0 py-8"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
-                >
-                    {painPoints.map((item, index) => (
-                        <div 
-                            key={index}
-                            className="group relative flex flex-col items-center text-center shrink-0 w-[82vw] md:w-[340px] snap-center rounded-[2.5rem] bg-[#3a524a] p-8 md:p-10 border border-white/5 shadow-[0_8px_20px_rgba(0,0,0,0.35)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.5)] hover:-translate-y-1 transition-all duration-300"
-                        >
-                            <IconWrapper Icon={item.icon} />
-                            <h3 className="text-2xl font-bold font-serif text-white mb-4">
-                                {item.title}
-                            </h3>
-                            <p className="text-stone-300 text-base leading-relaxed font-sans font-light">
-                                {item.desc}
-                            </p>
-                        </div>
-                    ))}
-                </motion.div>
-            </div>
-
+      <div className="max-w-[1200px] mx-auto px-6 md:px-8 relative z-10">
+        
+        {/* CABECERA MINIMALISTA */}
+        <div className="text-center mb-20 max-w-3xl mx-auto">
+          <motion.h2
+            className="text-4xl md:text-5xl lg:text-7xl font-medium font-serif text-white mb-6 tracking-tight leading-[1.1]"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} // Curva de aceleración Apple
+          >
+            Las señales de que <br className="hidden md:block"/>
+            es momento de <span className="text-amber-400 italic">pausar.</span>
+          </motion.h2>
+          
+          <motion.p
+            className="text-lg md:text-2xl text-stone-400 font-sans font-light leading-relaxed max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            El cuerpo y la mente hablan cuando el peso se vuelve insostenible. <br/>
+            <span className="text-white font-medium mt-2 inline-block">Validar lo que sientes es el primer paso.</span>
+          </motion.p>
         </div>
-      </section>
-    </div>
+
+        {/* BENTO GRID (Cuadrícula Asimétrica) */}
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          {painPoints.map((item) => (
+            <motion.div 
+              key={item.id}
+              variants={cardVariants}
+              className={`group relative overflow-hidden rounded-[2rem] bg-white/[0.03] border border-white/[0.08] p-8 md:p-10 backdrop-blur-md transition-all duration-500 hover:bg-white/[0.06] hover:border-amber-400/30 hover:shadow-[0_0_40px_rgba(251,191,36,0.1)] ${item.colSpan}`}
+            >
+              {/* Reflejo superior estilo cristal */}
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+
+              <div className={`flex h-full ${item.layout === 'horizontal' ? 'flex-col md:flex-row md:items-center gap-8' : 'flex-col items-start gap-6'}`}>
+                
+                {/* Icono Premium */}
+                <div className="shrink-0 relative">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#3a524a] to-[#253630] border border-white/10 flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 ease-out z-10 relative">
+                    <item.icon className="w-8 h-8 text-amber-400" strokeWidth={1.5} />
+                  </div>
+                  {/* Resplandor trasero del icono */}
+                  <div className="absolute inset-0 bg-amber-400/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+
+                {/* Contenido de texto */}
+                <div>
+                  <h3 className="text-2xl font-serif text-white mb-3 tracking-wide">
+                    {item.title}
+                  </h3>
+                  <p className="text-stone-400 text-base md:text-lg leading-relaxed font-sans font-light group-hover:text-stone-300 transition-colors duration-300">
+                    {item.desc}
+                  </p>
+                </div>
+
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+      </div>
+    </section>
   );
 }
