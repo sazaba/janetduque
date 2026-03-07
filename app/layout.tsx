@@ -5,7 +5,6 @@ import { Providers } from "./providers";
 
 // --- IMPORTACIÓN DE IMÁGENES ---
 import iconImage from "./icon.webp"; 
-import imageJeff from "@/app/assets/Jeffseo.webp";
 
 const playfair = Playfair_Display({ 
   subsets: ["latin"],
@@ -20,57 +19,44 @@ const lato = Lato({
   display: "swap",
 });
 
-// --- SEO OPTIMIZADO PARA MANIZALES, COLOMBIA Y EXTERIOR ---
+// --- SEO OPTIMIZADO PARA JANET DUQUE ---
 export const metadata: Metadata = {
   title: {
-    default: "Jefferson Bastidas Mejía | Psicólogo en Manizales y Online",
-    template: "%s | Jefferson Bastidas Mejía",
+    default: "Janet Duque | Psicóloga Clínica y Psicoterapeuta Online",
+    template: "%s | Janet Duque",
   },
   
-  description: "Psicólogo en Manizales y online. Psicoterapia basada en terapias contextuales de tercera generación y Terapia de Aceptación y Compromiso (ACT).",
+  description: "Atención psicológica online y presencial. Psicoterapia enfocada en el bienestar emocional mediante terapias contextuales de tercera generación y Terapia de Aceptación y Compromiso (ACT).",
   
   alternates: {
-    canonical: 'https://psicologojeffersonbastidas.com',
+    canonical: 'https://psicologajanetduque.com',
   },
   
   keywords: [
-    "Psicólogo Manizales",
-    "Psicólogo Pereira",
-    "Psicólogo Medellin",
-    "Psicólogo Sabaneta",
-    "Psicólogo Envigado",
-    "Psicólogo Nueva York",
-    "Psicólogo New York",
-    "Psicólogo ",
+    "Psicóloga",
+    "Psicóloga Clínica",
+    "Psicóloga Online",
     "Psicoterapia Online",
-    "Jefferson Bastidas Mejía",
-    "Salud Mental Colombia",
-    "Psicólogo Latino Nueva York", 
-    "Tratamiento Ansiedad Manizales",
+    "Janet Duque",
+    "Salud Mental",
+    "Terapia de Aceptación y Compromiso",
+    "Psicóloga Colombia", 
+    "Tratamiento Ansiedad",
     "Consulta psicológica virtual",
-    "Salud mental Manizales",
-    "Psicología Manizales",
-    "Psicólogo Eje Cafetero"
+    "Terapias de tercera generación",
+    "Bienestar emocional"
   ],
 
-  authors: [{ name: "Jefferson Bastidas Mejía" }],
-  creator: "Jefferson Bastidas Mejía",
+  authors: [{ name: "Janet Duque" }],
+  creator: "Janet Duque",
 
   openGraph: {
-    title: "Jefferson Bastidas | Psicólogo en Manizales y Online",
-    description: "Psicoterapia presencial en Manizales y online mediante terapias contextuales de tercera generación y Terapia de Aceptación y Compromiso.",
-    url: "https://psicologojeffersonbastidas.com",
-    siteName: "Jefferson Bastidas Psicólogo",
+    title: "Janet Duque | Psicóloga Clínica y Psicoterapeuta",
+    description: "Psicoterapia presencial y online mediante terapias contextuales de tercera generación y Terapia de Aceptación y Compromiso.",
+    url: "https://psicologajanetduque.com",
+    siteName: "Janet Duque Psicóloga",
     locale: "es_CO",
     type: "website",
-    images: [
-      {
-        url: `https://psicologojeffersonbastidas.com${imageJeff.src}`, 
-        width: 800,
-        height: 800,
-        alt: 'Psicólogo Jefferson Bastidas Mejía',
-      },
-    ],
   },
 
   robots: {

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, ArrowRight } from "lucide-react";
+// TAREA: Asegúrate de que el logo de Janet esté en public/Logo.webp o cambia el nombre aquí
 import logoImg from "@/public/Logo.webp";
 
 export default function Navbar() {
@@ -70,7 +71,7 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 border-b will-change-transform ${
           isScrolled || isMobileMenuOpen 
-            ? "bg-[#f0fdfa]/95 backdrop-blur-md border-teal-100/50 shadow-sm py-3" 
+            ? "bg-white/95 backdrop-blur-md border-emerald-100/50 shadow-sm py-3" 
             : "bg-transparent border-transparent py-6"
         }`}
       >
@@ -81,7 +82,7 @@ export default function Navbar() {
             <div className="relative w-10 h-10 md:w-12 md:h-12 transition-transform duration-300 group-hover:scale-105">
               <Image 
                 src={logoImg} 
-                alt="Logo Jefferson Bastidas" 
+                alt="Logo Psicóloga Janet Duque" 
                 fill 
                 className="object-contain"
                 priority
@@ -90,11 +91,11 @@ export default function Navbar() {
             </div>
             
             <div className="leading-tight hidden sm:block">
-              <span className="block text-stone-700 font-bold tracking-wide text-sm md:text-base group-hover:text-teal-700 transition-colors font-serif">
-                Jefferson Bastidas
+              <span className="block text-stone-800 font-bold tracking-wide text-sm md:text-base group-hover:text-emerald-700 transition-colors font-serif">
+                Janet Duque
               </span>
-              <span className="block text-xs text-stone-500 font-medium tracking-wider font-sans">
-                Psicólogo
+              <span className="block text-xs text-amber-600 font-medium tracking-wider font-sans">
+                Psicóloga
               </span>
             </div>
           </Link>
@@ -107,10 +108,10 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleScrollToSection(e, link.href)}
-                  className="text-sm font-bold text-stone-600 hover:text-teal-700 transition-colors relative group tracking-wide font-sans cursor-pointer"
+                  className="text-sm font-bold text-stone-600 hover:text-emerald-700 transition-colors relative group tracking-wide font-sans cursor-pointer"
                 >
                   {link.name}
-                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-teal-400 transition-all duration-300 group-hover:w-full opacity-0 group-hover:opacity-100"></span>
+                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-amber-500 transition-all duration-300 group-hover:w-full opacity-0 group-hover:opacity-100"></span>
                 </a>
               ))}
             </div>
@@ -119,17 +120,17 @@ export default function Navbar() {
               href="https://wa.link/2x3i8s"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#14b8a6] hover:bg-[#0f766e] text-white text-sm font-semibold transition-all duration-300 shadow-md shadow-teal-100 hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
+              className="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-semibold transition-all duration-300 shadow-md shadow-emerald-200 hover:shadow-lg hover:-translate-y-0.5 cursor-pointer ring-1 ring-amber-500/30"
             >
               Solicitar Información
-              <ArrowRight size={16} className="text-white group-hover:translate-x-1 transition-transform" />
+              <ArrowRight size={16} className="text-amber-400 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
 
           {/* MOBILE TOGGLE */}
           <button
             aria-label="Toggle Menu"
-            className="md:hidden relative z-50 p-1 text-stone-700 hover:text-teal-700 transition-colors active:scale-95"
+            className="md:hidden relative z-50 p-1 text-stone-700 hover:text-emerald-700 transition-colors active:scale-95"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -139,7 +140,7 @@ export default function Navbar() {
 
       {/* MOBILE MENU OPTIMIZADO */}
       <div
-        className={`fixed inset-0 z-40 bg-[#fffcf8]/98 backdrop-blur-xl flex flex-col items-center justify-center transition-all duration-500 md:hidden h-[100dvh] supports-[height:100dvh]:h-screen w-full transform-gpu will-change-transform
+        className={`fixed inset-0 z-40 bg-white/98 backdrop-blur-xl flex flex-col items-center justify-center transition-all duration-500 md:hidden h-[100dvh] supports-[height:100dvh]:h-screen w-full transform-gpu will-change-transform
         ${isMobileMenuOpen 
             ? "opacity-100 visible translate-y-0" 
             : "opacity-0 invisible -translate-y-4 pointer-events-none"
@@ -151,7 +152,7 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleScrollToSection(e, link.href)}
-                className={`text-3xl font-serif text-stone-700 hover:text-teal-700 transition-all duration-500 transform
+                className={`text-3xl font-serif text-stone-700 hover:text-emerald-700 transition-all duration-500 transform
                 ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
                 style={{ transitionDelay: `${i * 100}ms` }}
             >
@@ -164,11 +165,11 @@ export default function Navbar() {
                 ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
             >
                 <a
-                href="https://wa.link/2x3i8s"
+                href="https://wa.link/6vc76u"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="inline-flex px-10 py-4 rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 text-white font-bold shadow-xl shadow-teal-500/20 active:scale-95 transition-transform"
+                className="inline-flex px-10 py-4 rounded-xl bg-gradient-to-r from-emerald-700 to-emerald-800 text-white font-bold shadow-xl shadow-emerald-500/20 active:scale-95 transition-transform border border-amber-500/30"
                 >
                 Agendar Sesión
                 </a>
