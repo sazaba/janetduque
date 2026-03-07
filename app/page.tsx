@@ -49,7 +49,7 @@ export default async function Home() {
           <PainPoints />
         </section>
 
-        <section>
+        {/* <section>
            <TargetAudience/>
         </section>
 
@@ -79,7 +79,7 @@ export default async function Home() {
 
         <section id="blog">
           <BlogCarousel />
-        </section>
+        </section> */}
 
       </main>
     
