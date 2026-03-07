@@ -144,51 +144,64 @@
 //   );
 // }
 
-
 "use client";
 
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
 import { Activity, Cloud, Flame, Waves } from 'lucide-react';
 
+// --- ICONO PREMIUM CENTRADO ---
+const PremiumIcon = ({ Icon }: { Icon: React.ElementType }) => (
+  <div className="relative flex items-center justify-center w-24 h-24 mb-10 z-10 group-hover:-translate-y-2 transition-transform duration-500 ease-out">
+    {/* Anillo exterior sutil que palpita */}
+    <motion.div 
+      animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.8, 0.4] }}
+      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute inset-0 rounded-full border border-amber-200 bg-amber-50/50"
+    />
+    {/* Círculo dorado sólido interior */}
+    <div className="absolute inset-3 rounded-full bg-gradient-to-tr from-amber-500 to-amber-300 shadow-[0_8px_16px_rgba(251,191,36,0.3)]"></div>
+    {/* Icono Principal */}
+    <Icon className="relative z-20 w-8 h-8 text-[#2b3d38]" strokeWidth={2} />
+  </div>
+);
+
 // --- DATOS CURADOS (Enfoque en Tarjetas Gigantes) ---
 const painPoints = [
   { 
     icon: Activity, 
     title: "Ansiedad Constante", 
-    desc: "El cuerpo reacciona a un peligro invisible. Alertas, miedos repentinos y una opresión en el pecho que no te deja respirar." 
+    desc: "El cuerpo reacciona a un peligro invisible. Alertas, miedos repentinos y una opresión en el pecho que no te deja respirar con tranquilidad." 
   },
   { 
     icon: Cloud, 
     title: "Depresión Silenciosa", 
-    desc: "Desconexión con lo que antes te apasionaba. Una falta de vitalidad pesada y una tristeza que cuesta explicar con palabras." 
+    desc: "Desconexión con lo que antes te apasionaba. Una falta de vitalidad pesada y una tristeza profunda que cuesta explicar con palabras." 
   },
   { 
     icon: Flame, 
     title: "Burnout Total", 
-    desc: "El límite se rompió. Sientes que las demandas te superan y el agotamiento mental no desaparece ni siquiera durmiendo." 
+    desc: "El límite se rompió. Sientes que las demandas te superan y el agotamiento mental no desaparece ni siquiera después de dormir." 
   },
   { 
     icon: Waves, 
     title: "Desregulación", 
-    desc: "Tus emociones toman el control del volante. Reaccionas con una intensidad que te asusta y cuesta mucho volver a la calma." 
+    desc: "Tus emociones toman el control del volante. Reaccionas con una intensidad que te asusta y cuesta muchísimo volver a la calma." 
   }
 ];
 
-// --- VARIANTES DE ANIMACIÓN APPLE (Blur Reveal + Spring) ---
+// --- VARIANTES DE ANIMACIÓN (Optimizadas para Safari) ---
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.2, delayChildren: 0.3 },
+    transition: { staggerChildren: 0.2, delayChildren: 0.2 },
   },
 };
 
 const cardVariants: Variants = {
-  // Apple usa mucho el desenfoque para revelar elementos al hacer scroll
-  hidden: { filter: "blur(20px)", opacity: 0, y: 50, scale: 0.95 },
+  hidden: { opacity: 0, y: 50, scale: 0.95 },
   visible: { 
-    filter: "blur(0px)", 
     opacity: 1, 
     y: 0, 
     scale: 1,
@@ -201,44 +214,44 @@ export default function PainPoints() {
     <div className="relative z-10 w-full bg-transparent overflow-hidden">
       
       {/* --- 1. ONDA ORGÁNICA (Transición brutal) --- */}
-      {/* Pintada en el color super oscuro para que se "coma" el fondo beige del Hero */}
+      {/* Pintada en tu verde original para comerse el fondo del Hero */}
       <div className="w-full leading-[0] border-none -mb-[1px]">
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none" className="w-full h-16 md:h-24 lg:h-36 block">
           <path 
             d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,42.7C1120,32,1280,32,1360,32L1440,32L1440,121L1360,121C1280,121,1120,121,960,121C800,121,640,121,480,121C320,121,160,121,80,121L0,121Z" 
-            fill="#121b18" 
+            fill="#4a675e" 
           />
         </svg>
       </div>
 
-      {/* --- 2. SECCIÓN SUPER OSCURA TIPO "PRO" --- */}
-      <section className="pb-32 w-full bg-[#121b18] relative pt-10">
+      {/* --- 2. SECCIÓN VERDE INMERSIVA --- */}
+      <section className="pb-32 w-full bg-[#4a675e] relative pt-10">
         <div className="max-w-[1200px] mx-auto px-6 md:px-8">
           
-          {/* HEADER APPLE STYLE (Textos masivos y degradados) */}
-          <div className="text-center md:text-left mb-20 max-w-4xl mx-auto md:mx-0">
+          {/* HEADER (Textos masivos y elegantes) */}
+          <div className="text-center mb-20 max-w-4xl mx-auto">
             <motion.h2
-              className="text-5xl md:text-7xl lg:text-[5.5rem] font-medium font-serif text-white tracking-tighter leading-[1.05] mb-8"
-              initial={{ filter: "blur(20px)", opacity: 0, y: 30 }}
+              className="text-5xl md:text-6xl lg:text-7xl font-medium font-serif text-white tracking-tighter leading-[1.05] mb-8"
+              initial={{ filter: "blur(10px)", opacity: 0, y: 30 }}
               whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }} // Curva de aceleración suave
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }} 
             >
-              Las señales de que es momento de <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500 italic">pausar.</span>
+              Las señales de que es momento de <span className="text-amber-400 italic">pausar.</span>
             </motion.h2>
             
             <motion.p
-              className="text-xl md:text-3xl text-stone-400 font-sans font-light leading-relaxed max-w-2xl"
+              className="text-xl md:text-2xl text-stone-200 font-sans font-light leading-relaxed max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              El cuerpo y la mente hablan cuando el peso se vuelve insostenible.
+              El cuerpo y la mente hablan cuando el peso se vuelve insostenible. Validar lo que sientes es el primer paso.
             </motion.p>
           </div>
 
-          {/* GRID TIPO BENTO (Tarjetas Gigantes 2x2) */}
+          {/* GRID TIPO APPLE (Tarjetas Blancas Gigantes 2x2) */}
           <motion.div 
             className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
             variants={containerVariants}
@@ -250,28 +263,25 @@ export default function PainPoints() {
               <motion.div
                 key={index}
                 variants={cardVariants}
-                className="group relative overflow-hidden rounded-[2.5rem] bg-[#1a2521] border border-white/5 p-10 md:p-12 transition-all duration-700 hover:bg-[#1e2a26] hover:scale-[1.02] hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)] cursor-default"
+                // Tarjetas blancas sólidas: Máximo rendimiento en Safari y elegancia pura
+                className="group relative overflow-hidden rounded-[2.5rem] bg-white p-10 md:p-14 transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] flex flex-col items-center text-center cursor-default transform-gpu"
               >
-                {/* ICONO DE FONDO GIGANTE (Efecto clásico de Apple que sangra por el borde) */}
-                <item.icon className="absolute -bottom-10 -right-10 w-64 h-64 text-amber-500/5 group-hover:text-amber-500/10 group-hover:rotate-12 group-hover:scale-110 transition-all duration-700 ease-out pointer-events-none" />
+                {/* ICONO FANTASMA GIGANTE DE FONDO (Centrado) */}
+                <item.icon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 text-[#4a675e]/[0.03] group-hover:scale-110 group-hover:rotate-6 transition-transform duration-1000 ease-out pointer-events-none" />
                 
-                {/* CONTENIDO SUPERIOR */}
-                <div className="relative z-10 flex flex-col h-full justify-between">
-                  {/* Icono Principal Brillante */}
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-b from-amber-400 to-amber-600 flex items-center justify-center shadow-lg mb-10 md:mb-16 group-hover:scale-110 transition-transform duration-500">
-                    <item.icon className="w-8 h-8 text-[#121b18]" strokeWidth={2.5} />
-                  </div>
-                  
-                  {/* Textos */}
-                  <div>
-                    <h3 className="text-3xl md:text-4xl font-serif text-white mb-4 tracking-tight group-hover:text-amber-300 transition-colors duration-500">
-                      {item.title}
-                    </h3>
-                    <p className="text-stone-400 text-lg md:text-xl font-sans font-light leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
+                {/* ICONO PRINCIPAL MEJORADO */}
+                <PremiumIcon Icon={item.icon} />
+                
+                {/* TEXTOS (En verde oscuro para contraste perfecto) */}
+                <div className="relative z-10">
+                  <h3 className="text-3xl md:text-4xl font-serif text-[#4a675e] mb-4 tracking-tight group-hover:text-amber-600 transition-colors duration-500">
+                    {item.title}
+                  </h3>
+                  <p className="text-stone-600 text-lg md:text-xl font-sans font-light leading-relaxed max-w-sm mx-auto">
+                    {item.desc}
+                  </p>
                 </div>
+
               </motion.div>
             ))}
           </motion.div>
