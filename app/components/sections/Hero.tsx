@@ -21,14 +21,15 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-48 md:pt-40 lg:pt-32 pb-20 overflow-hidden w-full bg-transparent">
+    // CORRECCIÓN AQUÍ: pt-28 para móviles, md:pt-32 para tablets, lg:pt-32 para escritorio
+    <section className="relative min-h-[90vh] flex items-center pt-28 md:pt-32 lg:pt-32 pb-20 overflow-hidden w-full bg-transparent">
       
       {/* OPTIMIZACIÓN SAFARI 1: Luces de fondo con translate3d para evitar parpadeos (flickering) en iOS */}
       <div className="absolute top-1/2 right-0 md:right-20 -translate-y-1/2 w-[80vw] md:w-[600px] h-[600px] bg-[#4a675e]/10 rounded-full blur-[100px] -z-10 pointer-events-none transform-gpu translate-z-0" />
       <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-amber-500/10 rounded-full blur-[120px] -z-10 pointer-events-none transform-gpu translate-z-0" />
 
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center">
             
             {/* COLUMNA 1: TEXTO */}
             <div className={`text-center md:text-left z-10 relative transition-all duration-1000 ease-out transform-gpu ${
@@ -36,7 +37,7 @@ export default function Hero() {
             }`}>
                 
                 {/* Título Principal */}
-                <h1 className="text-5xl md:text-5xl lg:text-6xl xl:text-[4.5rem] font-medium tracking-tight text-stone-800 mb-6 leading-[1.15] font-serif">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] font-medium tracking-tight text-stone-800 mb-6 leading-[1.15] font-serif">
                     Encuentra el equilibrio y transforma tu forma de <br className="hidden lg:block" />
                     <span className="relative inline-block text-[#4a675e] italic mt-2 md:mt-0">
                         vivir el presente
@@ -86,7 +87,7 @@ export default function Hero() {
             </div>
 
             {/* COLUMNA 2: IMAGEN */}
-            <div className={`relative flex justify-center lg:justify-end transition-all duration-1000 delay-300 ease-out transform-gpu ${
+            <div className={`relative flex justify-center lg:justify-end transition-all duration-1000 delay-300 ease-out transform-gpu mt-8 md:mt-0 ${
               isMounted ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
             }`}>
                 
