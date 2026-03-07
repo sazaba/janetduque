@@ -3,7 +3,7 @@
 import { MouseEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
 // TAREA: Sube la foto de Janet sin fondo a la carpeta assets y asegúrate de que el nombre coincida aquí.
-import HeroJanet from '@/app/assets/Herojanet.webp'; 
+import HeroJanet from '@/app/assets/HeroJanet.webp'; 
 
 export default function Hero() {
   const [isMounted, setIsMounted] = useState(false);
