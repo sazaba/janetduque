@@ -1,4 +1,3 @@
-
 "use client";
 
 import React from 'react';
@@ -21,7 +20,7 @@ const PremiumIcon = ({ Icon }: { Icon: React.ElementType }) => (
   </div>
 );
 
-// --- DATOS CURADOS (Enfoque en Tarjetas Gigantes) ---
+// --- DATOS CURADOS ---
 const painPoints = [
   { 
     icon: Activity, 
@@ -45,7 +44,7 @@ const painPoints = [
   }
 ];
 
-// --- VARIANTES DE ANIMACIÓN (Optimizadas para Safari) ---
+// --- VARIANTES DE ANIMACIÓN ---
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -68,8 +67,13 @@ export default function PainPoints() {
   return (
     <div className="relative z-10 w-full bg-transparent overflow-hidden">
       
-      {/* --- 1. ONDA ORGÁNICA (Transición brutal) --- */}
-      {/* Pintada en tu verde original para comerse el fondo del Hero */}
+      {/* Estilo para ocultar scrollbar en el carrusel móvil */}
+      <style dangerouslySetInnerHTML={{__html: `
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      `}} />
+
+      {/* --- 1. ONDA ORGÁNICA --- */}
       <div className="w-full leading-[0] border-none -mb-[1px]">
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none" className="w-full h-16 md:h-24 lg:h-36 block">
           <path 
@@ -83,8 +87,8 @@ export default function PainPoints() {
       <section className="pb-32 w-full bg-[#4a675e] relative pt-10">
         <div className="max-w-[1200px] mx-auto px-6 md:px-8">
           
-          {/* HEADER (Textos masivos y elegantes) */}
-          <div className="text-center mb-20 max-w-4xl mx-auto">
+          {/* HEADER */}
+          <div className="text-center mb-16 md:mb-20 max-w-4xl mx-auto">
             <motion.h2
               className="text-5xl md:text-6xl lg:text-7xl font-medium font-serif text-white tracking-tighter leading-[1.05] mb-8"
               initial={{ filter: "blur(10px)", opacity: 0, y: 30 }}
@@ -106,9 +110,9 @@ export default function PainPoints() {
             </motion.p>
           </div>
 
-          {/* GRID TIPO APPLE (Tarjetas Blancas Gigantes 2x2) */}
+          {/* GRID (Desktop) / CARRUSEL (Móvil) */}
           <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+            className="flex md:grid md:grid-cols-2 gap-5 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none hide-scrollbar -mx-6 px-6 md:mx-0 md:px-0 py-8 -my-8 md:py-0 md:my-0"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -118,16 +122,17 @@ export default function PainPoints() {
               <motion.div
                 key={index}
                 variants={cardVariants}
-                // Tarjetas blancas sólidas: Máximo rendimiento en Safari y elegancia pura
-                className="group relative overflow-hidden rounded-[2.5rem] bg-white p-10 md:p-14 transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] flex flex-col items-center text-center cursor-default transform-gpu"
+                // En móvil: w-[85vw] (casi toda la pantalla), shrink-0 para no aplastarse, snap-center para imantarse
+                // En desktop: md:w-auto y md:shrink para respetar la cuadrícula
+                className="group relative overflow-hidden rounded-[2.5rem] bg-white p-8 md:p-14 transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] flex flex-col items-center text-center cursor-default transform-gpu shrink-0 w-[85vw] snap-center md:w-auto md:shrink"
               >
-                {/* ICONO FANTASMA GIGANTE DE FONDO (Centrado) */}
+                {/* ICONO FANTASMA GIGANTE DE FONDO */}
                 <item.icon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 text-[#4a675e]/[0.03] group-hover:scale-110 group-hover:rotate-6 transition-transform duration-1000 ease-out pointer-events-none" />
                 
-                {/* ICONO PRINCIPAL MEJORADO */}
+                {/* ICONO PRINCIPAL */}
                 <PremiumIcon Icon={item.icon} />
                 
-                {/* TEXTOS (En verde oscuro para contraste perfecto) */}
+                {/* TEXTOS */}
                 <div className="relative z-10">
                   <h3 className="text-3xl md:text-4xl font-serif text-[#4a675e] mb-4 tracking-tight group-hover:text-amber-600 transition-colors duration-500">
                     {item.title}
