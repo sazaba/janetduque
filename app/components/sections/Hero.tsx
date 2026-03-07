@@ -1,13 +1,20 @@
 'use client';
 
-import { MouseEvent } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
-import Headerpsicojeff from '@/app/assets/Headerpsicojeff.webp'; 
+// TAREA: Sube la foto de Janet sin fondo a la carpeta assets y asegúrate de que el nombre coincida aquí.
+import HeroJanet from '@/app/assets/Herojanet.webp'; 
 
 export default function Hero() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Activador de animaciones al cargar la página
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleScrollToEnfoque = (e: MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault(); // Evita que se añada #proceso a la URL
+    e.preventDefault(); 
     const element = document.getElementById('proceso');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -15,85 +22,96 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-32 md:pt-20 overflow-hidden w-full">
+    <section className="relative min-h-[90vh] flex items-center pt-32 md:pt-20 overflow-hidden w-full bg-transparent">
       
-      {/* OPTIMIZACIÓN 1: GPU ACCELERATION */}
-      <div className="absolute top-1/2 right-0 md:right-20 -translate-y-1/2 w-[80vw] md:w-[600px] h-[600px] bg-teal-50/40 rounded-full blur-[120px] -z-10 pointer-events-none transform-gpu will-change-transform" />
+      {/* OPTIMIZACIÓN SAFARI 1: Luces de fondo con translate3d para evitar parpadeos (flickering) en iOS */}
+      <div className="absolute top-1/2 right-0 md:right-20 -translate-y-1/2 w-[80vw] md:w-[600px] h-[600px] bg-[#4a675e]/10 rounded-full blur-[100px] -z-10 pointer-events-none transform-gpu translate-z-0" />
+      <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-amber-500/10 rounded-full blur-[120px] -z-10 pointer-events-none transform-gpu translate-z-0" />
 
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-center">
             
-            {/* COLUMNA 1: IMAGEN */}
-            <div className="relative order-last md:order-first flex justify-center md:justify-end">
+            {/* COLUMNA 1: TEXTO (Ahora a la izquierda en escritorio) */}
+            <div className={`text-center md:text-left z-10 relative transition-all duration-1000 ease-out transform-gpu ${
+              isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
                 
-                {/* OPTIMIZACIÓN GPU TAMBIÉN AQUÍ */}
-                <div className="absolute top-10 left-1/2 -translate-x-1/2 w-3/4 h-3/4 bg-teal-200/30 rounded-full blur-[60px] -z-10 transform-gpu will-change-transform"></div>
-
-                <div className="relative w-full max-w-[500px]"> 
-                    <Image
-                        src={Headerpsicojeff}
-                        alt="Psicólogo Jefferson Bastidas - Terapia Online y Presencial"
-                        className="w-full h-auto object-contain drop-shadow-2xl z-10 [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)] will-change-transform" 
-                        priority={true} 
-                        placeholder="blur"
-                        quality={100}
-                        sizes="100vw"
-                    />
-                </div>
-            </div>
-
-            {/* COLUMNA 2: TEXTO */}
-            <div className="text-center md:text-left z-10 relative">
-                
-                <div className="inline-block mb-8 mt-4 md:mt-0 px-5 py-2 rounded-full border border-teal-100 bg-white/50 backdrop-blur-sm">
-                    <span className="text-xs md:text-sm font-bold text-teal-700 tracking-widest uppercase font-sans">
-                        Psicólogo en Manizales y Online
+                {/* Etiqueta / Badge */}
+                <div className="inline-flex items-center gap-2 mb-6 mt-4 md:mt-0 px-5 py-2 rounded-full border border-amber-200/50 bg-white/70 shadow-sm backdrop-blur-md">
+                    <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                    <span className="text-xs md:text-sm font-bold text-[#4a675e] tracking-widest uppercase font-sans">
+                        Psicóloga Clínica y Psicoterapeuta
                     </span>
                 </div>
                 
-                <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium tracking-tight text-stone-800 mb-8 leading-[1.1] font-serif">
-                    Impactar vidas a través del <br />
-                    bienestar mental con <br className="hidden md:block" />
-                    <span className="relative inline-block text-teal-700/90 italic mt-2 md:mt-0">
-                        significado y propósito
-                        <svg className="absolute w-full h-3 md:h-4 -bottom-1 left-0 text-teal-200 -z-10 opacity-70" viewBox="0 0 100 10" preserveAspectRatio="none">
-                            <path d="M0 5 Q 50 12 100 5" stroke="currentColor" strokeWidth="6" fill="none" />
+                {/* Título Principal */}
+                <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-[4rem] font-medium tracking-tight text-stone-800 mb-6 leading-[1.15] font-serif">
+                    Encuentra el equilibrio y transforma tu forma de <br className="hidden lg:block" />
+                    <span className="relative inline-block text-[#4a675e] italic mt-2 md:mt-0">
+                        vivir el presente
+                        {/* Subrayado SVG dorado optimizado */}
+                        <svg className="absolute w-full h-3 md:h-4 -bottom-1 left-0 text-amber-400 -z-10 opacity-60" viewBox="0 0 100 10" preserveAspectRatio="none">
+                            <path d="M0 5 Q 50 12 100 5" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round" />
                         </svg>
                     </span>
                 </h1>
 
-                <p className="text-lg md:text-xl text-stone-600 mb-10 max-w-lg mx-auto md:mx-0 leading-relaxed font-sans font-medium flex flex-wrap justify-center md:justify-start items-center gap-1.5">
-                    Un espacio terapéutico de alta precisión para generar
-                    
-                    <span className="relative group/highlight inline-flex items-center justify-center px-3 py-0.5 ml-1">
-                        <span className="absolute inset-0 bg-teal-100/50 rounded-lg -skew-x-6 transform group-hover/highlight:skew-x-0 transition-transform duration-300 ease-out origin-center"></span>
-                        <span className="relative font-serif italic font-semibold text-teal-800 text-xl md:text-2xl tracking-wide">
-                        Calma Vitalizada
+                {/* Párrafo Descriptivo */}
+                <p className="text-lg md:text-xl text-stone-600 mb-10 max-w-lg mx-auto md:mx-0 leading-relaxed font-sans font-medium">
+                    Un espacio terapéutico seguro, empático y profesional, diseñado para brindarte las herramientas que necesitas para alcanzar una{' '}
+                    <span className="relative group inline-block whitespace-nowrap">
+                        <span className="relative z-10 font-serif italic font-bold text-amber-600 text-xl md:text-2xl px-1">
+                            tranquilidad duradera.
                         </span>
-                        <svg className="absolute -top-2 -right-3 w-5 h-5 text-teal-400 opacity-0 group-hover/highlight:opacity-100 transition-opacity duration-500" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 0L12.5 7.5L20 10L12.5 12.5L10 20L7.5 12.5L0 10L7.5 7.5L10 0Z" />
-                        </svg>
+                        <span className="absolute bottom-1 left-0 w-full h-2 bg-amber-100 -z-0 transition-all duration-300 group-hover:h-full group-hover:bottom-0 rounded-sm"></span>
                     </span>
-                    <span>.</span>
                 </p>
 
+                {/* Botones de Acción */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center">
                     <a 
-                        href="https://wa.link/2x3i8s" 
+                        href="https://wa.link/6vc76u" 
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-8 py-4 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-lg transition-all hover:-translate-y-1 shadow-lg shadow-teal-600/20 w-full sm:w-auto text-center cursor-pointer"
+                        className="group relative px-8 py-4 rounded-full bg-[#4a675e] text-white font-bold text-lg overflow-hidden shadow-xl shadow-[#4a675e]/20 w-full sm:w-auto text-center cursor-pointer transition-transform hover:-translate-y-1 active:translate-y-0"
                     >
-                        Solicitar Información
+                        <span className="relative z-10 flex items-center justify-center gap-2">
+                            Agendar mi primera sesión
+                            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </span>
+                        <div className="absolute inset-0 h-full w-full scale-0 rounded-full transition-all duration-300 group-hover:scale-150 group-hover:bg-[#3a524a]/50"></div>
                     </a>
                     
                     <a 
                         href="#proceso" 
                         onClick={handleScrollToEnfoque} 
-                        className="cursor-pointer px-8 py-4 rounded-full border border-stone-300 hover:border-teal-400 bg-transparent text-stone-600 hover:text-teal-700 font-medium transition-all w-full sm:w-auto text-center"
+                        className="cursor-pointer px-8 py-4 rounded-full border-2 border-stone-200 hover:border-amber-400 bg-transparent text-stone-600 hover:text-[#4a675e] font-bold transition-colors w-full sm:w-auto text-center"
                     >
-                        Conocer mi enfoque
+                        Descubrir mi enfoque
                     </a>
+                </div>
+            </div>
+
+            {/* COLUMNA 2: IMAGEN */}
+            {/* OPTIMIZACIÓN SAFARI 2: Se eliminó el mix de blur + mask-image complejo en el mismo contenedor */}
+            <div className={`relative flex justify-center lg:justify-end transition-all duration-1000 delay-300 ease-out transform-gpu ${
+              isMounted ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+            }`}>
+                
+                {/* Círculo de fondo detrás de la psicóloga */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] md:w-[400px] md:h-[400px] bg-gradient-to-tr from-[#4a675e]/20 to-amber-200/30 rounded-full -z-10"></div>
+
+                <div className="relative w-full max-w-[450px] aspect-[4/5] md:aspect-auto md:h-[600px]"> 
+                    <Image
+                        src={HeroJanet} // Asegúrate de cambiar esto si no tienes la imagen importada
+                        alt="Psicóloga Janet Duque"
+                        fill
+                        className="object-contain object-bottom drop-shadow-2xl [-webkit-mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)] mask-image-safe" 
+                        priority={true} 
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                    />
                 </div>
             </div>
 

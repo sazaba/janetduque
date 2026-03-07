@@ -4,9 +4,6 @@ import Hero from "@/app/components/sections/Hero";
 import Footer from "@/app/components/sections/Footer";
 import dynamic from "next/dynamic"; 
 
-// --- IMPORTACIÓN DE LA IMAGEN PARA EL SCRIPT DE GOOGLE ---
-import imageJeff from "@/app/assets/Jeffseo.webp";
-
 // --- OPTIMIZACIÓN DE CARGA (LAZY LOADING) ---
 const PainPoints = dynamic(() => import("@/app/components/sections/PainPoints"));
 const ProfessionalProfile = dynamic(() => import("@/app/components/sections/ProfessionalProfile"));
@@ -38,48 +35,9 @@ async function getReviewCount() {
 export default async function Home() {
   const reviewCount = await getReviewCount();
 
-  // --- ESTRUCTURA DE DATOS JSON-LD PARA GOOGLE SEO ---
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Physician",
-    "name": "Jefferson Bastidas Mejía",
-    "jobTitle": "Psicólogo Clínico",
-    "image": `https://psicologojeffersonbastidas.com${imageJeff.src}`,
-    "url": "https://psicologojeffersonbastidas.com",
-    "priceRange": "$100.000 COP",
-    "address": [
-      {
-        "@type": "PostalAddress",
-        "streetAddress": "Sede Centro",
-        "addressLocality": "Manizales",
-        "addressRegion": "Caldas",
-        "addressCountry": "CO"
-      },
-      {
-        "@type": "PostalAddress",
-        "streetAddress": "Avenida Santander con 55A (Edificio Cristóbal Colón)",
-        "addressLocality": "Manizales",
-        "addressRegion": "Caldas",
-        "addressCountry": "CO"
-      }
-    ],
-    "description": "Psicoterapia presencial en Manizales y online. Especialista en terapias contextuales de tercera generación.",
-    "knowsAbout": [
-      "Protocolo Integrativo de Alta Precisión (PIAP)", 
-      "Terapia de Aceptación y Compromiso (ACT)",
-      "Terapias de Tercera Generación"
-    ]
-  };
-
   return (
     <div className="relative flex flex-col gap-0 scroll-smooth"> 
       
-      {/* INYECCIÓN DEL SCRIPT PARA LOS RESULTADOS ENRIQUECIDOS DE GOOGLE */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-
       <Navbar />
       
       <main className="flex-1">
