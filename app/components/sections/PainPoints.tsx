@@ -13,8 +13,8 @@ const PremiumIcon = ({ Icon }: { Icon: React.ElementType }) => (
       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
       className="absolute inset-0 rounded-full border border-amber-200 bg-amber-50/50"
     />
-    {/* Círculo dorado sólido interior */}
-    <div className="absolute inset-3 rounded-full bg-gradient-to-tr from-amber-500 to-amber-300 shadow-[0_8px_16px_rgba(251,191,36,0.3)]"></div>
+    {/* Círculo dorado sólido interior (sombra ajustada para más realismo) */}
+    <div className="absolute inset-3 rounded-full bg-gradient-to-tr from-amber-500 to-amber-300 shadow-[0_4px_12px_rgba(251,191,36,0.3)]"></div>
     {/* Icono Principal */}
     <Icon className="relative z-20 w-8 h-8 text-[#2b3d38]" strokeWidth={2} />
   </div>
@@ -54,7 +54,7 @@ const containerVariants: Variants = {
 };
 
 const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 50, scale: 0.95 },
+  hidden: { opacity: 0, y: 40, scale: 0.98 },
   visible: { 
     opacity: 1, 
     y: 0, 
@@ -122,12 +122,14 @@ export default function PainPoints() {
               <motion.div
                 key={index}
                 variants={cardVariants}
-                // En móvil: w-[85vw] (casi toda la pantalla), shrink-0 para no aplastarse, snap-center para imantarse
-                // En desktop: md:w-auto y md:shrink para respetar la cuadrícula
-                className="group relative overflow-hidden rounded-[2.5rem] bg-white p-8 md:p-14 transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] flex flex-col items-center text-center cursor-default transform-gpu shrink-0 w-[85vw] snap-center md:w-auto md:shrink"
+                // Sombra inicial corta [0.06], sombra de hover más pronunciada [0.15]
+                className="group relative overflow-hidden rounded-[2.5rem] bg-white p-8 md:p-14 transition-all duration-700 hover:-translate-y-2 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.15)] flex flex-col items-center text-center cursor-default transform-gpu shrink-0 w-[85vw] snap-center md:w-auto md:shrink"
               >
-                {/* ICONO FANTASMA GIGANTE DE FONDO */}
-                <item.icon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 text-[#4a675e]/[0.03] group-hover:scale-110 group-hover:rotate-6 transition-transform duration-1000 ease-out pointer-events-none" />
+                {/* BARRA DE ACENTO PREMIUM (Aparece al hacer hover) */}
+                <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#4a675e] to-amber-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                {/* ICONO FANTASMA GIGANTE DE FONDO (Más visible y reactivo) */}
+                <item.icon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 text-[#4a675e]/[0.08] group-hover:text-[#4a675e]/[0.15] group-hover:scale-125 group-hover:rotate-6 transition-all duration-1000 ease-out pointer-events-none" />
                 
                 {/* ICONO PRINCIPAL */}
                 <PremiumIcon Icon={item.icon} />
