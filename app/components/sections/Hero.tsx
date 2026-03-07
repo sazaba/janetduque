@@ -51,11 +51,13 @@ export default function Hero() {
                 {/* Párrafo Descriptivo */}
                 <p className="text-lg md:text-xl text-stone-600 mb-10 max-w-lg mx-auto md:mx-0 leading-relaxed font-sans font-medium">
                     Un espacio terapéutico seguro, empático y profesional, diseñado para brindarte las herramientas que necesitas para alcanzar una{' '}
-                    <span className="relative group inline-block whitespace-nowrap">
-                        <span className="relative z-10 font-serif italic font-bold text-amber-600 text-xl md:text-2xl px-1">
-                            tranquilidad duradera.
-                        </span>
-                        <span className="absolute bottom-1 left-0 w-full h-2 bg-amber-100 -z-0 transition-all duration-300 group-hover:h-full group-hover:bottom-0 rounded-sm"></span>
+                    
+                    {/* Palabra Destacada con Estilo Unificado */}
+                    <span className="relative inline-block text-[#4a675e] italic font-serif font-bold text-xl md:text-2xl px-1">
+                        tranquilidad duradera.
+                        <svg className="absolute w-full h-2 md:h-3 -bottom-0.5 left-0 text-amber-400 -z-10 opacity-60" viewBox="0 0 100 10" preserveAspectRatio="none">
+                            <path d="M0 5 Q 50 12 100 5" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round" />
+                        </svg>
                     </span>
                 </p>
 
