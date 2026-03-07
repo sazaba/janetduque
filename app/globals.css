@@ -4,11 +4,19 @@
 
 @layer base {
   :root {
-    --background: 255 252 248; 
-    --foreground: 41 37 36; 
-    --primary: 94 234 212; 
-    --font-serif: "Playfair Display", serif;
-    --font-sans: "Lato", sans-serif;
+    /* Fondo crema muy sutil y limpio */
+    --background: 252 253 252; 
+    /* Texto principal: Gris oscuro con un levísimo toque de verde para armonizar */
+    --foreground: 43 61 56; 
+    
+    /* Tu Verde Pastel Oscuro (Hex #4a675e) */
+    --primary: 74 103 94; 
+    /* Tu Dorado Elegante (Hex #d4af37) */
+    --gold: 212 175 55;
+
+    /* Nuevas tipografías propuestas */
+    --font-serif: "Lora", serif;
+    --font-sans: "Nunito", sans-serif;
   }
 
   /* RESET DE SEGURIDAD */
@@ -19,9 +27,6 @@
 
   html {
     scroll-behavior: smooth;
-    /* CORRECCIÓN CRÍTICA: */
-    /* Se elimina max-width: 100vw. */
-    /* Se mantiene overflow-x: hidden para evitar scroll horizontal accidental */
     overflow-x: hidden; 
     width: 100%;
   }
@@ -31,9 +36,6 @@
     color: rgb(var(--foreground));
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    
-    /* CORRECCIÓN CRÍTICA: */
-    /* Se elimina max-width: 100vw. */
     overflow-x: hidden;
     width: 100%;
     position: relative;
@@ -42,21 +44,21 @@
   
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif);
-    color: #44403c;
+    /* Ahora todos los títulos por defecto tomarán tu verde pastel oscuro */
+    color: rgb(var(--primary));
     font-weight: 500;
   }
 
   p, span, a, li {
     font-family: var(--font-sans);
-    color: #57534e;
+    color: rgb(var(--foreground));
   }
 }
 
-/* UTILIDAD DE EMERGENCIA (Opcional, pero segura si se usa en secciones internas, NO en body) */
+/* UTILIDAD DE EMERGENCIA */
 @layer utilities {
   .clip-content {
     overflow: hidden;
-    /* max-width: 100%; usar % es más seguro que vw aquí también */
     max-width: 100%; 
   }
 }
