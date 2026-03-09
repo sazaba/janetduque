@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Activity, Cloud, Flame, Waves } from 'lucide-react';
 
@@ -25,16 +25,34 @@ const painPoints = [
   { icon: Waves, title: "Desregulación", desc: "Tus emociones toman el control del volante. Reaccionas con una intensidad que te asusta." }
 ];
 
+// Rotaciones manuales para que el mazo se vea orgánico, pero con la primera carta recta
+const rotations = [0, -5, 4, -3];
+
 export default function PainPointsDealingOut() {
   const [isStacked, setIsStacked] = useState(true);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
-  // Físicas lentas y elegantes para ver el vuelo completo
-  const springConfig = { type: "spring" as const, stiffness: 65, damping: 16, mass: 1.2 };
+  // Físicas ágiles (120fps)
+  const springConfig = { type: "spring" as const, stiffness: 85, damping: 18, mass: 0.8 };
+
+  const handleToggle = () => {
+    if (isStacked) {
+      setIsStacked(false);
+      // Cuando se abre, forzamos el scroll al inicio (izquierda) para móviles
+      setTimeout(() => {
+        if (carouselRef.current) {
+          carouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+        }
+      }, 50); // Pequeño retraso para que el DOM se actualice a flex-row
+    } else {
+      setIsStacked(true);
+    }
+  };
 
   return (
     <div className="relative w-full bg-[#4a675e] overflow-hidden py-16">
       
-      {/* Ocultar scrollbar pero mantener funcionalidad */}
+      {/* Ocultar scrollbar */}
       <style dangerouslySetInnerHTML={{__html: `
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -53,47 +71,44 @@ export default function PainPointsDealingOut() {
             Señales para <span className="text-amber-400 italic">pausar.</span>
           </motion.h2>
           <motion.p className="text-lg text-stone-200 font-sans font-light leading-relaxed">
-            {isStacked ? "Toca el mazo para descubrir las señales." : "Desliza para explorar. Toca cualquier carta para apilarlas."}
+            {isStacked ? "Toca el mazo para descubrir las señales." : "Desliza para explorar. Toca cualquier carta para apilar."}
           </motion.p>
         </div>
 
         {/* CONTENEDOR ANIMADO ÚNICO */}
         <div className="min-h-[460px] flex flex-col justify-center relative w-full">
           
-          {/* La magia del contenedor: 
-            Cambia de justificar al centro (para el mazo) a permitir overflow (para carrusel).
-          */}
           <motion.div 
             layout
-            className={`flex w-full items-center min-h-[440px] hide-scrollbar
+            ref={carouselRef}
+            className={`flex w-full items-center min-h-[440px] hide-scrollbar overscroll-x-contain
               ${isStacked 
                 ? 'justify-center overflow-visible' 
-                : 'overflow-x-auto snap-x md:justify-center px-6 md:px-12 py-8 gap-4 md:gap-6'
+                : 'overflow-x-auto snap-x snap-mandatory scroll-smooth scroll-p-6 md:justify-center px-6 md:px-12 py-8 gap-5'
               }
             `}
-            style={{ WebkitTapHighlightColor: 'transparent' }}
+            style={{ WebkitTapHighlightColor: 'transparent', WebkitOverflowScrolling: 'touch' }}
           >
             {painPoints.map((item, index) => {
-              // Matemáticas para el Mazo
-              const reverseIndex = painPoints.length - 1 - index;
-              const rot = isStacked ? (index - 1.5) * 6 : 0;
-              const yOff = isStacked ? reverseIndex * 12 : 0;
-              const scl = isStacked ? 1 - (reverseIndex * 0.04) : 1;
+              // --- NUEVA MATEMÁTICA DEL MAZO ---
+              // La carta 0 ahora tiene z-index mayor, escala 1, y no baja (yOff = 0)
+              const rot = isStacked ? rotations[index] : 0;
+              const yOff = isStacked ? index * 12 : 0; // Se apilan hacia abajo
+              const scl = isStacked ? 1 - (index * 0.04) : 1; // Se hacen más pequeñas hacia atrás
+              const zInd = isStacked ? painPoints.length - index : 1; // Invertimos el Z-Index
 
               return (
                 <motion.div
-                  layout // <- ESTA ES LA CLAVE DE TODO EL VUELO FÍSICO
+                  layout
                   key={index}
-                  onClick={() => setIsStacked(!isStacked)}
-                  // Posiciones estáticas dictadas por la lógica
+                  onClick={handleToggle}
                   initial={false}
                   animate={{
                     rotate: rot,
                     y: yOff,
                     scale: scl,
-                    zIndex: isStacked ? index : 1
+                    zIndex: zInd
                   }}
-                  // Elevación al pasar el mouse (reemplaza hover de Tailwind para evitar conflictos)
                   whileHover={{
                     y: isStacked ? yOff - 20 : -10,
                     scale: isStacked ? scl : 1.02,
@@ -101,17 +116,15 @@ export default function PainPointsDealingOut() {
                   }}
                   transition={springConfig}
                   className={`
-                    shrink-0 bg-white rounded-[2rem] p-6 md:p-8 cursor-pointer transform-gpu flex flex-col justify-center items-center text-center
+                    shrink-0 bg-white rounded-[2rem] p-6 md:p-8 cursor-pointer transform-gpu will-change-transform flex flex-col justify-center items-center text-center
                     ${isStacked
                       ? 'absolute w-[300px] h-[380px] shadow-[0_15px_50px_rgba(0,0,0,0.3)]'
-                      : 'relative w-[85vw] md:w-[280px] lg:w-[310px] min-h-[400px] shadow-[0_8px_30px_rgba(0,0,0,0.1)] snap-center'
+                      : 'relative w-[80vw] md:w-[280px] lg:w-[310px] min-h-[400px] shadow-[0_8px_30px_rgba(0,0,0,0.1)] snap-center snap-always'
                     }
                   `}
                 >
-                  {/* Icono de fondo (Se ajusta al rotar) */}
                   <item.icon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 text-[#4a675e]/[0.02] -rotate-6 pointer-events-none" />
                   
-                  {/* Contenido de la Carta */}
                   <div className="relative z-10 w-full">
                     <PremiumIcon Icon={item.icon} />
                     <h3 className="text-2xl font-serif text-[#4a675e] mb-3 tracking-tight">
