@@ -7,7 +7,6 @@ import HeroJanet from '@/app/assets/HeroJanet.webp';
 export default function Hero() {
   const [isMounted, setIsMounted] = useState(false);
 
-  // Solo usamos esto para asegurarnos de que las animaciones arranquen cuando la página esté lista
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -35,16 +34,16 @@ export default function Hero() {
             isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
               
-            {/* TÍTULO PRINCIPAL */}
+            {/* TÍTULO PRINCIPAL REDUCIDO */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] font-medium tracking-tight text-stone-800 leading-[1.15] mb-6 relative">
-              Encuentra el equilibrio y transforma tu forma de <br className="hidden lg:block" />
+              Encuentra tu equilibrio y vuelve a <br className="hidden lg:block" />
               
               {/* Contenedor del Highlight Animado (Texto 1) */}
               <span className="relative inline-block mt-2 md:mt-0 whitespace-nowrap">
-                {/* Texto Fantasma para reservar el espacio */}
+                {/* Texto Fantasma */}
                 <span className="invisible px-1 italic">vivir el presente</span>
                 
-                {/* Texto Real (Verde Pastel) que se revela como tinta fluida */}
+                {/* Texto Real Animado */}
                 <span 
                   className={`absolute top-0 left-0 px-1 italic text-[#4a675e] w-full h-full ${isMounted ? 'animate-text-reveal' : 'invisible'}`} 
                   style={{ animationDelay: '0.4s' }}
@@ -52,7 +51,7 @@ export default function Hero() {
                   vivir el presente
                 </span>
                 
-                {/* Subrayado SVG que se dibuja después de la tinta */}
+                {/* Subrayado SVG */}
                 <svg 
                   className={`absolute w-full h-3 md:h-4 -bottom-1 left-0 text-amber-400 -z-10 opacity-60 ${isMounted ? 'animate-draw' : 'invisible'}`} 
                   style={{ animationDelay: '1.2s' }}
@@ -63,16 +62,16 @@ export default function Hero() {
               </span>
             </h1>
 
-            {/* PÁRRAFO DESCRIPTIVO */}
+            {/* PÁRRAFO DESCRIPTIVO REDUCIDO */}
             <p className="text-lg md:text-xl text-stone-600 leading-relaxed font-medium mb-10 max-w-lg mx-auto md:mx-0 relative">
-              Un espacio terapéutico seguro, empático y profesional, diseñado para brindarte las herramientas que necesitas para alcanzar una{' '}
+              Un espacio seguro y profesional donde encontrarás las herramientas para construir tu{' '}
               
               {/* Contenedor del Highlight Animado (Texto 2) */}
               <span className="relative inline-block font-bold text-xl md:text-2xl whitespace-nowrap">
-                 {/* Texto Fantasma para reservar espacio */}
+                 {/* Texto Fantasma */}
                  <span className="invisible px-1 italic">tranquilidad duradera.</span>
                  
-                 {/* Texto Real (Verde Pastel) que se revela después del primer texto */}
+                 {/* Texto Real Animado */}
                  <span 
                   className={`absolute top-0 left-0 px-1 italic text-[#4a675e] w-full h-full ${isMounted ? 'animate-text-reveal' : 'invisible'}`} 
                   style={{ animationDelay: '1.6s' }}
@@ -80,7 +79,7 @@ export default function Hero() {
                    tranquilidad duradera.
                  </span>
                  
-                 {/* Subrayado SVG final */}
+                 {/* Subrayado SVG */}
                  <svg 
                   className={`absolute w-full h-2 md:h-3 -bottom-0.5 left-0 text-amber-400 -z-10 opacity-60 ${isMounted ? 'animate-draw' : 'invisible'}`} 
                   style={{ animationDelay: '2.4s' }}
