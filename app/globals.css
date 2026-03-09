@@ -14,9 +14,9 @@
     /* Tu Dorado Elegante (Hex #d4af37) */
     --gold: 212 175 55;
 
-    /* Nuevas tipografías propuestas */
-    --font-serif: "Lora", serif;
-    --font-sans: "Nunito", sans-serif;
+    /* TIPOGRAFÍA ESTILO APPLE (San Francisco / System Stack) */
+    --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-serif: "Lora", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   }
 
   /* RESET DE SEGURIDAD */
@@ -44,7 +44,6 @@
   
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif);
-    /* Ahora todos los títulos por defecto tomarán tu verde pastel oscuro */
     color: rgb(var(--primary));
     font-weight: 500;
   }
@@ -55,10 +54,23 @@
   }
 }
 
-/* UTILIDAD DE EMERGENCIA */
+/* UTILIDADES Y ANIMACIONES BRUTALES */
 @layer utilities {
   .clip-content {
     overflow: hidden;
     max-width: 100%; 
+  }
+  
+  /* Animación que simula el trazo del lápiz en los SVG */
+  .animate-draw {
+    stroke-dasharray: 150;
+    stroke-dashoffset: 150;
+    animation: drawLine 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  }
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
   }
 }
