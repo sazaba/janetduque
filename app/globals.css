@@ -75,3 +75,32 @@
     stroke-dashoffset: 0;
   }
 }
+/* UTILIDADES Y ANIMACIONES BRUTALES */
+@layer utilities {
+  .clip-content {
+    overflow: hidden;
+    max-width: 100%; 
+  }
+  
+  /* Animación que simula el trazo del lápiz en los SVG (Subrayados) */
+  .animate-draw {
+    stroke-dasharray: 150;
+    stroke-dashoffset: 150;
+    animation: drawLine 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  }
+
+  /* NUEVO: Efecto de tinta fluida para el texto (Smooth Reveal) */
+  .animate-text-reveal {
+    clip-path: inset(0 100% 0 0); /* Oculta todo desde la derecha */
+    animation: revealText 1.2s cubic-bezier(0.42, 0, 0.14, 1) forwards;
+  }
+}
+
+/* Keyframes para las animaciones */
+@keyframes drawLine {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes revealText {
+  to { clip-path: inset(0 0 0 0); /* Revela todo el texto suavemente hacia la derecha */ }
+}

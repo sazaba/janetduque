@@ -4,46 +4,13 @@ import { MouseEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
 import HeroJanet from '@/app/assets/HeroJanet.webp'; 
 
-// Hook personalizado para el efecto de escritura
-function useTypewriter(text: string, speed: number, start: boolean) {
-  const [displayedText, setDisplayedText] = useState('');
-  const [isComplete, setIsComplete] = useState(false);
-
-  useEffect(() => {
-    if (!start || isComplete) return;
-
-    let currentIndex = 0;
-    const timeout = setInterval(() => {
-      if (currentIndex < text.length) {
-        setDisplayedText(text.slice(0, currentIndex + 1));
-        currentIndex++;
-      } else {
-        clearInterval(timeout);
-        setIsComplete(true);
-      }
-    }, speed);
-
-    return () => clearInterval(timeout);
-  }, [text, speed, start, isComplete]);
-
-  return { displayedText, isComplete };
-}
-
 export default function Hero() {
   const [isMounted, setIsMounted] = useState(false);
 
+  // Solo usamos esto para asegurarnos de que las animaciones arranquen cuando la página esté lista
   useEffect(() => {
     setIsMounted(true);
   }, []);
-
-  // Solo animamos estas dos partes clave
-  const titleHighlight = "vivir el presente";
-  const textHighlight = "tranquilidad duradera.";
-
-  // La animación del título arranca apenas carga el componente
-  const { displayedText: dispTitleHighlight, isComplete: titleDone } = useTypewriter(titleHighlight, 60, isMounted);
-  // La animación del párrafo arranca cuando termina la del título, para mantener una secuencia lógica
-  const { displayedText: dispTextHighlight, isComplete: textDone } = useTypewriter(textHighlight, 50, titleDone);
 
   const handleScrollToEnfoque = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault(); 
@@ -68,48 +35,64 @@ export default function Hero() {
             isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
               
-            {/* TÍTULO PRINCIPAL (Estático + Highlight Animado) */}
+            {/* TÍTULO PRINCIPAL */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] font-medium tracking-tight text-stone-800 leading-[1.15] mb-6 relative">
               Encuentra el equilibrio y transforma tu forma de <br className="hidden lg:block" />
-              {/* Contenedor del Highlight */}
-              <span className="relative inline-block text-[#4a675e] italic mt-2 md:mt-0 whitespace-nowrap">
-                {/* Texto Fantasma para reservar el espacio y evitar el salto */}
-                <span className="invisible px-1">{titleHighlight}</span>
-                {/* Texto Animado */}
-                <span className="absolute top-0 left-0 px-1">{dispTitleHighlight}</span>
+              
+              {/* Contenedor del Highlight Animado (Texto 1) */}
+              <span className="relative inline-block mt-2 md:mt-0 whitespace-nowrap">
+                {/* Texto Fantasma para reservar el espacio */}
+                <span className="invisible px-1 italic">vivir el presente</span>
                 
-                {/* Cursor */}
-                {!titleDone && isMounted && <span className="absolute right-0 top-1/2 -translate-y-1/2 w-[3px] h-[0.9em] bg-[#4a675e] animate-pulse"></span>}
+                {/* Texto Real (Verde Pastel) que se revela como tinta fluida */}
+                <span 
+                  className={`absolute top-0 left-0 px-1 italic text-[#4a675e] w-full h-full ${isMounted ? 'animate-text-reveal' : 'invisible'}`} 
+                  style={{ animationDelay: '0.4s' }}
+                >
+                  vivir el presente
+                </span>
                 
-                {/* Subrayado SVG */}
-                <svg className={`absolute w-full h-3 md:h-4 -bottom-1 left-0 text-amber-400 -z-10 opacity-60 ${titleDone ? 'animate-draw' : 'hidden'}`} viewBox="0 0 100 10" preserveAspectRatio="none">
+                {/* Subrayado SVG que se dibuja después de la tinta */}
+                <svg 
+                  className={`absolute w-full h-3 md:h-4 -bottom-1 left-0 text-amber-400 -z-10 opacity-60 ${isMounted ? 'animate-draw' : 'invisible'}`} 
+                  style={{ animationDelay: '1.2s' }}
+                  viewBox="0 0 100 10" preserveAspectRatio="none"
+                >
                   <path d="M0 5 Q 50 12 100 5" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round" />
                 </svg>
               </span>
             </h1>
 
-            {/* PÁRRAFO DESCRIPTIVO (Estático + Highlight Animado) */}
+            {/* PÁRRAFO DESCRIPTIVO */}
             <p className="text-lg md:text-xl text-stone-600 leading-relaxed font-medium mb-10 max-w-lg mx-auto md:mx-0 relative">
               Un espacio terapéutico seguro, empático y profesional, diseñado para brindarte las herramientas que necesitas para alcanzar una{' '}
-              {/* Contenedor del Highlight */}
-              <span className="relative inline-block text-[#4a675e] italic font-bold text-xl md:text-2xl whitespace-nowrap">
+              
+              {/* Contenedor del Highlight Animado (Texto 2) */}
+              <span className="relative inline-block font-bold text-xl md:text-2xl whitespace-nowrap">
                  {/* Texto Fantasma para reservar espacio */}
-                 <span className="invisible px-1">{textHighlight}</span>
-                 {/* Texto Animado */}
-                 <span className="absolute top-0 left-0 px-1">{dispTextHighlight}</span>
+                 <span className="invisible px-1 italic">tranquilidad duradera.</span>
                  
-                 {/* Cursor */}
-                 {titleDone && !textDone && <span className="absolute right-0 top-1/2 -translate-y-1/2 w-[2px] h-[0.9em] bg-stone-400 animate-pulse"></span>}
+                 {/* Texto Real (Verde Pastel) que se revela después del primer texto */}
+                 <span 
+                  className={`absolute top-0 left-0 px-1 italic text-[#4a675e] w-full h-full ${isMounted ? 'animate-text-reveal' : 'invisible'}`} 
+                  style={{ animationDelay: '1.6s' }}
+                 >
+                   tranquilidad duradera.
+                 </span>
                  
-                 {/* Subrayado SVG */}
-                 <svg className={`absolute w-full h-2 md:h-3 -bottom-0.5 left-0 text-amber-400 -z-10 opacity-60 ${textDone ? 'animate-draw' : 'hidden'}`} viewBox="0 0 100 10" preserveAspectRatio="none">
+                 {/* Subrayado SVG final */}
+                 <svg 
+                  className={`absolute w-full h-2 md:h-3 -bottom-0.5 left-0 text-amber-400 -z-10 opacity-60 ${isMounted ? 'animate-draw' : 'invisible'}`} 
+                  style={{ animationDelay: '2.4s' }}
+                  viewBox="0 0 100 10" preserveAspectRatio="none"
+                 >
                    <path d="M0 5 Q 50 12 100 5" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round" />
                  </svg>
               </span>
             </p>
 
-            {/* Botones de Acción (Aparecen con el contenedor principal) */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center">
+            {/* Botones de Acción */}
+            <div className={`flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center transition-all duration-1000 delay-[2600ms] ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               <a 
                 href="https://wa.link/6vc76u" 
                 target="_blank"
