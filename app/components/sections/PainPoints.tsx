@@ -17,7 +17,6 @@ const PremiumIcon = ({ Icon }: { Icon: React.ElementType }) => (
   </div>
 );
 
-// --- DATOS CURADOS ---
 const painPoints = [
   { icon: Activity, title: "Ansiedad Constante", desc: "El cuerpo reacciona a un peligro invisible. Alertas, miedos repentinos y opresión en el pecho." },
   { icon: Cloud, title: "Depresión Silenciosa", desc: "Desconexión con lo que antes te apasionaba. Una falta de vitalidad pesada y tristeza profunda." },
@@ -25,25 +24,26 @@ const painPoints = [
   { icon: Waves, title: "Desregulación", desc: "Tus emociones toman el control del volante. Reaccionas con una intensidad que te asusta." }
 ];
 
-// Rotaciones manuales para que el mazo se vea orgánico, pero con la primera carta recta
 const rotations = [0, -5, 4, -3];
 
-export default function PainPointsDealingOut() {
+export default function PainPointsFinalFix() {
   const [isStacked, setIsStacked] = useState(true);
   const carouselRef = useRef<HTMLDivElement>(null);
 
-  // Físicas ágiles (120fps)
   const springConfig = { type: "spring" as const, stiffness: 85, damping: 18, mass: 0.8 };
 
   const handleToggle = () => {
     if (isStacked) {
       setIsStacked(false);
-      // Cuando se abre, forzamos el scroll al inicio (izquierda) para móviles
+      // Forzamos el scroll al inicio con un pequeño delay para que Safari procese el cambio de layout
       setTimeout(() => {
         if (carouselRef.current) {
-          carouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+          carouselRef.current.scrollTo({
+            left: 0,
+            behavior: 'auto' // 'auto' es más confiable que 'smooth' para el salto inicial en iOS
+          });
         }
-      }, 50); // Pequeño retraso para que el DOM se actualice a flex-row
+      }, 10); 
     } else {
       setIsStacked(true);
     }
@@ -52,7 +52,6 @@ export default function PainPointsDealingOut() {
   return (
     <div className="relative w-full bg-[#4a675e] overflow-hidden py-16">
       
-      {/* Ocultar scrollbar */}
       <style dangerouslySetInnerHTML={{__html: `
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -60,7 +59,6 @@ export default function PainPointsDealingOut() {
 
       <div className="max-w-[1400px] mx-auto">
         
-        {/* HEADER */}
         <div className="text-center mb-12 max-w-3xl mx-auto px-6">
           <motion.h2
             className="text-4xl md:text-5xl lg:text-6xl font-medium font-serif text-white tracking-tight leading-[1.05] mb-4"
@@ -75,7 +73,6 @@ export default function PainPointsDealingOut() {
           </motion.p>
         </div>
 
-        {/* CONTENEDOR ANIMADO ÚNICO */}
         <div className="min-h-[460px] flex flex-col justify-center relative w-full">
           
           <motion.div 
@@ -84,18 +81,17 @@ export default function PainPointsDealingOut() {
             className={`flex w-full items-center min-h-[440px] hide-scrollbar overscroll-x-contain
               ${isStacked 
                 ? 'justify-center overflow-visible' 
-                : 'overflow-x-auto snap-x snap-mandatory scroll-smooth scroll-p-6 md:justify-center px-6 md:px-12 py-8 gap-5'
+                : 'overflow-x-auto snap-x snap-mandatory md:justify-center px-6 md:px-12 py-8 gap-5'
               }
             `}
             style={{ WebkitTapHighlightColor: 'transparent', WebkitOverflowScrolling: 'touch' }}
           >
             {painPoints.map((item, index) => {
-              // --- NUEVA MATEMÁTICA DEL MAZO ---
-              // La carta 0 ahora tiene z-index mayor, escala 1, y no baja (yOff = 0)
+              // La primera carta (index 0) siempre arriba y centrada en el mazo
               const rot = isStacked ? rotations[index] : 0;
-              const yOff = isStacked ? index * 12 : 0; // Se apilan hacia abajo
-              const scl = isStacked ? 1 - (index * 0.04) : 1; // Se hacen más pequeñas hacia atrás
-              const zInd = isStacked ? painPoints.length - index : 1; // Invertimos el Z-Index
+              const yOff = isStacked ? index * 12 : 0; 
+              const scl = isStacked ? 1 - (index * 0.04) : 1;
+              const zInd = isStacked ? painPoints.length - index : 1;
 
               return (
                 <motion.div
@@ -109,12 +105,8 @@ export default function PainPointsDealingOut() {
                     scale: scl,
                     zIndex: zInd
                   }}
-                  whileHover={{
-                    y: isStacked ? yOff - 20 : -10,
-                    scale: isStacked ? scl : 1.02,
-                    zIndex: 50
-                  }}
                   transition={springConfig}
+                  // transform-gpu + will-change para fluidez de 120fps
                   className={`
                     shrink-0 bg-white rounded-[2rem] p-6 md:p-8 cursor-pointer transform-gpu will-change-transform flex flex-col justify-center items-center text-center
                     ${isStacked
