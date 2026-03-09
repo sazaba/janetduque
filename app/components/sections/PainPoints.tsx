@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Transition } from 'framer-motion';
 import { Activity, Cloud, Flame, Waves } from 'lucide-react';
 
 // --- ICONO PREMIUM ---
@@ -58,7 +58,7 @@ export default function PainPointsDeckFull() {
   const [isStacked, setIsStacked] = useState(true);
 
   // Físicas de animación hiper-fluidas
-  const springConfig = { type: "spring", stiffness: 180, damping: 22, mass: 0.9 };
+  const springConfig: Transition = { type: "spring", stiffness: 180, damping: 22, mass: 0.9 };
 
   return (
     <div className="relative w-full bg-[#4a675e] overflow-hidden py-16">
