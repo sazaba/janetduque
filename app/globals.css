@@ -55,27 +55,7 @@
   }
 }
 
-/* UTILIDADES Y ANIMACIONES BRUTALES */
-@layer utilities {
-  .clip-content {
-    overflow: hidden;
-    max-width: 100%; 
-  }
-  
-  /* Animación que simula el trazo del lápiz en los SVG */
-  .animate-draw {
-    stroke-dasharray: 150;
-    stroke-dashoffset: 150;
-    animation: drawLine 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-  }
-}
-
-@keyframes drawLine {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-/* UTILIDADES Y ANIMACIONES BRUTALES */
+/* UTILIDADES Y ANIMACIONES BRUTALES BLINDADAS PARA SAFARI/iOS */
 @layer utilities {
   .clip-content {
     overflow: hidden;
@@ -89,18 +69,24 @@
     animation: drawLine 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   }
 
-  /* NUEVO: Efecto de tinta fluida para el texto (Smooth Reveal) */
+  /* Efecto de tinta fluida (Smooth Reveal) con soporte para iPhone/Safari */
   .animate-text-reveal {
-    clip-path: inset(0 100% 0 0); /* Oculta todo desde la derecha */
+    -webkit-clip-path: inset(0 100% 0 0); /* Safari */
+    clip-path: inset(0 100% 0 0); 
     animation: revealText 1.2s cubic-bezier(0.42, 0, 0.14, 1) forwards;
   }
 }
 
-/* Keyframes para las animaciones */
+/* Keyframes para las animaciones con soporte Webkit */
 @keyframes drawLine {
-  to { stroke-dashoffset: 0; }
+  to { 
+    stroke-dashoffset: 0; 
+  }
 }
 
 @keyframes revealText {
-  to { clip-path: inset(0 0 0 0); /* Revela todo el texto suavemente hacia la derecha */ }
+  to { 
+    -webkit-clip-path: inset(0 0 0 0); /* Safari */
+    clip-path: inset(0 0 0 0); 
+  }
 }
