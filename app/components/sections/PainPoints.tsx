@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Activity, Cloud, Flame, Waves } from 'lucide-react';
 
-// --- ICONO PREMIUM ---
 const PremiumIcon = ({ Icon }: { Icon: React.ElementType }) => (
   <div className="relative flex items-center justify-center w-16 h-16 mb-6 z-10">
     <motion.div 
@@ -18,36 +17,45 @@ const PremiumIcon = ({ Icon }: { Icon: React.ElementType }) => (
 );
 
 const painPoints = [
-  { icon: Activity, title: "Ansiedad Constante", desc: "El cuerpo reacciona a un peligro invisible. Alertas, miedos repentinos y opresión en el pecho." },
-  { icon: Cloud, title: "Depresión Silenciosa", desc: "Desconexión con lo que antes te apasionaba. Una falta de vitalidad pesada y tristeza profunda." },
-  { icon: Flame, title: "Burnout Total", desc: "El límite se rompió. Sientes que las demandas te superan y el agotamiento mental no desaparece." },
-  { icon: Waves, title: "Desregulación", desc: "Tus emociones toman el control del volante. Reaccionas con una intensidad que te asusta." }
+  { id: 'first', icon: Activity, title: "Ansiedad Constante", desc: "El cuerpo reacciona a un peligro invisible. Alertas, miedos repentinos y opresión en el pecho." },
+  { id: 'second', icon: Cloud, title: "Depresión Silenciosa", desc: "Desconexión con lo que antes te apasionaba. Una falta de vitalidad pesada y tristeza profunda." },
+  { id: 'third', icon: Flame, title: "Burnout Total", desc: "El límite se rompió. Sientes que las demandas te superan y el agotamiento mental no desaparece." },
+  { id: 'fourth', icon: Waves, title: "Desregulación", desc: "Tus emociones toman el control del volante. Reaccionas con una intensidad que te asusta." }
 ];
 
 const rotations = [0, -5, 4, -3];
 
-export default function PainPointsFinalFix() {
+export default function PainPointsSafariFix() {
   const [isStacked, setIsStacked] = useState(true);
   const carouselRef = useRef<HTMLDivElement>(null);
 
-  const springConfig = { type: "spring" as const, stiffness: 85, damping: 18, mass: 0.8 };
+  // Físicas de 120fps (ágiles y ligeras)
+  const springConfig = { type: "spring" as const, stiffness: 90, damping: 20, mass: 0.6 };
 
-  const handleToggle = () => {
-    if (isStacked) {
-      setIsStacked(false);
-      // Forzamos el scroll al inicio con un pequeño delay para que Safari procese el cambio de layout
-      setTimeout(() => {
-        if (carouselRef.current) {
-          carouselRef.current.scrollTo({
-            left: 0,
-            behavior: 'auto' // 'auto' es más confiable que 'smooth' para el salto inicial en iOS
-          });
-        }
-      }, 10); 
-    } else {
-      setIsStacked(true);
+  // --- EL FIX MAESTRO PARA SAFARI ---
+  useEffect(() => {
+    if (!isStacked && carouselRef.current) {
+      const container = carouselRef.current;
+      
+      // Reset inmediato (Frame 0)
+      container.scrollLeft = 0;
+
+      // Reset durante la animación (Frame 1)
+      const scrollReset = () => {
+        if (container) container.scrollLeft = 0;
+      };
+      
+      const frameId = requestAnimationFrame(scrollReset);
+      
+      // Reset final cuando las cartas ya se acomodaron (Frame Final)
+      const timeoutId = setTimeout(scrollReset, 100);
+
+      return () => {
+        cancelAnimationFrame(frameId);
+        clearTimeout(timeoutId);
+      };
     }
-  };
+  }, [isStacked]);
 
   return (
     <div className="relative w-full bg-[#4a675e] overflow-hidden py-16">
@@ -62,42 +70,41 @@ export default function PainPointsFinalFix() {
         <div className="text-center mb-12 max-w-3xl mx-auto px-6">
           <motion.h2
             className="text-4xl md:text-5xl lg:text-6xl font-medium font-serif text-white tracking-tight leading-[1.05] mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            layout
           >
             Señales para <span className="text-amber-400 italic">pausar.</span>
           </motion.h2>
-          <motion.p className="text-lg text-stone-200 font-sans font-light leading-relaxed">
-            {isStacked ? "Toca el mazo para descubrir las señales." : "Desliza para explorar. Toca cualquier carta para apilar."}
+          <motion.p layout className="text-lg text-stone-200 font-sans font-light">
+            {isStacked ? "Toca el mazo para descubrir las señales." : "Explora las señales. Toca una para apilar."}
           </motion.p>
         </div>
 
-        <div className="min-h-[460px] flex flex-col justify-center relative w-full">
+        <div className="min-h-[460px] flex flex-col justify-center relative w-full px-4">
           
           <motion.div 
             layout
             ref={carouselRef}
+            // Cambiamos justify-center por justify-start en móvil para que el scroll 0 sea el inicio real
             className={`flex w-full items-center min-h-[440px] hide-scrollbar overscroll-x-contain
               ${isStacked 
                 ? 'justify-center overflow-visible' 
-                : 'overflow-x-auto snap-x snap-mandatory md:justify-center px-6 md:px-12 py-8 gap-5'
+                : 'overflow-x-auto snap-x snap-mandatory justify-start md:justify-center px-4 md:px-12 py-8 gap-5'
               }
             `}
             style={{ WebkitTapHighlightColor: 'transparent', WebkitOverflowScrolling: 'touch' }}
           >
             {painPoints.map((item, index) => {
-              // La primera carta (index 0) siempre arriba y centrada en el mazo
+              // Primera carta (Ansiedad) siempre al frente (z-index y escala)
               const rot = isStacked ? rotations[index] : 0;
-              const yOff = isStacked ? index * 12 : 0; 
-              const scl = isStacked ? 1 - (index * 0.04) : 1;
-              const zInd = isStacked ? painPoints.length - index : 1;
+              const yOff = isStacked ? index * 14 : 0; 
+              const scl = isStacked ? 1 - (index * 0.05) : 1;
+              const zInd = isStacked ? painPoints.length - index : 10;
 
               return (
                 <motion.div
                   layout
-                  key={index}
-                  onClick={handleToggle}
+                  key={item.id}
+                  onClick={() => setIsStacked(!isStacked)}
                   initial={false}
                   animate={{
                     rotate: rot,
@@ -106,12 +113,11 @@ export default function PainPointsFinalFix() {
                     zIndex: zInd
                   }}
                   transition={springConfig}
-                  // transform-gpu + will-change para fluidez de 120fps
                   className={`
-                    shrink-0 bg-white rounded-[2rem] p-6 md:p-8 cursor-pointer transform-gpu will-change-transform flex flex-col justify-center items-center text-center
+                    shrink-0 bg-white rounded-[2.5rem] p-8 cursor-pointer transform-gpu will-change-transform flex flex-col justify-center items-center text-center
                     ${isStacked
-                      ? 'absolute w-[300px] h-[380px] shadow-[0_15px_50px_rgba(0,0,0,0.3)]'
-                      : 'relative w-[80vw] md:w-[280px] lg:w-[310px] min-h-[400px] shadow-[0_8px_30px_rgba(0,0,0,0.1)] snap-center snap-always'
+                      ? 'absolute w-[300px] h-[380px] shadow-[0_20px_60px_rgba(0,0,0,0.3)]'
+                      : 'relative w-[82vw] md:w-[300px] lg:w-[320px] min-h-[400px] shadow-[0_10px_30px_rgba(0,0,0,0.08)] snap-center snap-always'
                     }
                   `}
                 >
@@ -119,10 +125,10 @@ export default function PainPointsFinalFix() {
                   
                   <div className="relative z-10 w-full">
                     <PremiumIcon Icon={item.icon} />
-                    <h3 className="text-2xl font-serif text-[#4a675e] mb-3 tracking-tight">
+                    <h3 className="text-2xl md:text-3xl font-serif text-[#4a675e] mb-4 tracking-tight">
                       {item.title}
                     </h3>
-                    <p className="text-stone-600 text-base font-sans font-light leading-relaxed">
+                    <p className="text-stone-600 text-base md:text-lg font-sans font-light leading-relaxed">
                       {item.desc}
                     </p>
                   </div>
