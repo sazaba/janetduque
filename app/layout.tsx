@@ -1,18 +1,9 @@
 import type { Metadata } from "next";
-// 1. Dejamos SOLO Lora para los títulos elegantes. Eliminamos Nunito.
-import { Lora } from "next/font/google"; 
 import "./globals.css";
 import { Providers } from "./providers";
 
 // --- IMPORTACIÓN DE IMÁGENES ---
 import iconImage from "./icon.webp"; 
-
-// 2. Configuramos Lora para los títulos (Serif)
-const lora = Lora({ 
-  subsets: ["latin"],
-  variable: "--font-serif",
-  display: "swap",
-});
 
 // --- SEO OPTIMIZADO PARA JANET DUQUE ---
 export const metadata: Metadata = {
@@ -71,8 +62,7 @@ export default function RootLayout({
   return (
     <html lang="es" className="scroll-smooth">
       <body
-        // 3. Aplicamos lora.variable y agregamos "font-sans" para activar el estilo Apple
-        className={`${lora.variable} font-sans min-h-screen antialiased overflow-x-hidden`}
+        className="font-sans min-h-screen antialiased overflow-x-hidden"
       >
         <Providers>
             

@@ -14,9 +14,9 @@
     /* Tu Dorado Elegante (Hex #d4af37) */
     --gold: 212 175 55;
 
-    /* TIPOGRAFÍA ESTILO APPLE (San Francisco / System Stack) */
+    /* LA MAGIA DE APPLE: Usamos la misma fuente nativa premium para TODO */
     --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --font-serif: "Lora", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    --font-serif: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
 
   /* RESET DE SEGURIDAD */
@@ -43,9 +43,10 @@
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     color: rgb(var(--primary));
-    font-weight: 500;
+    font-weight: 600; /* Un poco más de grosor para imponer presencia */
+    letter-spacing: -0.02em; /* Juntamos un poco las letras, técnica de Apple para títulos */
   }
 
   p, span, a, li {
