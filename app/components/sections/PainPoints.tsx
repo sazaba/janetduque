@@ -19,41 +19,44 @@ const PremiumIcon = ({ Icon }: { Icon: React.ElementType }) => (
 
 // --- DATOS CURADOS ---
 const painPoints = [
-  { icon: Activity, title: "Ansiedad Constante", desc: "El cuerpo reacciona a un peligro invisible. Alertas, miedos repentinos y una opresión en el pecho que no te deja respirar." },
-  { icon: Cloud, title: "Depresión Silenciosa", desc: "Desconexión con lo que antes te apasionaba. Una falta de vitalidad pesada y una tristeza profunda que cuesta explicar." },
-  { icon: Flame, title: "Burnout Total", desc: "El límite se rompió. Sientes que las demandas te superan y el agotamiento mental no desaparece ni siquiera después de dormir." },
-  { icon: Waves, title: "Desregulación", desc: "Tus emociones toman el control del volante. Reaccionas con una intensidad que te asusta y cuesta muchísimo volver a la calma." }
+  { icon: Activity, title: "Ansiedad Constante", desc: "El cuerpo reacciona a un peligro invisible. Alertas, miedos repentinos y opresión en el pecho." },
+  { icon: Cloud, title: "Depresión Silenciosa", desc: "Desconexión con lo que antes te apasionaba. Una falta de vitalidad pesada y tristeza profunda." },
+  { icon: Flame, title: "Burnout Total", desc: "El límite se rompió. Sientes que las demandas te superan y el agotamiento mental no desaparece." },
+  { icon: Waves, title: "Desregulación", desc: "Tus emociones toman el control del volante. Reaccionas con una intensidad que te asusta." }
 ];
 
 // --- COMPONENTE INTERNO DE LA CARTA ---
 const CardContent = ({ item }: { item: typeof painPoints[0] }) => (
-  <div className="relative z-10 flex flex-col items-center justify-center text-center h-full w-full max-w-lg mx-auto">
+  <div className="relative z-10 flex flex-col items-center justify-center text-center h-full w-full">
     <PremiumIcon Icon={item.icon} />
-    <h3 className="text-3xl font-serif text-[#4a675e] mb-4 tracking-tight">
+    <h3 className="text-2xl font-serif text-[#4a675e] mb-3 tracking-tight">
       {item.title}
     </h3>
-    <p className="text-stone-600 text-lg font-sans font-light leading-relaxed px-4">
+    <p className="text-stone-600 text-base font-sans font-light leading-relaxed">
       {item.desc}
     </p>
   </div>
 );
 
-export default function PainPointsCarouselFull() {
+export default function PainPointsDeckSpread() {
   const [isStacked, setIsStacked] = useState(true);
 
-  // Solución al error de TypeScript: Declaramos el type explícitamente como constante
+  // Físicas de resorte fluidas y sin errores de tipado
   const springConfig = { type: "spring" as const, stiffness: 180, damping: 22, mass: 0.9 };
 
   return (
     <div className="relative w-full bg-[#4a675e] overflow-hidden py-16">
       
-      {/* Estilos para ocultar scrollbar en Safari/Chrome pero mantener la funcionalidad */}
+      {/* Estilos para ocultar scrollbar pero mantener funcionalidad */}
       <style dangerouslySetInnerHTML={{__html: `
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}} />
 
-      <div className="max-w-[1000px] mx-auto px-6">
+      {/* AQUÍ ESTÁ LA CLAVE: max-w-[1400px] para darle un lienzo súper ancho al 
+        carrusel, permitiendo que las 4 cartas quepan en desktop sin cortarse. 
+      */}
+      <div className="max-w-[1400px] mx-auto px-4 md:px-8">
         
         {/* HEADER */}
         <div className="text-center mb-12 max-w-3xl mx-auto">
@@ -66,7 +69,7 @@ export default function PainPointsCarouselFull() {
             Señales para <span className="text-amber-400 italic">pausar.</span>
           </motion.h2>
           <motion.p className="text-lg text-stone-200 font-sans font-light leading-relaxed">
-            {isStacked ? "Toca el mazo para descubrir las señales." : "Desliza para ver más. Toca una carta para volver a apilar."}
+            {isStacked ? "Toca el mazo para descubrir las señales." : "Toca cualquier carta para volver a apilarlas."}
           </motion.p>
         </div>
 
@@ -76,7 +79,7 @@ export default function PainPointsCarouselFull() {
             
             {isStacked ? (
               // ==========================================
-              // ESTADO 1: EL MAZO (Centro)
+              // ESTADO 1: EL MAZO APILADO
               // ==========================================
               <motion.div 
                 key="deck"
@@ -101,7 +104,8 @@ export default function PainPointsCarouselFull() {
                       initial={false}
                       animate={{ rotate, y: yOffset, scale }}
                       transition={springConfig}
-                      className="absolute w-[80vw] max-w-[340px] h-[380px] bg-white rounded-[2rem] p-8 shadow-[0_15px_50px_rgba(0,0,0,0.3)] group-hover:-translate-y-4 transition-transform duration-500 ease-out flex flex-col justify-center"
+                      // Tamaño fijo de la carta apilada
+                      className="absolute w-[80vw] max-w-[300px] h-[380px] bg-white rounded-[2rem] p-6 md:p-8 shadow-[0_15px_50px_rgba(0,0,0,0.3)] group-hover:-translate-y-4 transition-transform duration-500 ease-out flex flex-col justify-center"
                     >
                       <item.icon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 text-[#4a675e]/[0.03] rotate-12 pointer-events-none" />
                       <CardContent item={item} />
@@ -112,14 +116,15 @@ export default function PainPointsCarouselFull() {
             ) : (
 
               // ==========================================
-              // ESTADO 2: CARRUSEL FULL WIDTH
+              // ESTADO 2: MAZO DESPLEGADO / CARRUSEL
               // ==========================================
               <motion.div 
                 key="carousel"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="flex overflow-x-auto snap-x snap-mandatory gap-4 w-full hide-scrollbar items-center pb-8"
+                // md:justify-center centra todas las cartas si la pantalla es grande
+                className="flex overflow-x-auto md:justify-center snap-x snap-mandatory gap-4 md:gap-6 w-full hide-scrollbar items-center pb-8 px-4 md:px-0"
                 style={{ WebkitTapHighlightColor: 'transparent' }}
               >
                 {painPoints.map((item, index) => (
@@ -130,10 +135,11 @@ export default function PainPointsCarouselFull() {
                     animate={{ rotate: 0, y: 0, scale: 1 }} 
                     transition={springConfig}
                     onClick={() => setIsStacked(true)}
-                    // Aquí la carta obliga a ocupar el 100% de la pantalla
-                    className="relative shrink-0 w-full min-h-[380px] bg-white rounded-[2rem] p-8 shadow-[0_8px_30px_rgba(0,0,0,0.1)] snap-center cursor-pointer flex flex-col justify-center"
+                    // AQUÍ ESTÁ EL CAMBIO: w-[280px] a lg:w-[300px]. 
+                    // Ya no son w-full, mantienen su forma de naipe.
+                    className="relative shrink-0 w-[85vw] md:w-[280px] lg:w-[300px] min-h-[380px] bg-white rounded-[2rem] p-6 md:p-8 shadow-[0_8px_30px_rgba(0,0,0,0.1)] snap-center cursor-pointer flex flex-col justify-center hover:shadow-[0_15px_40px_rgba(0,0,0,0.15)] hover:-translate-y-2 transition-all duration-300"
                   >
-                    <item.icon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 text-[#4a675e]/[0.02] -rotate-6 pointer-events-none" />
+                    <item.icon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 text-[#4a675e]/[0.02] -rotate-6 pointer-events-none" />
                     <CardContent item={item} />
                   </motion.div>
                 ))}
