@@ -69,11 +69,7 @@ export default async function Home() {
           <FAQ/>
         </section>
 
-
-
         {/* 
-
-        
 
         <section id="diferencial">
           <ValueProposition/>
@@ -82,9 +78,6 @@ export default async function Home() {
         <section id="proceso">
           <Transformation/>
         </section>
-
-        
-        
 
         <section id="blog">
           <BlogCarousel />

@@ -8,7 +8,7 @@ import {
   BrainCircuit, 
   Target, 
   Clock, 
-  Globe2, // Cambiado de MapPin a Globe2 por ser virtual
+  Globe2,
   Wallet, 
   SunMedium, 
   Plus, 
@@ -16,7 +16,7 @@ import {
   ArrowRight
 } from "lucide-react";
 
-// --- DATOS ACTUALIZADOS PARA LA DRA. JANET DUQUE ---
+// --- DATOS ACTUALIZADOS ---
 const faqData = [
   {
     id: "profesional",
@@ -38,10 +38,7 @@ const faqData = [
       <>
         A diferencia de los enfoques tradicionales que solo se centran en hablar del pasado, mi propuesta es pasar del <em>"¿Por qué me pasa esto?"</em> al <strong>"¿Cómo lo soluciono?"</strong>.
         <br /><br />
-        <div className="bg-[#4a675e]/5 p-5 rounded-xl border-l-2 border-amber-400 my-4 text-sm">
-            <strong>Atención "Boutique":</strong> No es una consulta masiva. Trabajo con un número limitado de consultantes para garantizar una inmersión profunda, personalizada y de alta precisión clínica.
-        </div>
-        No vienes solo a ser escuchado, vienes a entrenar tu mente con herramientas concretas para la vida real.
+        Mi objetivo es brindarte un espacio de trabajo activo. No vienes solo a ser escuchado, sino a entrenar tu mente con herramientas y estrategias concretas que puedas aplicar de inmediato en tu vida real para generar cambios sostenibles.
       </>
     )
   },
@@ -107,11 +104,11 @@ const faqData = [
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
             <div className="bg-white border border-stone-100 p-5 rounded-2xl text-center shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
                 <p className="text-[10px] text-stone-400 font-bold uppercase tracking-widest mb-1">Colombia</p>
-                <p className="text-2xl font-serif text-[#4a675e]">$100.000 <span className="text-sm font-sans text-stone-400">COP</span></p>
+                <p className="text-2xl font-serif text-[#4a675e]">$130.000 <span className="text-sm font-sans text-stone-400">COP</span></p>
             </div>
             <div className="bg-white border border-stone-100 p-5 rounded-2xl text-center shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
                 <p className="text-[10px] text-stone-400 font-bold uppercase tracking-widest mb-1">Exterior</p>
-                <p className="text-2xl font-serif text-[#4a675e]">$30 <span className="text-sm font-sans text-stone-400">USD/EUR</span></p>
+                <p className="text-2xl font-serif text-[#4a675e]">$70 <span className="text-sm font-sans text-stone-400">USD</span></p>
             </div>
         </div>
         <p className="text-center text-xs text-stone-400 mt-4 font-light">
