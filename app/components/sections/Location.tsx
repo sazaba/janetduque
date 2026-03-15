@@ -27,40 +27,56 @@ const VIRTUAL_BENEFITS = [
   }
 ];
 
-// --- COMPONENTE DEL GLOBO 3D (Actualizado y más grande) ---
+// --- COMPONENTE DEL GLOBO 3D (100% Responsive & Tamaño Ajustable) ---
 const Globe = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     let phi = 4.7; // Rotación inicial centrada en Colombia
+    let width = 0;
+
+    // FIX MÓVIL: Calculamos el ancho real del contenedor en la pantalla
+    const onResize = () => {
+      if (canvasRef.current) {
+        width = canvasRef.current.offsetWidth;
+      }
+    };
+    window.addEventListener('resize', onResize);
+    onResize(); // Llamada inicial
 
     if (!canvasRef.current) return;
 
     const globe = createGlobe(canvasRef.current, {
       devicePixelRatio: 2,
-      width: 1200, // Aumentamos la resolución interna para pantallas grandes
-      height: 1200,
+      width: width * 2, // Ancho inicial dinámico
+      height: width * 2, // Alto inicial dinámico
       phi: 0,
-      theta: 0.15, // Inclinación ligeramente más dramática
+      theta: 0.15,
       dark: 0, 
       diffuse: 1.2,
-      mapSamples: 24000, // Más detalle en los bordes de los continentes
+      mapSamples: 24000,
       mapBrightness: 6,
-      baseColor: [0.17, 0.24, 0.22], // Verde oscuro (#2b3d38)
-      markerColor: [0.96, 0.75, 0.26], // Dorado (amber-400)
-      glowColor: [0.17, 0.24, 0.22], 
+      // CONVERSIÓN EXACTA: Verde #4a675e a RGB normalizado
+      baseColor: [0.29, 0.40, 0.37], 
+      // CONVERSIÓN EXACTA: Dorado amber-400 a RGB normalizado
+      markerColor: [0.98, 0.75, 0.14], 
+      glowColor: [0.29, 0.40, 0.37], 
       markers: [
-        // Marcador en Colombia (Pereira) un poco más grande
+        // Marcador en Pereira
         { location: [4.8133, -75.6961], size: 0.1 } 
       ],
       onRender: (state) => {
-        // Animación de rotación perpetua suave
         state.phi = phi;
         phi += 0.003; 
+        
+        // FIX MÓVIL: Mantiene la proporción correcta en WebGL en cada frame
+        state.width = width * 2;
+        state.height = width * 2;
       }
     });
 
     return () => {
+      window.removeEventListener('resize', onResize);
       globe.destroy();
     };
   }, []);
@@ -69,9 +85,8 @@ const Globe = () => {
     <canvas
       ref={canvasRef}
       style={{
-        width: "100%", // Responsive real
+        width: "100%", // Obliga al canvas a respetar el contenedor
         height: "auto",
-        maxWidth: "600px", // Limite máximo para escritorio
         aspectRatio: "1/1",
       }}
       className="mx-auto cursor-grab active:cursor-grabbing relative z-10 drop-shadow-2xl"
@@ -82,11 +97,11 @@ const Globe = () => {
 
 export default function VirtualLocation() {
   return (
-    <section className="py-24 md:py-32 px-6 relative overflow-hidden bg-[#2b3d38] selection:bg-amber-400 selection:text-[#2b3d38]">
+    <section className="py-24 md:py-32 px-6 relative overflow-hidden bg-[#4a675e] selection:bg-amber-400 selection:text-[#4a675e]">
       
-      {/* Elementos Decorativos de Fondo de la Sección */}
+      {/* Elementos Decorativos de Fondo */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-gradient-to-br from-teal-600/20 to-transparent blur-[100px]" />
+        <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-gradient-to-br from-[#4a675e] to-transparent blur-[100px]" />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-center">
@@ -112,7 +127,7 @@ export default function VirtualLocation() {
                   Tu bienestar no tiene <span className="text-amber-400 italic">fronteras.</span>
                 </h2>
                 
-                <p className="text-teal-50 font-light text-lg mb-10 leading-relaxed opacity-90">
+                <p className="text-white/80 font-light text-lg mb-10 leading-relaxed">
                   La terapia debe adaptarse a tu vida, no al revés. A través de mi consultorio 100% virtual, te brindo un espacio de contención profesional y cálido, sin importar en qué lugar del mundo te encuentres.
                 </p>
             </motion.div>
@@ -128,14 +143,15 @@ export default function VirtualLocation() {
                         transition={{ delay: 0.2 + (index * 0.1), duration: 0.5 }}
                         className="flex items-start gap-5 group"
                     >
-                        <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-amber-400 group-hover:bg-amber-400 group-hover:text-[#2b3d38] transition-colors duration-300 transform-gpu shrink-0">
+                        {/* Hover usa el verde #4a675e */}
+                        <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-amber-400 group-hover:bg-amber-400 group-hover:text-[#4a675e] transition-colors duration-300 transform-gpu shrink-0">
                             {benefit.icon}
                         </div>
                         <div>
                             <h3 className="text-xl font-serif font-bold text-white mb-1">
                                 {benefit.title}
                             </h3>
-                            <p className="text-teal-100/70 font-light text-sm md:text-base leading-relaxed">
+                            <p className="text-white/70 font-light text-sm md:text-base leading-relaxed">
                                 {benefit.description}
                             </p>
                         </div>
@@ -149,11 +165,12 @@ export default function VirtualLocation() {
               viewport={{ once: true }}
               transition={{ delay: 0.6, duration: 0.5 }}
             >
+              {/* Botón con texto #4a675e */}
               <a 
                   href="https://wa.link/2x3i8s"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-amber-500 hover:bg-amber-400 text-[#2b3d38] font-bold text-base transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(251,191,36,0.2)] w-fit"
+                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-amber-500 hover:bg-amber-400 text-[#4a675e] font-bold text-base transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(251,191,36,0.2)] w-fit"
               >
                   Agendar Sesión Virtual
                   <ArrowRight size={20} />
@@ -162,18 +179,19 @@ export default function VirtualLocation() {
 
         </div>
 
-        {/* --- COLUMNA DERECHA: GLOBO 3D PROTAGONISTA --- */}
-        <div className="lg:col-span-6 relative flex flex-col items-center justify-center w-full min-h-[400px] lg:min-h-[600px]">
+        {/* --- COLUMNA DERECHA: GLOBO 3D INMENSO --- */}
+        <div className="lg:col-span-6 relative flex flex-col items-center justify-center w-full min-h-[400px]">
             
             <motion.div
                initial={{ opacity: 0, scale: 0.8 }}
                whileInView={{ opacity: 1, scale: 1 }}
                viewport={{ once: true }}
                transition={{ duration: 1, ease: "easeOut" }}
-               className="relative w-full flex items-center justify-center"
+               // UPGRADE: max-w-[400px] en móvil para controlarlo, scale-125 y traslación en desktop para hacerlo masivo
+               className="relative w-full max-w-[400px] md:max-w-[500px] lg:max-w-none lg:w-full lg:scale-125 lg:-ml-12 flex items-center justify-center"
             >
-                {/* UPGRADE: Aura de luz detrás del globo pulsando suavemente */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-amber-500/20 rounded-full blur-[80px] md:blur-[120px] animate-pulse pointer-events-none" />
+                {/* Aura de luz */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] bg-amber-500/20 rounded-full blur-[80px] md:blur-[120px] animate-pulse pointer-events-none" />
                 
                 <Globe />
 
