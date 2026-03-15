@@ -49,9 +49,11 @@ export default async function Home() {
           <PainPoints />
         </section>
 
-        {/* <section>
+        <section>
            <TargetAudience/>
         </section>
+
+        {/* 
 
         <section id="sobre-mi">
           <ProfessionalProfile/>
