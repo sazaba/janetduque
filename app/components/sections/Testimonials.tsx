@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { Star, CheckCircle2, ArrowRight, Quote } from "lucide-react";
 import google from "@/app/assets/logo.svg";
 
-// --- DATOS CORREGIDOS (Adaptados para la Dra. Janet y con colores premium) ---
 const reviews = [
   {
     id: 1,
@@ -14,7 +13,7 @@ const reviews = [
     date: "Hace 2 semanas",
     text: "Excelente su trabajo 👌 trabajando no solo la mente sino también las emociones y lo que esto genera en el cuerpo, ayudando a llegar a un propósito de vida.",
     rating: 5,
-    color: "bg-[#4a675e]" // Verde principal
+    color: "bg-[#4a675e]" 
   },
   {
     id: 2,
@@ -22,7 +21,7 @@ const reviews = [
     date: "Hace 3 meses",
     text: "En varias ocasiones que he requerido los servicios profesionales de la Dra. Janet, mis clientes han quedado satisfechos con los resultados de su trabajo.",
     rating: 5,
-    color: "bg-amber-500" // Dorado
+    color: "bg-amber-500" 
   },
   {
     id: 3,
@@ -38,7 +37,7 @@ const reviews = [
     date: "Hace 2 meses",
     text: "Una experiencia grata y útil para mi bienestar integral con la profesional Janet!",
     rating: 5,
-    color: "bg-[#384e47]" // Verde más oscuro
+    color: "bg-[#384e47]" 
   },
   {
     id: 5,
@@ -58,9 +57,9 @@ const reviews = [
   }
 ];
 
-// Duplicamos para el efecto de scroll infinito
 const infiniteReviews = [...reviews, ...reviews];
 
+// La conexión al backend (dbReviewCount) se mantiene intacta aquí
 interface TestimonialsProps {
   dbReviewCount?: number;
 }
@@ -74,11 +73,11 @@ export default function Testimonials({ dbReviewCount = 88 }: TestimonialsProps) 
 
       {/* --- CABECERA (TÍTULO Y CAJA DE GOOGLE) --- */}
       <div className="max-w-7xl mx-auto px-6 mb-16 md:mb-24 relative z-10">
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-10">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-12 lg:gap-10 w-full">
             
             {/* Izquierda: Títulos */}
             <motion.div 
-                className="max-w-2xl"
+                className="max-w-2xl w-full"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -98,16 +97,18 @@ export default function Testimonials({ dbReviewCount = 88 }: TestimonialsProps) 
                 </p>
             </motion.div>
 
-            {/* Derecha: Google Badge Premium */}
+            {/* Derecha: Google Badge Premium (AJUSTADO PARA MÓVILES) */}
             <motion.div 
-                className="shrink-0 relative group"
+                /* Se agregó self-center en móvil y self-auto en escritorio, además de un max-w para que no se deforme */
+                className="shrink-0 relative group w-full max-w-[320px] sm:max-w-[360px] self-center lg:self-auto lg:w-auto mx-auto lg:mx-0"
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
             >
                 <div className="absolute -inset-1 bg-gradient-to-r from-amber-200 to-amber-400 rounded-3xl blur opacity-30 group-hover:opacity-50 transition duration-500"></div>
-                <div className="relative bg-white border border-amber-100 p-8 rounded-3xl shadow-xl flex flex-col items-center text-center min-w-[300px]">
+                <div className="relative bg-white border border-amber-100 p-8 rounded-3xl shadow-xl flex flex-col items-center text-center w-full">
+                    
                     <div className="mb-4 relative w-24 h-8 opacity-90 hover:opacity-100 transition-opacity">
                         <Image src={google} alt="Google Logo" fill className="object-contain" />
                     </div>
@@ -125,12 +126,11 @@ export default function Testimonials({ dbReviewCount = 88 }: TestimonialsProps) 
                         Basado en <strong className="text-[#4a675e] font-semibold">{dbReviewCount} reseñas</strong>
                     </p>
 
-                    {/* Botón de Google (Placeholder para el enlace final) */}
                     <a 
-                        href="#" // TODO: Agregar enlace de Google Business aquí
+                        href="#" 
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full flex items-center justify-center gap-2 bg-[#4a675e] hover:bg-[#384e47] text-white text-sm font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
+                        className="w-full flex items-center justify-center gap-2 bg-[#4a675e] hover:bg-[#384e47] text-white text-sm font-bold py-3.5 px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
                     >
                         Ver en Google
                         <ArrowRight size={16} />
@@ -143,8 +143,6 @@ export default function Testimonials({ dbReviewCount = 88 }: TestimonialsProps) 
 
       {/* --- SLIDER DE RESEÑAS INFINITO --- */}
       <div className="w-full max-w-full overflow-hidden relative z-10">
-        
-        {/* Máscara de desvanecimiento en los bordes */}
         <div 
             className="relative w-full overflow-hidden py-8"
             style={{
@@ -155,11 +153,7 @@ export default function Testimonials({ dbReviewCount = 88 }: TestimonialsProps) 
             <motion.div 
                 className="flex gap-6 md:gap-8 w-max px-4"
                 animate={{ x: ["0%", "-50%"] }} 
-                transition={{ 
-                    duration: 50, // Ajusta la velocidad aquí
-                    ease: "linear", 
-                    repeat: Infinity 
-                }}
+                transition={{ duration: 50, ease: "linear", repeat: Infinity }}
                 whileHover={{ animationPlayState: "paused" }} 
             >
                 {infiniteReviews.map((review, index) => (
@@ -167,7 +161,6 @@ export default function Testimonials({ dbReviewCount = 88 }: TestimonialsProps) 
                         key={`${review.id}-${index}`} 
                         className="w-[300px] sm:w-[360px] md:w-[420px] flex-shrink-0 bg-white p-8 md:p-10 rounded-[2rem] border border-stone-100 relative group hover:border-amber-200 hover:shadow-[0_20px_40px_-15px_rgba(74,103,94,0.1)] transition-all duration-500 flex flex-col"
                     >
-                        {/* Ícono de Comillas Gigante de Fondo */}
                         <Quote className="absolute top-8 right-8 text-amber-500/10 w-24 h-24 rotate-12 pointer-events-none transition-transform duration-500 group-hover:scale-110 group-hover:rotate-0" />
 
                         <div className="flex items-center gap-2 mb-6 relative z-10">
@@ -192,8 +185,6 @@ export default function Testimonials({ dbReviewCount = 88 }: TestimonialsProps) 
                                 <p className="text-base font-bold text-[#4a675e] leading-tight line-clamp-1">{review.name}</p>
                                 <p className="text-sm text-stone-400 mt-1 font-light">{review.date}</p>
                             </div>
-                            
-                            {/* Logo sutil de Google en la esquina inferior */}
                             <div className="ml-auto opacity-20 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300">
                                 <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M23.5 12.28c0-.86-.07-1.7-.22-2.5H12v4.86h6.47c-.28 1.48-1.12 2.73-2.4 3.58v3h3.86c2.26-2.09 3.57-5.17 3.57-8.94z" fill="#4285F4"/>
