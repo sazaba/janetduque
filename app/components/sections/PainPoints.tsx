@@ -4,7 +4,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Activity, Cloud, Flame, Waves, ArrowRight } from 'lucide-react';
 
-// --- ICONO PREMIUM REDISEÑADO CON EFECTO VIDRIO ---
 const PremiumIcon = ({ Icon }: { Icon: React.ElementType }) => (
   <div className="relative flex items-center justify-center w-16 h-16 mx-auto mb-8 z-10 group-hover:scale-110 transition-transform duration-500">
     <motion.div 
@@ -13,7 +12,6 @@ const PremiumIcon = ({ Icon }: { Icon: React.ElementType }) => (
       className="absolute inset-[-4px] rounded-full border border-amber-300/50 bg-amber-50"
     />
     <div className="absolute inset-1 rounded-full bg-gradient-to-br from-amber-200 via-amber-400 to-amber-500 shadow-[0_8px_16px_rgba(212,175,55,0.4)] border border-amber-100"></div>
-    {/* EFECTO DE VIDRIO ESMERILADO (Glassmorphism) */}
     <div className="absolute inset-1.5 rounded-full bg-white/20 backdrop-blur-sm"></div>
     <Icon className="relative z-20 w-7 h-7 text-[#2b3d38] drop-shadow-sm" strokeWidth={2} />
   </div>
@@ -26,7 +24,6 @@ const painPoints = [
   { id: 'fourth', icon: Waves, title: "Desregulación", desc: "Tus emociones toman el control del volante. Reaccionas con una intensidad que te desconoce y asusta." }
 ];
 
-// Rotaciones más dramáticas para el mazo
 const rotations = [0, -6, 5, -4];
 
 export default function PainPointsSafariFix() {
@@ -35,26 +32,21 @@ export default function PainPointsSafariFix() {
 
   const springConfig = { type: "spring" as const, stiffness: 80, damping: 20, mass: 0.8 };
 
-  // --- FIX DE SCROLL MAESTRO PARA SAFARI/RESPONSIVE ---
+  // FIX DE SCROLL MAESTRO PARA SAFARI/RESPONSIVE
   useEffect(() => {
     if (!isStacked && carouselRef.current) {
       const container = carouselRef.current;
-      
-      // Forzar scroll al inicio de forma abrupta antes de que el usuario interactúe
       container.scrollTo({ left: 0, behavior: 'instant' });
-
-      // Doble chequeo por si la animación de Framer mueve el foco
       const timeoutId = setTimeout(() => {
         if (container) container.scrollTo({ left: 0, behavior: 'instant' });
-      }, 50); // Justo cuando empieza la expansión
-
+      }, 50);
       return () => clearTimeout(timeoutId);
     }
   }, [isStacked]);
 
   return (
-    // FIX LAYOUT: Quitamos full-viewport-fix y usamos padding responsive estándar
-    <section className="relative w-full bg-[#4a675e] overflow-hidden py-24 md:py-32 selection:bg-amber-200 selection:text-[#2b3d38] px-4 sm:px-6 md:px-8">
+    // CONTENEDOR PRINCIPAL: 100% del Viewport
+    <section className="relative w-full bg-[#4a675e] overflow-hidden py-24 md:py-32 selection:bg-amber-200 selection:text-[#2b3d38]">
       
       <style dangerouslySetInnerHTML={{__html: `
         .hide-scrollbar::-webkit-scrollbar { display: none; }
@@ -64,11 +56,10 @@ export default function PainPointsSafariFix() {
       {/* Brillo de fondo */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-white/10 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* FIX LAYOUT: Contenedor que limita el ancho al 90% en celular (hasta 1024px) y 7xl en escritorio */}
-      <div className="w-full lg:max-w-7xl lg:mx-auto max-w-[95%] mx-auto relative z-10">
+      {/* CONTENEDOR INTERNO: w-full sin max-w estricto que corte las tarjetas */}
+      <div className="w-full relative z-10">
         
-        {/* Cabecera Centrada con Ancho Controlado */}
-        <div className="text-center mb-16 max-w-3xl mx-auto px-4">
+        <div className="text-center mb-16 max-w-3xl mx-auto px-6">
           <motion.div layout className="flex items-center justify-center gap-4 mb-6">
               <span className="w-8 h-[1px] bg-amber-500"></span>
               <span className="text-amber-400 font-bold tracking-[0.2em] text-xs uppercase">
@@ -89,32 +80,27 @@ export default function PainPointsSafariFix() {
           </motion.p>
         </div>
 
-        {/* --- CAROUSEL / MAZO FULL WIDTH DENTRO DEL CONTENEDOR --- */}
+        {/* --- CAROUSEL / MAZO --- */}
         <div className="min-h-[500px] flex flex-col justify-center relative w-full overflow-hidden">
           
           <motion.div 
             layout
             ref={carouselRef}
-            // Cambiamos justify-start en móvil para que el scroll 0 sea el inicio real
-            // UPGRADE MOBILE: justify-start en móvil, px-4 en móvil para que las tarjetas de los extremos tengan espacio al deslizar
+            // UPGRADE MOBILE: Usamos px-[5vw] para crear un margen dinámico perfecto en móviles sin cortar el desktop
             className={`flex w-full items-center min-h-[480px] hide-scrollbar overscroll-x-contain
               ${isStacked 
                 ? 'justify-center overflow-visible' 
-                : 'overflow-x-auto snap-x snap-mandatory justify-start xl:justify-center px-4 sm:px-6 xl:px-8 py-8 gap-4 md:gap-6'
+                : 'overflow-x-auto snap-x snap-mandatory justify-start lg:justify-center px-[5vw] lg:px-8 py-8 gap-4 md:gap-6'
               }
             `}
             style={{ WebkitTapHighlightColor: 'transparent', WebkitOverflowScrolling: 'touch' }}
           >
             {painPoints.map((item, index) => {
               
-              // Variables para el mazo (Stacked) con mayor profundidad vertical
               const rot = isStacked ? rotations[index] : 0;
-              const yOff = isStacked ? index * 16 : 0; // Más separación vertical
+              const yOff = isStacked ? index * 16 : 0;
               const scl = isStacked ? 1 - (index * 0.06) : 1;
               const zInd = isStacked ? painPoints.length - index : 10;
-              
-              // Efecto de sombreado volumétrico cuando están atrás (Stacked)
-              const isBehind = isStacked && index > 0;
 
               return (
                 <motion.div
@@ -133,30 +119,22 @@ export default function PainPointsSafariFix() {
                     shrink-0 group cursor-pointer transform-gpu will-change-transform flex flex-col items-center text-center
                     ${isStacked
                       ? 'absolute w-[300px] md:w-[320px] h-[420px]'
-                      // UPGRADE MOBILE: w-[85vw] y snap-center garantizan un 7.5% de margen a cada lado en celular al hacer snap
-                      : 'relative w-[85vw] sm:w-[300px] xl:w-[340px] min-h-[440px] snap-center snap-always'
+                      : 'relative w-[85vw] sm:w-[300px] lg:w-[280px] xl:w-[320px] min-h-[440px] snap-center snap-always'
                     }
                   `}
                 >
-                  {/* FONDO DE LA TARJETA PREMIUM (GRADIENTE Y SOMBRAS MEJORADAS) */}
+                  {/* FONDO DE LA TARJETA LIMPIO Y SIN SOMBRAS OSCURAS */}
                   <div className={`
                       absolute inset-0 rounded-[2.5rem] transition-all duration-700
                       ${isStacked 
-                          // UPGRADE STACKED SHADOW: Cambiada shadow-strong por shadow-xl (más sutil y premium, menos negra)
-                          ? 'bg-white shadow-xl border border-stone-200/50' 
-                          : 'bg-gradient-to-b from-white to-stone-50 shadow-[0_15px_40px_rgba(0,0,0,0.15)] border border-white hover:border-amber-200/50 hover:shadow-[0_20px_50px_rgba(212,175,55,0.15)]'
+                          ? 'bg-white shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-stone-200' 
+                          : 'bg-white shadow-[0_15px_40px_rgba(0,0,0,0.1)] border border-stone-100 hover:border-amber-200 hover:shadow-[0_20px_50px_rgba(212,175,55,0.15)]'
                       }
                   `}>
-                      {/* UPGRADE MAZO CERRADO: Oscurecimiento para efecto de sombra volumétrica */}
-                      {isBehind && (
-                          <div className="absolute inset-0 bg-[#2b3d38]/10 rounded-[2.5rem] z-10 pointer-events-none" />
-                      )}
                   </div>
                   
-                  {/* Marca de agua SVG de fondo */}
                   <item.icon className="absolute top-10 right-10 w-40 h-40 text-stone-100 -rotate-12 pointer-events-none z-0 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-0" />
                   
-                  {/* CONTENIDO DE LA TARJETA */}
                   <div className="relative z-20 w-full h-full flex flex-col p-10">
                     <PremiumIcon Icon={item.icon} />
                     
@@ -164,7 +142,6 @@ export default function PainPointsSafariFix() {
                         <h3 className="text-2xl md:text-3xl font-serif font-bold text-[#2b3d38] mb-4 tracking-tight group-hover:text-[#4a675e] transition-colors leading-tight">
                         {item.title}
                         </h3>
-                        {/* Texto con contraste mejorado */}
                         <p className="text-stone-500 text-base md:text-[17px] font-light leading-relaxed">
                         {item.desc}
                         </p>
