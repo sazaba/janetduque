@@ -53,22 +53,22 @@ export default function PainPointsSafariFix() {
   }, [isStacked]);
 
   return (
-    <section className="relative w-full bg-[#4a675e] overflow-hidden py-24 md:py-32 selection:bg-amber-200 selection:text-[#2b3d38] full-viewport-fix">
+    // FIX LAYOUT: Quitamos full-viewport-fix y usamos padding responsive estándar
+    <section className="relative w-full bg-[#4a675e] overflow-hidden py-24 md:py-32 selection:bg-amber-200 selection:text-[#2b3d38] px-4 sm:px-6 md:px-8">
       
       <style dangerouslySetInnerHTML={{__html: `
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        /* Fix Layout Full Width */
-        .full-viewport-fix { width: 100vw !important; max-width: 100vw !important; left: 50% !important; right: 50% !important; margin-left: -50vw !important; margin-right: -50vw !important; }
       `}} />
 
       {/* Brillo de fondo */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-white/10 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="w-full relative z-10">
+      {/* FIX LAYOUT: Contenedor que limita el ancho al 90% en celular (hasta 1024px) y 7xl en escritorio */}
+      <div className="w-full lg:max-w-7xl lg:mx-auto max-w-[95%] mx-auto relative z-10">
         
         {/* Cabecera Centrada con Ancho Controlado */}
-        <div className="text-center mb-16 max-w-3xl mx-auto px-6">
+        <div className="text-center mb-16 max-w-3xl mx-auto px-4">
           <motion.div layout className="flex items-center justify-center gap-4 mb-6">
               <span className="w-8 h-[1px] bg-amber-500"></span>
               <span className="text-amber-400 font-bold tracking-[0.2em] text-xs uppercase">
@@ -89,17 +89,18 @@ export default function PainPointsSafariFix() {
           </motion.p>
         </div>
 
-        {/* --- CAROUSEL / MAZO FULL WIDTH --- */}
+        {/* --- CAROUSEL / MAZO FULL WIDTH DENTRO DEL CONTENEDOR --- */}
         <div className="min-h-[500px] flex flex-col justify-center relative w-full overflow-hidden">
           
           <motion.div 
             layout
             ref={carouselRef}
             // Cambiamos justify-start en móvil para que el scroll 0 sea el inicio real
+            // UPGRADE MOBILE: justify-start en móvil, px-4 en móvil para que las tarjetas de los extremos tengan espacio al deslizar
             className={`flex w-full items-center min-h-[480px] hide-scrollbar overscroll-x-contain
               ${isStacked 
                 ? 'justify-center overflow-visible' 
-                : 'overflow-x-auto snap-x snap-mandatory justify-start xl:justify-center md:px-8 py-8 gap-4 md:gap-6'
+                : 'overflow-x-auto snap-x snap-mandatory justify-start xl:justify-center px-4 sm:px-6 xl:px-8 py-8 gap-4 md:gap-6'
               }
             `}
             style={{ WebkitTapHighlightColor: 'transparent', WebkitOverflowScrolling: 'touch' }}
@@ -132,6 +133,7 @@ export default function PainPointsSafariFix() {
                     shrink-0 group cursor-pointer transform-gpu will-change-transform flex flex-col items-center text-center
                     ${isStacked
                       ? 'absolute w-[300px] md:w-[320px] h-[420px]'
+                      // UPGRADE MOBILE: w-[85vw] y snap-center garantizan un 7.5% de margen a cada lado en celular al hacer snap
                       : 'relative w-[85vw] sm:w-[300px] xl:w-[340px] min-h-[440px] snap-center snap-always'
                     }
                   `}
@@ -140,7 +142,8 @@ export default function PainPointsSafariFix() {
                   <div className={`
                       absolute inset-0 rounded-[2.5rem] transition-all duration-700
                       ${isStacked 
-                          ? 'bg-white shadow-[0_30px_60px_rgba(0,0,0,0.4)] border border-stone-200/50' 
+                          // UPGRADE STACKED SHADOW: Cambiada shadow-strong por shadow-xl (más sutil y premium, menos negra)
+                          ? 'bg-white shadow-xl border border-stone-200/50' 
                           : 'bg-gradient-to-b from-white to-stone-50 shadow-[0_15px_40px_rgba(0,0,0,0.15)] border border-white hover:border-amber-200/50 hover:shadow-[0_20px_50px_rgba(212,175,55,0.15)]'
                       }
                   `}>
