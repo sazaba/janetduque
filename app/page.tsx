@@ -65,6 +65,10 @@ export default async function Home() {
           <Testimonials dbReviewCount={reviewCount} />
         </section>
 
+        <section id="faq">
+          <FAQ/>
+        </section>
+
 
 
         {/* 
@@ -80,9 +84,7 @@ export default async function Home() {
         </section>
 
         
-        <section id="faq">
-          <FAQ/>
-        </section>
+        
 
         <section id="blog">
           <BlogCarousel />
