@@ -170,7 +170,7 @@ export default function VirtualLocation() {
                   href="https://wa.link/2x3i8s"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-amber-500 hover:bg-amber-400 text-[#4a675e] font-bold text-base transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(251,191,36,0.2)] w-fit"
+                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-amber-500 hover:bg-amber-400 text-white font-bold text-base transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(251,191,36,0.2)] w-fit"
               >
                   Agendar Sesión Virtual
                   <ArrowRight size={20} />
