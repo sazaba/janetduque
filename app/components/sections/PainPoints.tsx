@@ -88,7 +88,7 @@ export default function PainPointsSafariFix() {
             className={`flex w-full items-center min-h-[440px] hide-scrollbar overscroll-x-contain
               ${isStacked 
                 ? 'justify-center overflow-visible' 
-               : 'overflow-x-auto snap-x snap-mandatory justify-start xl:justify-center px-4 md:px-8 py-8 gap-4 md:gap-5'
+                : 'overflow-x-auto snap-x snap-mandatory justify-start md:justify-center px-4 md:px-12 py-8 gap-5'
               }
             `}
             style={{ WebkitTapHighlightColor: 'transparent', WebkitOverflowScrolling: 'touch' }}
@@ -117,7 +117,7 @@ export default function PainPointsSafariFix() {
                     shrink-0 bg-white rounded-[2.5rem] p-8 cursor-pointer transform-gpu will-change-transform flex flex-col justify-center items-center text-center
                     ${isStacked
                       ? 'absolute w-[300px] h-[380px] shadow-[0_20px_60px_rgba(0,0,0,0.3)]'
-                      : 'relative w-[82vw] md:w-[280px] xl:w-[320px] min-h-[400px] shadow-[0_10px_30px_rgba(0,0,0,0.08)] snap-center snap-always'
+                      : 'relative w-[82vw] md:w-[300px] lg:w-[320px] min-h-[400px] shadow-[0_10px_30px_rgba(0,0,0,0.08)] snap-center snap-always'
                     }
                   `}
                 >

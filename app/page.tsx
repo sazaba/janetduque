@@ -53,11 +53,13 @@ export default async function Home() {
            <TargetAudience/>
         </section>
 
-        {/* 
-
         <section id="sobre-mi">
           <ProfessionalProfile/>
         </section>
+
+        {/* 
+
+        
 
         <section id="diferencial">
           <ValueProposition/>
