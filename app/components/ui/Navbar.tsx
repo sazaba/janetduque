@@ -8,12 +8,31 @@ import logoImg from "@/public/Logo.webp";
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  // NUEVO ESTADO: Controla si el navbar está visible o escondido
+  const [isVisible, setIsVisible] = useState(true);
 
-  // --- OPTIMIZACIÓN 1: Scroll Listener Pasivo y Eficiente ---
+  // --- OPTIMIZACIÓN 1: Scroll Listener (Detecta dirección y posición) ---
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      const scrolledNow = window.scrollY > 20;
+      const currentScrollY = window.scrollY;
+      
+      // 1. Detecta si hemos bajado más de 20px para aplicar fondo oscuro
+      const scrolledNow = currentScrollY > 20;
       setIsScrolled((prev) => (prev !== scrolledNow ? scrolledNow : prev));
+
+      // 2. Detecta la dirección del scroll para ocultar/mostrar
+      if (currentScrollY > lastScrollY && currentScrollY > 80) {
+        // Haciendo scroll Hacia ABAJO (y pasado el header inicial) -> Esconder
+        setIsVisible(false);
+      } else {
+        // Haciendo scroll Hacia ARRIBA -> Mostrar
+        setIsVisible(true);
+      }
+
+      lastScrollY = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -57,7 +76,6 @@ export default function Navbar() {
     }, 100); 
   };
 
-  // --- ESTILOS DINÁMICOS PARA EL CONTRASTE ---
   const isDarkBg = isScrolled || isMobileMenuOpen;
 
   return (
@@ -67,6 +85,9 @@ export default function Navbar() {
           isDarkBg 
             ? "bg-[#4a675e]/95 backdrop-blur-md border-[#3a524a] shadow-lg py-3" 
             : "bg-transparent border-transparent py-5"
+        } ${
+          // APLICAR CLASE PARA ESCONDER/MOSTRAR (Usamos translate-y)
+          isVisible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
         <div className="w-full max-w-7xl mx-auto px-6 flex items-center justify-between h-full">
@@ -148,7 +169,7 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* --- MOBILE MENU ESTILO APPLE (Pantalla completa, Glassmorphism, Mask Reveal) --- */}
+      {/* --- MOBILE MENU ESTILO APPLE --- */}
       <div
         className={`fixed inset-0 z-40 flex flex-col items-center justify-center transition-all duration-700 md:hidden h-[100dvh] w-full transform-gpu will-change-transform
         ${isMobileMenuOpen 
@@ -158,7 +179,6 @@ export default function Navbar() {
       >
         <div className="flex flex-col items-center w-full px-6 space-y-8 mt-10">
             {navLinks.map((link, i) => (
-            // Contenedor con overflow-hidden para el efecto de máscara (las letras salen de la nada)
             <div key={link.name} className="overflow-hidden py-1">
                 <a
                     href={link.href}
@@ -167,7 +187,7 @@ export default function Navbar() {
                     ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-[100%] opacity-0"}`}
                     style={{ 
                         transitionDelay: `${150 + i * 100}ms`,
-                        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" // Curva de animación Apple
+                        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)"
                     }}
                 >
                     {link.name}
