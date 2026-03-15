@@ -1,194 +1,200 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { MapPin, Clock, ArrowRight, Loader2 } from "lucide-react";
+import React, { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { Globe2, Laptop, ShieldCheck, Coffee, ArrowRight } from "lucide-react";
+import createGlobe from "cobe";
 
-// --- DATOS CONSTANTES (Fuera del componente para optimizar memoria) ---
-const LOCATIONS = [
+// --- DATOS DE LOS BENEFICIOS VIRTUALES ---
+const VIRTUAL_BENEFITS = [
   {
-    id: "centro",
-    name: "Sede Centro",
-    address: "Cra. 22 # 24-24",
-    landmark: "Corazón de la ciudad",
-    schedule: "Mañanas: hasta las 2:00 p.m.",
-    description: "Ideal si te mueves por el centro histórico o administrativo. Un espacio diseñado para hacer una pausa productiva en tu día.",
-    // Placeholder original (recuerda actualizar este también si lo necesitas)
-    mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.241376843383!2d-75.5186789!3d5.0686909!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e476ff4f1ad8bb3%3A0x67a810626356331c!2sCra.%2022%20%2324-24%2C%20Manizales%2C%20Caldas!5e0!3m2!1ses!2sco!4v1705461111111!5m2!1ses!2sco", 
-    color: "from-teal-600 to-teal-800"
+    id: "comfort",
+    icon: <Coffee size={24} />,
+    title: "Desde tu Refugio",
+    description: "Conéctate desde la comodidad de tu hogar, tu oficina o durante un viaje. Tu espacio, tus reglas."
   },
   {
-    id: "santander",
-    name: "Sede Av. Santander",
-    // 1. CAMBIO REALIZADO: Dirección actualizada
-    address: "Av. Santander # 55A-21",
-    landmark: "Edificio Cristóbal Colón",
-    schedule: "Tarde Noche: hasta las 8:00 p.m.",
-    description: "Perfecta para cerrar tu jornada laboral o de estudio. Ubicación estratégica con fácil acceso y ambiente tranquilo.",
-    // 2. CAMBIO REALIZADO: Link de mapa apuntando a la dirección exacta en Manizales
-    mapSrc: "https://maps.google.com/maps?q=Av.+Santander+%23+55A-21,+Manizales&z=17&output=embed",
-    color: "from-indigo-600 to-indigo-800"
+    id: "time",
+    icon: <Laptop size={24} />,
+    title: "Optimización de Tiempo",
+    description: "Cero tráfico, cero estrés por desplazamientos. Integrar la terapia en tu agenda nunca fue tan sencillo."
+  },
+  {
+    id: "privacy",
+    icon: <ShieldCheck size={24} />,
+    title: "Privacidad Absoluta",
+    description: "Plataformas encriptadas y seguras para garantizar que nuestra conversación sea un espacio 100% confidencial."
   }
 ];
 
-export default function Location() {
-  const [activeTab, setActiveTab] = useState("centro");
-  const [shouldLoadMap, setShouldLoadMap] = useState(false);
-  const sectionRef = useRef(null);
-  
-  const activeLocation = LOCATIONS.find((l) => l.id === activeTab) || LOCATIONS[0];
+// --- COMPONENTE DEL GLOBO 3D (Ultra ligero) ---
+const Globe = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // --- INTERSECTION OBSERVER (Detecta cuando el usuario ve la sección) ---
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setShouldLoadMap(true); // Solo carga el mapa si el usuario llega aquí
-          observer.disconnect(); // Deja de observar una vez cargado
-        }
-      },
-      { rootMargin: "200px" } // Carga 200px antes de llegar para que parezca instantáneo
-    );
+    let phi = 4.7; // Rotación inicial centrada aproximadamente en Colombia/Latam
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+    if (!canvasRef.current) return;
 
-    return () => observer.disconnect();
+    const globe = createGlobe(canvasRef.current, {
+      devicePixelRatio: 2,
+      width: 800,
+      height: 800,
+      phi: 0,
+      theta: 0.1,
+      dark: 0, // 0 para personalizar colores libremente
+      diffuse: 1.2,
+      mapSamples: 16000,
+      mapBrightness: 6,
+      // Colores ajustados a la paleta verde (#2b3d38) y dorado (amber)
+      baseColor: [0.17, 0.24, 0.22], // Verde oscuro
+      markerColor: [0.96, 0.75, 0.26], // Dorado
+      glowColor: [0.17, 0.24, 0.22], // Resplandor verde oscuro
+      markers: [
+        // Marcador en Colombia (Pereira aprox)
+        { location: [4.8133, -75.6961], size: 0.08 } 
+      ],
+      onRender: (state) => {
+        // Animación de rotación perpetua
+        state.phi = phi;
+        phi += 0.003; 
+      }
+    });
+
+    return () => {
+      globe.destroy();
+    };
   }, []);
 
   return (
-    <section 
-      ref={sectionRef} 
-      className="py-24 px-6 relative overflow-hidden bg-[#fffcf8]"
-    >
-      
-      <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-0 min-h-[600px] rounded-3xl overflow-hidden shadow-2xl shadow-stone-200">
-        
-        {/* --- COLUMNA IZQUIERDA --- */}
-        <div className="bg-white p-8 md:p-12 lg:p-16 flex flex-col justify-center relative">
-            
-            <div className="mb-10">
-                <span className="text-teal-600 font-bold tracking-widest text-xs uppercase mb-4 block">
-                    Logística Simplificada
-                </span>
-                <h2 className="text-3xl md:text-5xl font-serif text-stone-800 leading-tight mb-4">
-                    Terapia a tu ritmo: <br/> Elige dónde y cuándo
-                </h2>
-                <p className="text-stone-500 font-light">
-                    Mi objetivo es que la logística sea una preocupación menos. Elige la sede que mejor se adapte a tu rutina.
-                </p>
-            </div>
+    <canvas
+      ref={canvasRef}
+      style={{
+        width: 400,
+        height: 400,
+        maxWidth: "100%",
+        aspectRatio: 1,
+        cursor: "grab",
+      }}
+      className="mx-auto"
+    />
+  );
+};
 
-            {/* Selector de Pestañas */}
-            <div className="flex space-x-1 bg-stone-100 p-1 rounded-xl mb-8 w-fit">
-                {LOCATIONS.map((loc) => (
-                    <button
-                        key={loc.id}
-                        onClick={() => setActiveTab(loc.id)}
-                        className={`relative px-6 py-3 rounded-lg text-sm font-bold transition-all duration-300 z-10 ${
-                            activeTab === loc.id 
-                            ? "text-stone-800 shadow-sm" 
-                            : "text-stone-400 hover:text-stone-600"
-                        }`}
+
+export default function VirtualLocation() {
+  return (
+    <section className="py-24 md:py-32 px-6 relative overflow-hidden bg-[#2b3d38] selection:bg-amber-400 selection:text-[#2b3d38]">
+      
+      {/* Elementos Decorativos de Fondo */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-gradient-to-br from-teal-600/20 to-transparent blur-[100px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-gradient-to-tl from-amber-600/10 to-transparent blur-[100px]" />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-center">
+        
+        {/* --- COLUMNA IZQUIERDA: CONTENIDO --- */}
+        <div className="lg:col-span-6 flex flex-col justify-center text-white">
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="w-10 h-[1px] bg-amber-500"></span>
+                  <span className="text-amber-400 font-bold tracking-[0.2em] text-xs uppercase flex items-center gap-2">
+                    <Globe2 size={14} />
+                    Consultorio Global
+                  </span>
+                </div>
+                
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white leading-[1.15] mb-6">
+                  Tu bienestar no tiene <span className="text-amber-400 italic">fronteras.</span>
+                </h2>
+                
+                <p className="text-teal-50 font-light text-lg mb-10 leading-relaxed opacity-90">
+                  La terapia debe adaptarse a tu vida, no al revés. A través de mi consultorio 100% virtual, te brindo un espacio de contención profesional y cálido, sin importar en qué lugar del mundo te encuentres.
+                </p>
+            </motion.div>
+
+            {/* Lista de Beneficios */}
+            <div className="flex flex-col gap-8 mb-10">
+                {VIRTUAL_BENEFITS.map((benefit, index) => (
+                    <motion.div
+                        key={benefit.id}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 + (index * 0.1), duration: 0.5 }}
+                        className="flex items-start gap-5 group"
                     >
-                        {activeTab === loc.id && (
-                            <motion.div
-                                layoutId="activeTabBg"
-                                className="absolute inset-0 bg-white rounded-lg shadow-sm"
-                                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                                style={{ zIndex: -1 }}
-                            />
-                        )}
-                        {loc.name}
-                    </button>
+                        <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-amber-400 group-hover:bg-amber-400 group-hover:text-[#2b3d38] transition-colors duration-300 transform-gpu shrink-0">
+                            {benefit.icon}
+                        </div>
+                        <div>
+                            <h3 className="text-xl font-serif font-bold text-white mb-1">
+                                {benefit.title}
+                            </h3>
+                            <p className="text-teal-100/70 font-light text-sm md:text-base leading-relaxed">
+                                {benefit.description}
+                            </p>
+                        </div>
+                    </motion.div>
                 ))}
             </div>
 
-            {/* Detalles de la Sede Activa */}
-            <AnimatePresence mode="wait">
-                <motion.div
-                    key={activeLocation.id}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 20 }}
-                    transition={{ duration: 0.4 }}
-                    className="space-y-6"
-                >
-                    <div className="flex items-start gap-4">
-                        <div className={`p-3 rounded-xl bg-gradient-to-br ${activeLocation.color} text-white shadow-lg`}>
-                            <MapPin size={24} />
-                        </div>
-                        <div>
-                            <h3 className="text-xl font-bold text-stone-800">{activeLocation.address}</h3>
-                            <p className="text-teal-600 font-medium text-sm">{activeLocation.landmark}</p>
-                        </div>
-                    </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+            >
+              <a 
+                  href="https://wa.link/2x3i8s"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-amber-500 hover:bg-amber-400 text-[#2b3d38] font-bold text-base transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(251,191,36,0.2)] w-fit"
+              >
+                  Agendar Sesión Virtual
+                  <ArrowRight size={20} />
+              </a>
+            </motion.div>
 
-                    <div className="flex items-start gap-4">
-                        <div className="p-3 rounded-xl bg-stone-100 text-stone-500">
-                            <Clock size={24} />
-                        </div>
-                        <div>
-                            <h3 className="text-xl font-bold text-stone-800">Horario Disponible</h3>
-                            <p className="text-stone-500 text-sm">{activeLocation.schedule}</p>
-                        </div>
-                    </div>
-
-                    <div className="pt-6 border-t border-stone-100">
-                        <p className="text-stone-600 italic">
-                            "{activeLocation.description}"
-                        </p>
-                    </div>
-
-                    <a 
-                        href="https://wa.link/2x3i8s"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex items-center gap-2 text-stone-800 font-bold hover:text-teal-700 transition-colors mt-4 cursor-pointer relative z-20 w-fit"
-                    >
-                        <span>Agendar en {activeLocation.name}</span>
-                        <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                    </a>
-                </motion.div>
-            </AnimatePresence>
         </div>
 
-        {/* --- COLUMNA DERECHA: MAPA OPTIMIZADO --- */}
-        <div className="relative h-[400px] lg:h-auto bg-stone-100 overflow-hidden flex items-center justify-center">
+        {/* --- COLUMNA DERECHA: GLOBO 3D INTERACTIVO --- */}
+        <div className="lg:col-span-6 relative flex flex-col items-center justify-center min-h-[400px]">
             
-            {/* Solo renderizamos el iframe si shouldLoadMap es true */}
-            {shouldLoadMap ? (
-                <iframe
-                    key={activeLocation.id} // Cambiar el key fuerza al iframe a recargar solo lo necesario
-                    src={activeLocation.mapSrc}
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0, opacity: 1 }} // Opacidad directa, sin Framer Motion en el iframe
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title={`Mapa de ${activeLocation.name}`}
-                    className="absolute inset-0 w-full h-full animate-in fade-in duration-700"
-                />
-            ) : (
-                // Placeholder mientras el usuario hace scroll hacia abajo
-                <div className="absolute inset-0 flex items-center justify-center bg-stone-200">
-                    <div className="flex flex-col items-center gap-2 text-stone-400">
-                        <Loader2 className="animate-spin" />
-                        <span className="text-xs">Cargando mapa...</span>
-                    </div>
-                </div>
-            )}
-
-            <div className="absolute inset-0 pointer-events-none border-[12px] border-white/50 lg:border-white/0 z-20" />
-            
-            <div 
-                className="absolute bottom-8 right-8 bg-white/95 backdrop-blur-md px-4 py-3 rounded-xl shadow-xl border border-stone-200 flex items-center gap-3 z-30"
+            <motion.div
+               initial={{ opacity: 0, scale: 0.8 }}
+               whileInView={{ opacity: 1, scale: 1 }}
+               viewport={{ once: true }}
+               transition={{ duration: 1, ease: "easeOut" }}
+               className="relative w-full max-w-[500px] aspect-square flex items-center justify-center cursor-grab active:cursor-grabbing"
             >
-                <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                <span className="text-xs font-bold text-stone-700 uppercase tracking-wider">Ubicación Exacta</span>
-            </div>
+                {/* Aureola dorada de fondo */}
+                <div className="absolute inset-0 bg-amber-400/5 rounded-full blur-3xl pointer-events-none scale-90" />
+                
+                <Globe />
+
+                {/* Tarjeta flotante indicadora */}
+                <motion.div 
+                    className="absolute bottom-4 right-4 md:bottom-12 md:right-12 bg-white/10 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20 shadow-2xl flex items-center gap-3 pointer-events-none"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 1, duration: 0.5 }}
+                >
+                    <div className="relative flex h-3 w-3">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
+                    </div>
+                    <span className="text-xs font-bold text-white uppercase tracking-wider">Online para el Mundo</span>
+                </motion.div>
+            </motion.div>
 
         </div>
 
