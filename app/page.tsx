@@ -61,6 +61,12 @@ export default async function Home() {
           <Location/>
         </section>
 
+        <section id="testimonios">
+          <Testimonials dbReviewCount={reviewCount} />
+        </section>
+
+
+
         {/* 
 
         
@@ -73,11 +79,6 @@ export default async function Home() {
           <Transformation/>
         </section>
 
-        
-
-        <section id="testimonios">
-          <Testimonials dbReviewCount={reviewCount} />
-        </section>
         
         <section id="faq">
           <FAQ/>
