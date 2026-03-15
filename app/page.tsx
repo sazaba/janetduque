@@ -57,6 +57,10 @@ export default async function Home() {
           <ProfessionalProfile/>
         </section>
 
+        <section id="ubicacion">
+          <Location/>
+        </section>
+
         {/* 
 
         
@@ -69,9 +73,7 @@ export default async function Home() {
           <Transformation/>
         </section>
 
-        <section id="ubicacion">
-          <Location/>
-        </section>
+        
 
         <section id="testimonios">
           <Testimonials dbReviewCount={reviewCount} />
