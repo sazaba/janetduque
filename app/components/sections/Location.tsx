@@ -27,35 +27,34 @@ const VIRTUAL_BENEFITS = [
   }
 ];
 
-// --- COMPONENTE DEL GLOBO 3D (Ultra ligero) ---
+// --- COMPONENTE DEL GLOBO 3D (Actualizado y más grande) ---
 const Globe = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    let phi = 4.7; // Rotación inicial centrada aproximadamente en Colombia/Latam
+    let phi = 4.7; // Rotación inicial centrada en Colombia
 
     if (!canvasRef.current) return;
 
     const globe = createGlobe(canvasRef.current, {
       devicePixelRatio: 2,
-      width: 800,
-      height: 800,
+      width: 1200, // Aumentamos la resolución interna para pantallas grandes
+      height: 1200,
       phi: 0,
-      theta: 0.1,
-      dark: 0, // 0 para personalizar colores libremente
+      theta: 0.15, // Inclinación ligeramente más dramática
+      dark: 0, 
       diffuse: 1.2,
-      mapSamples: 16000,
+      mapSamples: 24000, // Más detalle en los bordes de los continentes
       mapBrightness: 6,
-      // Colores ajustados a la paleta verde (#2b3d38) y dorado (amber)
-      baseColor: [0.17, 0.24, 0.22], // Verde oscuro
-      markerColor: [0.96, 0.75, 0.26], // Dorado
-      glowColor: [0.17, 0.24, 0.22], // Resplandor verde oscuro
+      baseColor: [0.17, 0.24, 0.22], // Verde oscuro (#2b3d38)
+      markerColor: [0.96, 0.75, 0.26], // Dorado (amber-400)
+      glowColor: [0.17, 0.24, 0.22], 
       markers: [
-        // Marcador en Colombia (Pereira aprox)
-        { location: [4.8133, -75.6961], size: 0.08 } 
+        // Marcador en Colombia (Pereira) un poco más grande
+        { location: [4.8133, -75.6961], size: 0.1 } 
       ],
       onRender: (state) => {
-        // Animación de rotación perpetua
+        // Animación de rotación perpetua suave
         state.phi = phi;
         phi += 0.003; 
       }
@@ -70,13 +69,12 @@ const Globe = () => {
     <canvas
       ref={canvasRef}
       style={{
-        width: 400,
-        height: 400,
-        maxWidth: "100%",
-        aspectRatio: 1,
-        cursor: "grab",
+        width: "100%", // Responsive real
+        height: "auto",
+        maxWidth: "600px", // Limite máximo para escritorio
+        aspectRatio: "1/1",
       }}
-      className="mx-auto"
+      className="mx-auto cursor-grab active:cursor-grabbing relative z-10 drop-shadow-2xl"
     />
   );
 };
@@ -86,16 +84,15 @@ export default function VirtualLocation() {
   return (
     <section className="py-24 md:py-32 px-6 relative overflow-hidden bg-[#2b3d38] selection:bg-amber-400 selection:text-[#2b3d38]">
       
-      {/* Elementos Decorativos de Fondo */}
+      {/* Elementos Decorativos de Fondo de la Sección */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
         <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-gradient-to-br from-teal-600/20 to-transparent blur-[100px]" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-gradient-to-tl from-amber-600/10 to-transparent blur-[100px]" />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-center">
         
         {/* --- COLUMNA IZQUIERDA: CONTENIDO --- */}
-        <div className="lg:col-span-6 flex flex-col justify-center text-white">
+        <div className="lg:col-span-6 flex flex-col justify-center text-white relative z-20">
             
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -165,35 +162,21 @@ export default function VirtualLocation() {
 
         </div>
 
-        {/* --- COLUMNA DERECHA: GLOBO 3D INTERACTIVO --- */}
-        <div className="lg:col-span-6 relative flex flex-col items-center justify-center min-h-[400px]">
+        {/* --- COLUMNA DERECHA: GLOBO 3D PROTAGONISTA --- */}
+        <div className="lg:col-span-6 relative flex flex-col items-center justify-center w-full min-h-[400px] lg:min-h-[600px]">
             
             <motion.div
                initial={{ opacity: 0, scale: 0.8 }}
                whileInView={{ opacity: 1, scale: 1 }}
                viewport={{ once: true }}
                transition={{ duration: 1, ease: "easeOut" }}
-               className="relative w-full max-w-[500px] aspect-square flex items-center justify-center cursor-grab active:cursor-grabbing"
+               className="relative w-full flex items-center justify-center"
             >
-                {/* Aureola dorada de fondo */}
-                <div className="absolute inset-0 bg-amber-400/5 rounded-full blur-3xl pointer-events-none scale-90" />
+                {/* UPGRADE: Aura de luz detrás del globo pulsando suavemente */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-amber-500/20 rounded-full blur-[80px] md:blur-[120px] animate-pulse pointer-events-none" />
                 
                 <Globe />
 
-                {/* Tarjeta flotante indicadora */}
-                <motion.div 
-                    className="absolute bottom-4 right-4 md:bottom-12 md:right-12 bg-white/10 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20 shadow-2xl flex items-center gap-3 pointer-events-none"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 1, duration: 0.5 }}
-                >
-                    <div className="relative flex h-3 w-3">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
-                    </div>
-                    <span className="text-xs font-bold text-white uppercase tracking-wider">Online para el Mundo</span>
-                </motion.div>
             </motion.div>
 
         </div>
