@@ -66,10 +66,10 @@ export default function RootLayout({
       >
         <Providers>
             
-            {/* FONDO DE LUCES PASTEL */}
+            {/* FONDO DE LUCES PASTEL OPTIMIZADO PARA MÓVILES */}
             <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden opacity-50">
-                <div className="absolute top-[-10%] left-[-5%] w-[60vw] h-[60vw] rounded-full bg-[#e6efe9] blur-[100px] transform-gpu will-change-transform"></div>
-                <div className="absolute bottom-[-10%] right-[-5%] w-[60vw] h-[60vw] rounded-full bg-[#fbf3d6] blur-[100px] transform-gpu will-change-transform"></div>
+                <div className="absolute top-[-10%] left-[-5%] w-[60vw] h-[60vw] rounded-full bg-[radial-gradient(circle,_#e6efe9_0%,_transparent_60%)]"></div>
+                <div className="absolute bottom-[-10%] right-[-5%] w-[60vw] h-[60vw] rounded-full bg-[radial-gradient(circle,_#fbf3d6_0%,_transparent_60%)]"></div>
             </div>
             
             {children}
