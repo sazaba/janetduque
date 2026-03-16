@@ -56,7 +56,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 className="flex items-center justify-center gap-2.5 w-full bg-[#4a675e] hover:bg-[#384e47] text-white py-3.5 rounded-xl font-medium transition-all duration-300 shadow-[0_0_20px_rgba(74,103,94,0.2)] hover:shadow-[0_0_25px_rgba(74,103,94,0.4)] hover:-translate-y-0.5 group"
             >
                 <PlusCircle size={18} className="group-hover:rotate-90 transition-transform duration-500 text-amber-400"/>
-                <span>Escribir Artículo</span>
+                {/* FIX: Clase text-white directa al span */}
+                <span className="text-white">Escribir Artículo</span>
             </Link>
         </div>
 
@@ -69,14 +70,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsSidebarOpen(false)}
-                className={`flex items-center gap-3.5 px-4 py-3 rounded-xl transition-all duration-300 font-medium text-sm ${
+                className={`flex items-center gap-3.5 px-4 py-3 rounded-xl transition-all duration-300 font-medium text-sm group ${
                   isActive 
-                    ? "bg-white/10 text-white shadow-sm border border-white/10" 
-                    : "text-white/70 hover:bg-white/5 hover:text-white"
+                    ? "bg-white/10 shadow-sm border border-white/10" 
+                    : "hover:bg-white/5"
                 }`}
               >
-                <item.icon size={18} className={isActive ? "text-amber-400" : "text-white/40"} />
-                <span>{item.name}</span>
+                <item.icon size={18} className={isActive ? "text-amber-400" : "text-white/40 group-hover:text-white transition-colors"} />
+                {/* FIX: Control directo del color en el span */}
+                <span className={isActive ? "text-white" : "text-white/70 group-hover:text-white transition-colors"}>
+                  {item.name}
+                </span>
               </Link>
             );
           })}
@@ -86,10 +90,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="px-4 pb-4">
             <Link 
                 href="/"
-                className="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white/70 hover:bg-white/5 hover:text-white transition-all font-medium text-sm border border-transparent"
+                className="flex items-center gap-3.5 px-4 py-3 rounded-xl hover:bg-white/5 transition-all font-medium text-sm border border-transparent group"
             >
-                <Home size={18} className="text-white/40 transition-colors" />
-                <span>Ir al Sitio Web</span>
+                <Home size={18} className="text-white/40 group-hover:text-white transition-colors" />
+                {/* FIX: Control directo del color en el span */}
+                <span className="text-white/70 group-hover:text-white transition-colors">Ir al Sitio Web</span>
             </Link>
         </div>
 
