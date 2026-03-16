@@ -17,7 +17,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   ];
 
   return (
-    <div className="min-h-screen bg-stone-50 flex font-sans selection:bg-teal-500/30">
+    <div className="min-h-screen bg-[#fcfdfa] flex font-sans selection:bg-amber-200 selection:text-[#4a675e]">
       
       {/* Sidebar Móvil Overlay */}
       <div 
@@ -27,23 +27,23 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         onClick={() => setIsSidebarOpen(false)}
       />
 
-      {/* Sidebar Principal */}
+      {/* Sidebar Principal (Fondo verde ultra-oscuro premium) */}
       <aside className={`
-        fixed md:static inset-y-0 left-0 z-50 w-[280px] bg-stone-950 text-white transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col border-r border-stone-800/60 shadow-2xl md:shadow-none
+        fixed md:static inset-y-0 left-0 z-50 w-[280px] bg-[#1b2622] text-white transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col border-r border-white/5 shadow-2xl md:shadow-none
         ${isSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
       `}>
         {/* Header Sidebar */}
         <div className="p-8 flex items-center justify-between">
           <div>
             <span className="text-2xl font-serif font-bold tracking-wide text-white flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></div>
-              PsicoJeff
+              <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse drop-shadow-[0_0_8px_rgba(251,191,36,0.8)]"></div>
+              Dra. Janet
             </span>
-            <span className="block text-[10px] text-white uppercase tracking-[0.2em] mt-2 font-semibold">
+            <span className="block text-[10px] text-amber-500/70 uppercase tracking-[0.2em] mt-2 font-semibold">
               Admin Workspace
             </span>
           </div>
-          <button onClick={() => setIsSidebarOpen(false)} className="md:hidden p-2 rounded-lg bg-stone-900 text-white hover:text-white transition-colors">
+          <button onClick={() => setIsSidebarOpen(false)} className="md:hidden p-2 rounded-lg bg-white/5 text-white hover:bg-white/10 transition-colors">
             <X size={20} />
           </button>
         </div>
@@ -53,9 +53,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Link 
                 href="/admin/posts/new"
                 onClick={() => setIsSidebarOpen(false)}
-                className="flex items-center justify-center gap-2.5 w-full bg-teal-600 hover:bg-teal-500 text-white py-3.5 rounded-xl font-medium transition-all duration-300 shadow-[0_0_20px_rgba(13,148,136,0.15)] hover:shadow-[0_0_25px_rgba(13,148,136,0.3)] hover:-translate-y-0.5 group"
+                className="flex items-center justify-center gap-2.5 w-full bg-[#4a675e] hover:bg-[#384e47] text-white py-3.5 rounded-xl font-medium transition-all duration-300 shadow-[0_0_20px_rgba(74,103,94,0.2)] hover:shadow-[0_0_25px_rgba(74,103,94,0.4)] hover:-translate-y-0.5 group"
             >
-                <PlusCircle size={18} className="group-hover:rotate-90 transition-transform duration-500"/>
+                <PlusCircle size={18} className="group-hover:rotate-90 transition-transform duration-500 text-amber-400"/>
                 <span>Escribir Artículo</span>
             </Link>
         </div>
@@ -71,11 +71,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 onClick={() => setIsSidebarOpen(false)}
                 className={`flex items-center gap-3.5 px-4 py-3 rounded-xl transition-all duration-300 font-medium text-sm ${
                   isActive 
-                    ? "bg-white/10 text-white shadow-sm border border-white/5" 
-                    : "text-white hover:bg-white/5 hover:text-white"
+                    ? "bg-white/10 text-white shadow-sm border border-white/10" 
+                    : "text-white/70 hover:bg-white/5 hover:text-white"
                 }`}
               >
-                <item.icon size={18} className={isActive ? "text-teal-400" : "text-stone-400"} />
+                <item.icon size={18} className={isActive ? "text-amber-400" : "text-white/40"} />
                 <span>{item.name}</span>
               </Link>
             );
@@ -86,28 +86,28 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="px-4 pb-4">
             <Link 
                 href="/"
-                className="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white hover:bg-stone-900 hover:text-white transition-all font-medium text-sm border border-transparent hover:border-stone-800"
+                className="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white/70 hover:bg-white/5 hover:text-white transition-all font-medium text-sm border border-transparent"
             >
-                <Home size={18} className="text-stone-400 group-hover:text-white transition-colors" />
+                <Home size={18} className="text-white/40 transition-colors" />
                 <span>Ir al Sitio Web</span>
             </Link>
         </div>
 
         {/* Perfil de Usuario */}
-        <div className="p-6 bg-stone-900/50 border-t border-stone-800/60 mt-auto">
+        <div className="p-6 bg-black/20 border-t border-white/5 mt-auto">
           <div className="flex items-center gap-3 mb-5">
-             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center text-white font-bold shadow-lg">
-                {session?.user?.email?.charAt(0).toUpperCase() || "A"}
+             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#4a675e] to-[#2b3d38] border border-white/10 flex items-center justify-center text-amber-400 font-serif font-bold text-lg shadow-lg">
+                {session?.user?.email?.charAt(0).toUpperCase() || "J"}
              </div>
              <div className="overflow-hidden">
-                <p className="text-sm font-bold text-white truncate">Administrador</p>
-                <p className="text-xs text-white truncate">{session?.user?.email}</p>
+                <p className="text-sm font-bold text-white truncate">Administradora</p>
+                <p className="text-xs text-white/60 truncate">{session?.user?.email}</p>
              </div>
           </div>
           
           <button
             onClick={() => signOut({ callbackUrl: "/" })}
-            className="w-full flex items-center justify-center gap-2 bg-stone-900/80 hover:bg-red-500/10 text-white hover:text-red-400 py-3 rounded-xl transition-all text-xs font-bold uppercase tracking-wider border border-stone-800 hover:border-red-500/20 group"
+            className="w-full flex items-center justify-center gap-2 bg-black/20 hover:bg-red-500/20 text-white/80 hover:text-red-400 py-3 rounded-xl transition-all text-xs font-bold uppercase tracking-wider border border-white/5 hover:border-red-500/30 group"
           >
             <LogOut size={16} className="group-hover:-translate-x-1 transition-transform" />
             Cerrar Sesión
@@ -120,11 +120,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         
         {/* Header Móvil */}
         <header className="bg-white/80 backdrop-blur-md border-b border-stone-200/50 p-4 flex items-center justify-between md:hidden z-30 sticky top-0">
-            <span className="font-serif font-bold text-stone-800 flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-teal-500"></div>
-              PsicoJeff
+            <span className="font-serif font-bold text-[#4a675e] flex items-center gap-2 text-lg">
+              <div className="w-2 h-2 rounded-full bg-amber-500"></div>
+              Dra. Janet
             </span>
-            <button onClick={() => setIsSidebarOpen(true)} className="p-2 bg-stone-100 rounded-xl text-stone-600 hover:bg-stone-200 transition-colors">
+            <button onClick={() => setIsSidebarOpen(true)} className="p-2 bg-stone-50 rounded-xl text-stone-600 hover:bg-stone-200 transition-colors border border-stone-200/50">
                 <Menu size={20} />
             </button>
         </header>

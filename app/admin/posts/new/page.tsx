@@ -13,7 +13,7 @@ const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false }) as a
 
 const AVAILABLE_TAGS = [
   "Psicología", "Psicoterapia", "Ansiedad", "Depresión", "Estrés",
-  "Estres laboral", "Trauma", "SST", "Riesgo psicosocial en el trabajo", "Manizales"
+  "Estres laboral", "Trauma", "SST", "Riesgo psicosocial en el trabajo"
 ];
 
 export default function NewPostPage() {
