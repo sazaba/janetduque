@@ -21,7 +21,7 @@ const Location = dynamic(() => import("@/app/components/sections/Location"), {
 
 // --- OPTIMIZACIÓN DE SERVIDOR (SSR) ---
 // Cambiado de 0 a 86400 (1 día) para aprovechar la caché de Next.js
-export const revalidate = 0; 
+export const revalidate = 86400; 
 
 async function getReviewCount() {
   try {
