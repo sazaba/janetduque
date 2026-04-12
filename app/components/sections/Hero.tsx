@@ -22,9 +22,9 @@ export default function Hero() {
   return (
     <section className="relative min-h-[90dvh] flex items-center pt-28 md:pt-32 lg:pt-32 pb-20 overflow-hidden w-full bg-transparent">
       
-      {/* Luces de fondo */}
-      <div className="absolute top-1/2 right-0 md:right-20 -translate-y-1/2 w-[80vw] md:w-[600px] h-[600px] bg-[radial-gradient(circle,_rgba(74,103,94,0.1)_0%,_transparent_60%)] -z-10 pointer-events-none transform-gpu translate-z-0" />
-      <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-[radial-gradient(circle,_rgba(245,158,11,0.1)_0%,_transparent_60%)] -z-10 pointer-events-none transform-gpu translate-z-0" />
+      {/* Luces de fondo atmosféricas */}
+      <div className="absolute top-1/2 right-0 md:right-20 -translate-y-1/2 w-[80vw] md:w-[600px] h-[600px] bg-[radial-gradient(circle,_rgba(74,103,94,0.08)_0%,_transparent_60%)] -z-10 pointer-events-none transform-gpu translate-z-0" />
+      <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-[radial-gradient(circle,_rgba(245,158,11,0.08)_0%,_transparent_60%)] -z-10 pointer-events-none transform-gpu translate-z-0" />
 
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 lg:gap-32 items-center">
@@ -121,17 +121,36 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* COLUMNA 2: IMAGEN CON ANCHO MÁXIMO AJUSTADO */}
-          <div className={`relative flex justify-center lg:justify-end transition-all duration-1000 delay-300 ease-out transform-gpu mt-8 md:mt-0 ${
+          {/* COLUMNA 2: IMAGEN Y FORMAS MEJORADAS */}
+          <div className={`relative flex justify-center lg:justify-end transition-all duration-1000 delay-300 ease-out transform-gpu mt-12 md:mt-0 ${
             isMounted ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
           }`}>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] md:w-[400px] md:h-[400px] bg-gradient-to-tr from-[#4a675e]/20 to-amber-200/30 rounded-full -z-10"></div>
-            <div className="relative w-full max-w-[450px] aspect-[4/5] md:aspect-auto md:h-[600px] md:max-w-[500px]"> 
+            
+            {/* --- NUEVAS FORMAS DE FONDO MEJORADAS Y ORGÁNICAS --- */}
+            
+            {/* Forma 1: Brillo suave Ámbar/Oro (Aura) */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-radial from-amber-200/40 via-amber-100/10 to-transparent rounded-full -z-10 blur-2xl opacity-70" />
+
+            {/* Forma 2: Mancha orgánica Verde/Teal (Blob animado sutilmente) */}
+            {/* Nota: 'animate-pulse' de Tailwind da un movimiento suave. Para algo más complejo se requeriría CSS custom. */}
+            <div
+              className="absolute top-[10%] left-0 w-[90%] h-[90%] bg-[#4a675e]/15 -z-10 blur-xl animate-pulse-slow transition-opacity duration-1000 delay-500"
+              style={{
+                borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%', // Forma orgánica asimétrica
+                animationDuration: '8s', // Pulso muy lento
+                opacity: isMounted ? 1 : 0
+              }}
+            />
+            {/* --------------------------------------------------- */}
+
+            {/* CONTENEDOR DE IMAGEN CON BORDES REDONDEADOS Y MARCO */}
+            {/* He quitado mask-image-safe y añadido rounded-3xl, shadow, y un borde blanco fino */}
+            <div className="relative w-full max-w-[420px] aspect-[4/5] md:aspect-auto md:h-[580px] md:max-w-[480px] rounded-3xl overflow-hidden shadow-2xl shadow-stone-900/15 border-4 border-white bg-white"> 
               <Image
                 src={HeroJanet} 
                 alt="Janet Duque - Especialista en Bienestar Emocional y Talento Humano"
                 fill
-                className="object-contain object-bottom [-webkit-mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)] mask-image-safe" 
+                className="object-cover object-top" // object-top para asegurar que no se corte la cabeza
                 priority={true} 
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
