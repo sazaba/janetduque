@@ -5,129 +5,79 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
   UserCheck, 
   Sparkles, 
-  BrainCircuit, 
   Target, 
-  Clock, 
-  Globe2,
-  Wallet, 
-  SunMedium, 
+  Users,
+  Briefcase,
   Plus, 
   Minus,
   ArrowRight
 } from "lucide-react";
 
-// --- DATOS ACTUALIZADOS ---
 const faqData = [
   {
     id: "profesional",
-    question: "¿Quién es la profesional a cargo y cuál es su experiencia?",
+    question: "¿Quién lidera los procesos y cuál es su experiencia?",
     icon: <UserCheck size={24} strokeWidth={1.5} />,
     answer: (
       <>
-        El proceso es liderado por la <strong>Dra. Janet Maritza Duque</strong>, psicóloga clínica egresada de la <strong>Universidad Libre de Pereira</strong> con <span className="text-[#4a675e] font-bold">18 años de experiencia clínica</span>.
+        Soy <strong>Janet Duque</strong>, psicóloga, conferencista en bienestar emocional, especialista en Gerencia del Talento Humano y especialista en Gerencia en Seguridad y Salud en el Trabajo.
         <br /><br />
-        Su enfoque se especializa en <strong>Terapias de Tercera Generación</strong>, garantizando un acompañamiento que integra la rigurosidad científica con una profunda empatía humana.
-      </>
-    )
-  },
-  {
-    id: "diferencia",
-    question: "¿Qué hace que este enfoque sea diferente a otros?",
-    icon: <Sparkles size={24} strokeWidth={1.5} />,
-    answer: (
-      <>
-        A diferencia de los enfoques tradicionales que solo se centran en hablar del pasado, mi propuesta es pasar del <em>"¿Por qué me pasa esto?"</em> al <strong>"¿Cómo lo soluciono?"</strong>.
-        <br /><br />
-        Mi objetivo es brindarte un espacio de trabajo activo. No vienes solo a ser escuchado, sino a entrenar tu mente con herramientas y estrategias concretas que puedas aplicar de inmediato en tu vida real para generar cambios sostenibles.
-      </>
-    )
-  },
-  {
-    id: "metodologia",
-    question: "¿Qué metodologías se utilizan en las sesiones?",
-    icon: <BrainCircuit size={24} strokeWidth={1.5} />,
-    answer: (
-      <>
-        El trabajo se fundamenta en las <strong>Terapias Contextuales (Tercera Generación)</strong>, con un fuerte énfasis en:
-        <ul className="list-disc pl-5 mt-3 space-y-2 text-stone-600">
-          <li><strong>Mindfulness y Conciencia Plena.</strong></li>
-          <li><strong>Terapia de Aceptación y Compromiso (ACT).</strong></li>
-        </ul>
-        <p className="mt-4">
-            Estos métodos cuentan con el mayor respaldo científico en la actualidad para generar resultados sostenibles a largo plazo.
-        </p>
+        Además, estoy certificada como <strong>Master Speaker International</strong> por la International Coaching & Speaker Federation de México. Mi perfil me permite unir la profundidad del enfoque clínico con la visión estratégica y de resultados del entorno empresarial.
       </>
     )
   },
   {
     id: "publico",
-    question: "¿A quién va dirigido este servicio?",
-    icon: <Target size={24} strokeWidth={1.5} />,
+    question: "¿Para quién están diseñados exactamente estos servicios?",
+    icon: <Users size={24} strokeWidth={1.5} />,
     answer: (
       <>
-        Está diseñado para <strong>adultos, profesionales y estudiantes</strong> que lidian con altas exigencias en su día a día.
+        Cuento con un acompañamiento dual diseñado para generar impacto real en dos escenarios:
         <br /><br />
-        Es el espacio ideal si sientes que el estrés te supera, si tus emociones toman el control, o si simplemente buscas un crecimiento personal profundo y estructurado.
+        <span className="text-[#4a675e] font-semibold tracking-wide">PARA MUJERES:</span> A ti, que por fuera pareces fuerte, responsable, "la que puede con todo", pero por dentro sientes un cansancio que no se quita durmiendo. A ti, que sostienes a otros mientras te vas dejando siempre para después.
+        <br /><br />
+        <span className="text-[#4a675e] font-semibold tracking-wide">PARA EMPRESAS:</span> Organizaciones que están perdiendo dinero a causa de personas agotadas. Enfocado en combatir el ausentismo, el bajo rendimiento, el estrés laboral, los conflictos internos y la rotación de personal.
       </>
     )
   },
   {
-    id: "duracion",
-    question: "¿Cuánto dura cada sesión y qué frecuencia tienen?",
-    icon: <Clock size={24} strokeWidth={1.5} />,
+    id: "metodologia",
+    question: "¿Cuál es el diferencial y la metodología que utilizamos?",
+    icon: <Sparkles size={24} strokeWidth={1.5} />,
     answer: (
       <>
-        La salud mental no se trabaja con cronómetro en mano. Cada encuentro es una inmersión que dura entre <strong>60 y 90 minutos</strong>.
+        Mi enfoque se basa en intervenciones emocionales con un carácter <strong>terapéutico + práctico</strong>.
         <br /><br />
-        Este margen de tiempo nos permite profundizar realmente en la raíz de la situación y estructurar soluciones efectivas desde el primer día. La frecuencia se acuerda según tus necesidades (semanal o quincenal).
-      </>
-    )
-  },
-  {
-    id: "ubicacion",
-    question: "¿Dónde es la consulta y qué horarios manejan?",
-    icon: <Globe2 size={24} strokeWidth={1.5} />,
-    answer: (
-      <>
-        Mi consultorio es <strong>100% Virtual</strong>. 
+        A nivel personal, mi propósito no es que "aguanten más", sino que vuelvan a escucharse, suelten la carga que no les corresponde y aprendan a decir "no" sin culpa. Porque el verdadero cambio no está en hacer más, está en dejar de abandonarte.
         <br /><br />
-        Esto nos permite conectar desde la comodidad y privacidad de tu hogar u oficina, sin importar en qué ciudad o país te encuentres. Los horarios se coordinan directamente contigo para encontrar el espacio que mejor se adapte a tu rutina y zona horaria.
-      </>
-    )
-  },
-  {
-    id: "costo",
-    question: "¿Cuál es el valor de la inversión?",
-    icon: <Wallet size={24} strokeWidth={1.5} />,
-    answer: (
-      <>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
-            <div className="bg-white border border-stone-100 p-5 rounded-2xl text-center shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
-                <p className="text-[10px] text-stone-400 font-bold uppercase tracking-widest mb-1">Colombia</p>
-                <p className="text-2xl font-serif text-[#4a675e]">$130.000 <span className="text-sm font-sans text-stone-400">COP</span></p>
-            </div>
-            <div className="bg-white border border-stone-100 p-5 rounded-2xl text-center shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
-                <p className="text-[10px] text-stone-400 font-bold uppercase tracking-widest mb-1">Exterior</p>
-                <p className="text-2xl font-serif text-[#4a675e]">$70 <span className="text-sm font-sans text-stone-400">USD</span></p>
-            </div>
-        </div>
-        <p className="text-center text-xs text-stone-400 mt-4 font-light">
-            * Consulta por los planes de acompañamiento continuo.
-        </p>
+        A nivel empresarial, no ofrecemos una simple capacitación, sino experiencias vivenciales que incluyen Inteligencia Emocional aplicada, resolución de conflictos y nuestro sello único: el <strong>Método RISOTA®</strong> (emoción + risa + conciencia).
       </>
     )
   },
   {
     id: "resultados",
-    question: "¿Qué resultados puedo esperar del proceso?",
-    icon: <SunMedium size={24} strokeWidth={1.5} />,
+    question: "¿Qué resultados tangibles se logran tras la intervención?",
+    icon: <Target size={24} strokeWidth={1.5} />,
     answer: (
       <>
-        El objetivo es que dejes de "sobrevivir" y empieces a vivir con intención. Al comprometerte con el proceso, lograrás:
-        <ul className="list-disc pl-5 mt-3 space-y-2 text-stone-600">
-          <li>Desarrollar una <strong>resiliencia activa</strong> frente a las crisis.</li>
-          <li>Aprender a gestionar la ansiedad y la rumiación mental.</li>
-          <li>Tomar decisiones desde la claridad y no desde el miedo o el desborde emocional.</li>
+        <span className="text-[#4a675e] font-semibold tracking-wide">VIDA PERSONAL:</span> Logras calmar esa mente que nunca descansa, sentirte en paz, habitarte y vivir con sentido. Es una transformación integral estructurada bajo mi filosofía <em>Del Ser al Hacer</em>.
+        <br /><br />
+        <span className="text-[#4a675e] font-semibold tracking-wide">ENTORNO ORGANIZACIONAL:</span> Transformamos el agotamiento emocional en bienestar, compromiso y resultados medibles. Ayudo a las empresas a disminuir el desgaste emocional de sus colaboradores, lo que se traduce en mayor productividad, mejor clima laboral y un liderazgo más humano y efectivo.
+      </>
+    )
+  },
+  {
+    id: "programas",
+    question: "¿Cómo se estructuran los programas corporativos?",
+    icon: <Briefcase size={24} strokeWidth={1.5} />,
+    answer: (
+      <>
+        Sabemos que <em>no hay resultados sostenibles en una empresa si las personas están emocionalmente agotadas</em>. Por eso, diseñamos opciones premium listas para implementar:
+        <ul className="list-none pl-0 mt-4 space-y-3 text-stone-600">
+          <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span> <strong>Liderazgo con Emoción y Acción</strong></li>
+          <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span> <strong>Empresas emocionalmente sostenibles</strong></li>
+          <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span> <strong>Del desgaste emocional al bienestar productivo</strong></li>
+          <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span> <strong>Del Ser al Hacer en la organización</strong></li>
         </ul>
       </>
     )
@@ -142,7 +92,7 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="py-24 md:py-32 px-6 relative bg-white selection:bg-amber-200 selection:text-[#4a675e]">
+    <section id="faq" className="py-24 md:py-32 px-6 relative bg-[#FAFAFA] selection:bg-[#4a675e]/20 selection:text-[#4a675e]">
       
       <div className="max-w-7xl mx-auto relative z-10">
         
@@ -158,29 +108,29 @@ export default function FAQ() {
                 transition={{ duration: 0.6 }}
               >
                 <div className="flex items-center gap-4 mb-6">
-                  <span className="w-10 h-[1px] bg-amber-500"></span>
-                  <span className="text-amber-600 font-bold tracking-[0.2em] text-xs uppercase">
-                    Transparencia Total
+                  <span className="w-8 h-[1px] bg-[#4a675e]"></span>
+                  <span className="text-[#4a675e] font-bold tracking-[0.25em] text-xs uppercase">
+                    Claridad Total
                   </span>
                 </div>
                 
-                <h2 className="text-4xl md:text-5xl font-serif text-[#4a675e] leading-[1.1] mb-6">
-                  Preguntas <span className="text-amber-500 italic">Frecuentes.</span>
+                <h2 className="text-4xl md:text-5xl font-serif text-stone-900 leading-[1.1] mb-6">
+                  Preguntas <span className="text-[#4a675e] italic">Frecuentes.</span>
                 </h2>
                 
                 <p className="text-stone-500 font-light leading-relaxed mb-10 text-lg">
-                  Entiendo que iniciar un proceso terapéutico genera dudas. Aquí tienes respuestas claras y directas sobre mi forma de trabajo, sin letra pequeña.
+                  Respuestas directas sobre mi metodología, enfoque y cómo podemos estructurar una transformación emocional real para ti o para tu empresa.
                 </p>
 
-                <div className="hidden lg:block p-8 bg-[#4a675e]/5 rounded-3xl border border-[#4a675e]/10">
-                    <p className="text-sm text-[#4a675e] font-medium mb-6">¿Aún tienes dudas específicas sobre tu caso?</p>
+                <div className="hidden lg:block p-8 bg-white rounded-3xl border border-stone-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                    <p className="text-sm text-stone-600 font-medium mb-6">¿Quieres conversar sobre tu caso o tu equipo?</p>
                     <a 
                         href="https://wa.link/2x3i8s"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-[#4a675e] hover:bg-[#384e47] text-white font-bold text-sm transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 w-full justify-center group"
+                        className="inline-flex items-center gap-3 px-6 py-4 rounded-full bg-[#4a675e] hover:bg-[#384e47] text-white font-semibold text-sm transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 w-full justify-center group"
                     >
-                        Escríbeme al WhatsApp
+                        Contactar por WhatsApp
                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </a>
                 </div>
@@ -201,15 +151,15 @@ export default function FAQ() {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
                   onClick={() => toggleFAQ(item.id)}
-                  className={`group cursor-pointer rounded-[2rem] border transition-all duration-500 overflow-hidden relative
+                  className={`group cursor-pointer rounded-2xl md:rounded-[2rem] border transition-all duration-500 overflow-hidden relative bg-white
                     ${isOpen 
-                      ? "bg-white border-amber-200 shadow-[0_20px_40px_-15px_rgba(212,175,55,0.15)]" 
-                      : "bg-stone-50/50 hover:bg-white border-stone-100 hover:border-amber-200/50 hover:shadow-md"
+                      ? "border-[#4a675e]/20 shadow-[0_20px_40px_-15px_rgba(74,103,94,0.1)]" 
+                      : "border-stone-100 hover:border-[#4a675e]/30 hover:shadow-sm"
                     }
                   `}
                 >
                   {/* Decoración lateral en estado activo */}
-                  <div className={`absolute left-0 top-0 bottom-0 w-1.5 bg-amber-400 transition-transform duration-500 origin-top
+                  <div className={`absolute left-0 top-0 bottom-0 w-1.5 bg-[#4a675e] transition-transform duration-500 origin-top
                     ${isOpen ? "scale-y-100" : "scale-y-0"}
                   `} />
 
@@ -218,14 +168,14 @@ export default function FAQ() {
                     
                     {/* Icono */}
                     <div className={`shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500 transform-gpu
-                      ${isOpen ? "bg-amber-100 text-amber-600 scale-110" : "bg-white text-stone-400 shadow-sm group-hover:text-[#4a675e]"}
+                      ${isOpen ? "bg-[#4a675e]/10 text-[#4a675e] scale-110" : "bg-stone-50 text-stone-400 group-hover:text-[#4a675e]"}
                     `}>
                       {item.icon}
                     </div>
 
                     {/* Texto Pregunta */}
                     <div className="flex-grow pr-4">
-                      <h3 className={`font-serif text-lg md:text-xl transition-colors duration-300 ${isOpen ? "text-[#4a675e]" : "text-stone-700 group-hover:text-stone-900"}`}>
+                      <h3 className={`font-serif text-lg md:text-xl transition-colors duration-300 ${isOpen ? "text-stone-900" : "text-stone-700 group-hover:text-stone-900"}`}>
                         {item.question}
                       </h3>
                     </div>
@@ -233,7 +183,7 @@ export default function FAQ() {
                     {/* Botón +/- */}
                     <div className="shrink-0">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-500 transform
-                        ${isOpen ? "bg-[#4a675e] text-white rotate-180" : "bg-stone-100 text-stone-400 group-hover:bg-amber-100 group-hover:text-amber-600"}
+                        ${isOpen ? "bg-[#4a675e] text-white rotate-180" : "bg-stone-50 text-stone-400 group-hover:bg-[#4a675e]/10 group-hover:text-[#4a675e]"}
                       `}>
                         {isOpen ? <Minus size={16} /> : <Plus size={16} />}
                       </div>
@@ -248,7 +198,7 @@ export default function FAQ() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }} // Curva suave tipo Apple
+                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                       >
                         <div className="px-6 pb-8 md:px-8 md:pl-[5.5rem] md:pb-10 text-stone-500 leading-relaxed text-base font-light">
                           <div className="border-t border-stone-100 pt-6">
@@ -264,13 +214,13 @@ export default function FAQ() {
             })}
 
             {/* CTA Mobile (Aparece abajo si estás en celular) */}
-            <div className="lg:hidden mt-8 p-8 bg-[#4a675e]/5 rounded-3xl border border-[#4a675e]/10 text-center">
-                <p className="text-sm text-[#4a675e] font-medium mb-6">¿Aún tienes dudas específicas?</p>
+            <div className="lg:hidden mt-8 p-8 bg-white rounded-3xl border border-stone-100 shadow-sm text-center">
+                <p className="text-sm text-stone-600 font-medium mb-6">¿Aún tienes dudas específicas?</p>
                 <a 
                     href="https://wa.link/2x3i8s"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#4a675e] text-white font-bold text-sm transition-all shadow-lg active:scale-95 w-full justify-center"
+                    className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#4a675e] text-white font-semibold text-sm transition-all shadow-md active:scale-95 w-full justify-center"
                 >
                     Escríbeme al WhatsApp
                 </a>
