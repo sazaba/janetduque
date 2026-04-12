@@ -9,8 +9,11 @@ const PainPoints = dynamic(() => import("@/app/components/sections/PainPoints"))
 const ProfessionalProfile = dynamic(() => import("@/app/components/sections/ProfessionalProfile"));
 const ValueProposition = dynamic(() => import("@/app/components/sections/ValueProposition"));
 const TargetAudience = dynamic(() => import("@/app/components/sections/TargetAudience"));
-const Transformation = dynamic(() => import("@/app/components/sections/Transformation"));
 
+
+const B2BPrograms = dynamic(() => import("@/app/components/sections/B2BPrograms"));
+
+const Transformation = dynamic(() => import("@/app/components/sections/Transformation"));
 const Testimonials = dynamic(() => import("@/app/components/sections/Testimonials"));
 const FAQ = dynamic(() => import("@/app/components/sections/Faq"));
 const BlogCarousel = dynamic(() => import("@/app/components/sections/BlogCarousel"));
@@ -50,8 +53,12 @@ export default async function Home() {
           <PainPoints />
         </section>
 
-        <section>
+        <section id="servicios">
            <TargetAudience/>
+        </section>
+
+        <section id="programas-corporativos">
+           <B2BPrograms />
         </section>
 
         <section id="sobre-mi">
@@ -81,7 +88,6 @@ export default async function Home() {
         <section id="proceso">
           <Transformation/>
         </section>
-
         */}
 
       </main>
