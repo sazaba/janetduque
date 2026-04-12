@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Activity, Cloud, Flame, Waves, ArrowRight } from 'lucide-react';
+import { Activity, Cloud, Flame, Users, ArrowRight } from 'lucide-react';
 
 const PremiumIcon = ({ Icon }: { Icon: React.ElementType }) => (
   <div className="relative flex items-center justify-center w-16 h-16 mx-auto mb-8 z-10 group-hover:scale-110 transition-transform duration-500">
@@ -17,11 +17,32 @@ const PremiumIcon = ({ Icon }: { Icon: React.ElementType }) => (
   </div>
 );
 
+// Aquí integramos tu copy EXACTO, combinando la sensibilidad hacia la mujer y la crudeza hacia la empresa.
 const painPoints = [
-  { id: 'first', icon: Activity, title: "Ansiedad Constante", desc: "El cuerpo reacciona a un peligro invisible. Alertas, miedos repentinos y opresión recurrente en el pecho." },
-  { id: 'second', icon: Cloud, title: "Depresión Silenciosa", desc: "Desconexión con lo que antes te apasionaba. Una falta de vitalidad pesada y una tristeza profunda." },
-  { id: 'third', icon: Flame, title: "Burnout Total", desc: "El límite se rompió. Sientes que las demandas diarias te superan y el agotamiento mental no cede." },
-  { id: 'fourth', icon: Waves, title: "Desregulación", desc: "Tus emociones toman el control del volante. Reaccionas con una intensidad que te desconoce y asusta." }
+  { 
+    id: 'first', 
+    icon: Cloud, 
+    title: "Cansancio Profundo", 
+    desc: "Sientes un cansancio que no se quita durmiendo. Sigues cumpliendo y sosteniendo a otros, mientras te vas dejando para después." 
+  },
+  { 
+    id: 'second', 
+    icon: Activity, 
+    title: "Fuga de Capital", 
+    desc: "Personas agotadas = empresas que pierden dinero. El desgaste se traduce en ausentismo, rotación constante y bajo rendimiento." 
+  },
+  { 
+    id: 'third', 
+    icon: Flame, 
+    title: "Fuerza Insostenible", 
+    desc: "Por fuera eres 'la que puede con todo', pero en silencio sientes que algo se está rompiendo. No estás exagerando, ni estás fallando." 
+  },
+  { 
+    id: 'fourth', 
+    icon: Users, 
+    title: "Clima en Tensión", 
+    desc: "Estrés laboral y conflictos internos. No hay resultados sostenibles en una empresa si las personas están emocionalmente agotadas." 
+  }
 ];
 
 const rotations = [0, -6, 5, -4];
@@ -45,7 +66,7 @@ export default function PainPointsSafariFix() {
   }, [isStacked]);
 
   return (
-    // CONTENEDOR PRINCIPAL: 100% del Viewport
+    // CONTENEDOR PRINCIPAL
     <section className="relative w-full bg-[#4a675e] overflow-hidden py-24 md:py-32 selection:bg-amber-200 selection:text-[#2b3d38]">
       
       <style dangerouslySetInnerHTML={{__html: `
@@ -56,14 +77,14 @@ export default function PainPointsSafariFix() {
       {/* Brillo de fondo */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-white/10 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* CONTENEDOR INTERNO: w-full sin max-w estricto que corte las tarjetas */}
+      {/* CONTENEDOR INTERNO */}
       <div className="w-full relative z-10">
         
         <div className="text-center mb-16 max-w-3xl mx-auto px-6">
           <motion.div layout className="flex items-center justify-center gap-4 mb-6">
               <span className="w-8 h-[1px] bg-amber-500"></span>
               <span className="text-amber-400 font-bold tracking-[0.2em] text-xs uppercase">
-                Autoevaluación
+                Diagnóstico Emocional
               </span>
               <span className="w-8 h-[1px] bg-amber-500"></span>
           </motion.div>
@@ -71,11 +92,11 @@ export default function PainPointsSafariFix() {
             className="text-4xl md:text-5xl lg:text-6xl font-serif text-white leading-tight mb-6"
             layout
           >
-            Señales para <span className="text-amber-400 italic">pausar.</span>
+            El verdadero costo de <span className="text-amber-400 italic">aguantar.</span>
           </motion.h2>
           <motion.p layout className="text-lg text-emerald-50/70 font-light max-w-xl mx-auto">
             {isStacked 
-                ? "Toca el mazo para descubrir las alertas que tu cuerpo te está enviando." 
+                ? "Toca el mazo para descubrir las señales de alerta en tu vida personal y en tu organización." 
                 : "Explora las señales. Toca cualquier tarjeta para volver a apilar."}
           </motion.p>
         </div>
@@ -86,7 +107,6 @@ export default function PainPointsSafariFix() {
           <motion.div 
             layout
             ref={carouselRef}
-            // UPGRADE MOBILE: Usamos px-[5vw] para crear un margen dinámico perfecto en móviles sin cortar el desktop
             className={`flex w-full items-center min-h-[480px] hide-scrollbar overscroll-x-contain
               ${isStacked 
                 ? 'justify-center overflow-visible' 
@@ -123,7 +143,7 @@ export default function PainPointsSafariFix() {
                     }
                   `}
                 >
-                  {/* FONDO DE LA TARJETA LIMPIO Y SIN SOMBRAS OSCURAS */}
+                  {/* FONDO DE LA TARJETA */}
                   <div className={`
                       absolute inset-0 rounded-[2.5rem] transition-all duration-700
                       ${isStacked 
@@ -155,7 +175,7 @@ export default function PainPointsSafariFix() {
           
         </div>
 
-        {/* --- CTA FINAL DISCRETO --- */}
+        {/* --- CTA FINAL --- */}
         <AnimatePresence>
             {!isStacked && (
                 <motion.div 
@@ -170,7 +190,7 @@ export default function PainPointsSafariFix() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-white text-[#4a675e] font-bold text-sm transition-all hover:bg-stone-50 hover:shadow-lg hover:-translate-y-0.5 w-fit group shadow-md"
                     >
-                        Solicitar Consulta Virtual
+                        Inicia tu transformación hoy
                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </a>
                 </motion.div>
