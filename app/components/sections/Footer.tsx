@@ -2,16 +2,18 @@
 
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react"; 
-import { MapPin, Lock, LayoutDashboard, LogOut } from "lucide-react"; 
+import { Globe2, Lock, LayoutDashboard, LogOut } from "lucide-react"; 
 
 export default function Footer() {
   const { data: session } = useSession(); 
   const currentYear = new Date().getFullYear();
 
+  // Enlaces alineados a la propuesta dual
   const links = [
     { name: "Inicio", href: "#inicio" },
+    { name: "Para Mujeres", href: "#mujeres" },
+    { name: "Para Empresas", href: "#empresas" },
     { name: "Acerca de Mí", href: "#sobre-mi" },
-    { name: "Blog", href: "#blog" },
   ];
 
   return (
@@ -30,7 +32,8 @@ export default function Footer() {
                 Janet <br /> Duque
               </h2>
               <p className="text-stone-400 text-base md:text-lg font-sans font-light mt-4 max-w-sm leading-relaxed">
-                Un espacio terapéutico seguro, diseñado para brindarte una <span className="text-amber-400/90 italic font-serif">tranquilidad duradera.</span>
+                Transformación emocional con impacto en la vida y el trabajo. <br />
+                <span className="text-[#8ba89d] italic font-serif">Del Ser al Hacer.</span>
               </p>
             </div>
           </div>
@@ -45,7 +48,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link 
                     href={link.href}
-                    className="text-stone-400 hover:text-amber-400 transition-colors duration-300 text-sm md:text-base font-sans"
+                    className="text-stone-400 hover:text-[#8ba89d] transition-colors duration-300 text-sm md:text-base font-sans"
                   >
                     {link.name}
                   </Link>
@@ -61,16 +64,16 @@ export default function Footer() {
             </h3>
             <div className="space-y-6">
               
-              {/* Dirección */}
+              {/* Dirección / Modalidad */}
               <div className="flex items-start gap-4">
                 {/* Icono Apple Style (Caja semitransparente) */}
-                <div className="p-2.5 bg-white/[0.03] rounded-xl border border-white/5 text-amber-400">
-                   <MapPin size={20} strokeWidth={1.5} />
+                <div className="p-2.5 bg-white/[0.03] rounded-xl border border-white/5 text-[#8ba89d]">
+                   <Globe2 size={20} strokeWidth={1.5} />
                 </div>
                 <div>
-                  <p className="text-stone-200 font-medium font-sans">Consulta Online y Presencial</p>
+                  <p className="text-stone-200 font-medium font-sans">Consultorio 100% Virtual</p>
                   <p className="text-stone-500 text-sm mt-1 font-light">
-                    Atención psicológica<br />Colombia
+                    Intervenciones clínicas y corporativas<br />Colombia y Exterior
                   </p>
                 </div>
               </div>
@@ -81,11 +84,11 @@ export default function Footer() {
 
         {/* --- BOTTOM BAR (Estilo Apple: Línea fina, textos pequeños) --- */}
         <div className="border-t border-white/[0.08] pt-8 flex flex-col lg:flex-row justify-between items-center gap-6 text-xs text-stone-500 font-medium font-sans">
-          <p className="order-2 lg:order-1">
+          <p className="order-2 lg:order-1 font-light">
             &copy; {currentYear} Janet Duque. Todos los derechos reservados.
           </p>
           
-          <div className="flex items-center gap-6 order-1 lg:order-2">
+          <div className="flex items-center gap-6 order-1 lg:order-2 font-light">
             <Link href="#" className="hover:text-stone-300 transition-colors">
               Política de Privacidad
             </Link>
@@ -100,7 +103,7 @@ export default function Footer() {
                     {/* Botón ir al Dashboard */}
                     <Link 
                         href="/admin" 
-                        className="text-stone-500 hover:text-amber-400 transition-colors p-2"
+                        className="text-stone-500 hover:text-[#8ba89d] transition-colors p-2"
                         title="Ir al Panel Administrativo"
                     >
                         <LayoutDashboard size={16} strokeWidth={1.5} />
@@ -119,7 +122,7 @@ export default function Footer() {
                 // OPCIÓN B: NO HAY SESIÓN (Candado original, ahora más sutil)
                 <Link 
                     href="/login" 
-                    className="text-stone-700 hover:text-amber-400 transition-colors duration-300 p-2 ml-2"
+                    className="text-stone-600 hover:text-[#8ba89d] transition-colors duration-300 p-2 ml-2"
                     aria-label="Admin Login"
                     title="Acceso Privado"
                 >
@@ -131,7 +134,7 @@ export default function Footer() {
       </div>
       
       {/* Elemento Decorativo Gigante (JD) */}
-      <div className="absolute -bottom-12 right-0 translate-x-1/4 text-[16rem] font-serif font-medium text-white pointer-events-none select-none leading-none opacity-[0.02] whitespace-nowrap">
+      <div className="absolute -bottom-12 right-0 translate-x-1/4 text-[16rem] font-serif font-medium text-white pointer-events-none select-none leading-none opacity-[0.015] whitespace-nowrap">
         JD
       </div>
     </footer>
