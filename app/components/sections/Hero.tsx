@@ -22,36 +22,31 @@ export default function Hero() {
   return (
     <section className="relative min-h-[90dvh] flex items-center pt-28 md:pt-32 lg:pt-32 pb-20 overflow-hidden w-full bg-transparent">
       
-      {/* Luces de fondo (OPTIMIZADAS: Se cambió blur-[100px] por radial-gradient) */}
+      {/* Luces de fondo */}
       <div className="absolute top-1/2 right-0 md:right-20 -translate-y-1/2 w-[80vw] md:w-[600px] h-[600px] bg-[radial-gradient(circle,_rgba(74,103,94,0.1)_0%,_transparent_60%)] -z-10 pointer-events-none transform-gpu translate-z-0" />
       <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-[radial-gradient(circle,_rgba(245,158,11,0.1)_0%,_transparent_60%)] -z-10 pointer-events-none transform-gpu translate-z-0" />
 
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center">
             
-          {/* COLUMNA 1: TEXTO (Tus animaciones originales con isMounted) */}
+          {/* COLUMNA 1: TEXTO */}
           <div className={`text-center md:text-left z-10 relative transition-all duration-1000 ease-out transform-gpu ${
             isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
               
-            {/* TÍTULO PRINCIPAL REDUCIDO */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] font-medium tracking-tight text-stone-800 leading-[1.15] mb-6 relative">
-              Encuentra tu equilibrio y vuelve a <br className="hidden lg:block" />
+            {/* TÍTULO DUAL */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-[4.2rem] font-medium tracking-tight text-stone-800 leading-[1.15] mb-6 relative">
+              Del Ser al Hacer: <br className="hidden lg:block" />
               
-              {/* Contenedor del Highlight Animado (Texto 1) */}
               <span className="relative inline-block mt-2 md:mt-0 whitespace-nowrap">
-                {/* Texto Fantasma */}
-                <span className="invisible px-1 italic">vivir el presente</span>
-                
-                {/* Texto Real Animado */}
+                <span className="invisible px-1 italic">Transformación emocional</span>
                 <span 
                   className={`absolute top-0 left-0 px-1 italic text-[#4a675e] w-full h-full ${isMounted ? 'animate-text-reveal' : 'invisible'}`} 
                   style={{ animationDelay: '0.4s' }}
                 >
-                  vivir el presente
+                  Transformación emocional
                 </span>
                 
-                {/* Subrayado SVG */}
                 <svg 
                   className={`absolute w-full h-3 md:h-4 -bottom-1 left-0 text-amber-400 -z-10 opacity-60 ${isMounted ? 'animate-draw' : 'invisible'}`} 
                   style={{ animationDelay: '1.2s' }}
@@ -62,24 +57,19 @@ export default function Hero() {
               </span>
             </h1>
 
-            {/* PÁRRAFO DESCRIPTIVO REDUCIDO */}
-            <p className="text-lg md:text-xl text-stone-600 leading-relaxed font-medium mb-10 max-w-lg mx-auto md:mx-0 relative">
-              Un espacio seguro y profesional donde encontrarás las herramientas para construir tu{' '}
+            {/* PÁRRAFO DUAL: MUJERES Y EMPRESAS */}
+            <p className="text-lg md:text-xl text-stone-600 leading-relaxed font-medium mb-10 max-w-xl mx-auto md:mx-0 relative">
+              Acompaño a mujeres a volver a sí mismas y a empresas a transformar el agotamiento emocional en{' '}
               
-              {/* Contenedor del Highlight Animado (Texto 2) */}
               <span className="relative inline-block font-bold text-xl md:text-2xl whitespace-nowrap">
-                 {/* Texto Fantasma */}
-                 <span className="invisible px-1 italic">tranquilidad duradera.</span>
-                 
-                 {/* Texto Real Animado */}
+                 <span className="invisible px-1 italic">bienestar productivo.</span>
                  <span 
                   className={`absolute top-0 left-0 px-1 italic text-[#4a675e] w-full h-full ${isMounted ? 'animate-text-reveal' : 'invisible'}`} 
                   style={{ animationDelay: '1.6s' }}
                  >
-                   tranquilidad duradera.
+                   bienestar productivo.
                  </span>
                  
-                 {/* Subrayado SVG */}
                  <svg 
                   className={`absolute w-full h-2 md:h-3 -bottom-0.5 left-0 text-amber-400 -z-10 opacity-60 ${isMounted ? 'animate-draw' : 'invisible'}`} 
                   style={{ animationDelay: '2.4s' }}
@@ -87,6 +77,10 @@ export default function Hero() {
                  >
                    <path d="M0 5 Q 50 12 100 5" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round" />
                  </svg>
+              </span>
+              <br />
+              <span className="text-sm md:text-base mt-4 block font-normal italic">
+                Impacto real en la vida, la comunicación y los resultados.
               </span>
             </p>
 
@@ -99,7 +93,7 @@ export default function Hero() {
                 className="group relative px-8 py-4 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-[#2b3d38] font-bold text-lg overflow-hidden shadow-xl shadow-amber-500/20 w-full sm:w-auto text-center cursor-pointer transition-transform hover:-translate-y-1 active:translate-y-0"
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
-                  Agendar mi primera sesión
+                  Agendar consulta o propuesta
                   <svg className="w-5 h-5 transition-transform group-hover:translate-x-1 text-[#2b3d38]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
@@ -108,16 +102,15 @@ export default function Hero() {
               </a>
               
               <a 
-                href="#proceso" 
-                onClick={handleScrollToEnfoque} 
+                href="#servicios" 
                 className="cursor-pointer px-8 py-4 rounded-full border-2 border-stone-200 hover:border-amber-400 bg-transparent text-stone-600 hover:text-[#4a675e] font-bold transition-colors w-full sm:w-auto text-center"
               >
-                Descubrir mi enfoque
+                Ver servicios
               </a>
             </div>
           </div>
 
-          {/* COLUMNA 2: IMAGEN (OPTIMIZADA: Se quitó drop-shadow-2xl) */}
+          {/* COLUMNA 2: IMAGEN */}
           <div className={`relative flex justify-center lg:justify-end transition-all duration-1000 delay-300 ease-out transform-gpu mt-8 md:mt-0 ${
             isMounted ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
           }`}>
@@ -125,7 +118,7 @@ export default function Hero() {
             <div className="relative w-full max-w-[450px] aspect-[4/5] md:aspect-auto md:h-[600px]"> 
               <Image
                 src={HeroJanet} 
-                alt="Psicóloga Janet Duque"
+                alt="Janet Duque - Especialista en Bienestar Emocional y Talento Humano"
                 fill
                 className="object-contain object-bottom [-webkit-mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)] mask-image-safe" 
                 priority={true} 
