@@ -3,26 +3,25 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { GraduationCap, BrainCircuit, Award, Quote, Sparkles } from "lucide-react";
+import { Building2, Heart, Mic, Quote, Sparkles } from "lucide-react";
 
-// Importe corregido con el nuevo nombre
 import janetprofessional from "../../assets/janetprofessional.webp"; 
 
 const credentials = [
   {
-    icon: <Award size={28} strokeWidth={1.5} />,
-    title: "18 Años de Experiencia",
-    text: "Trayectoria clínica consolidada acompañando procesos de transformación profunda y bienestar integral.",
+    icon: <Mic size={28} strokeWidth={1.5} />,
+    title: "Master Speaker International",
+    text: "Certificada por la International Coaching & Speaker Federation de México. Conferencista en bienestar emocional.",
   },
   {
-    icon: <GraduationCap size={28} strokeWidth={1.5} />,
-    title: "Universidad Libre de Pereira",
-    text: "Psicóloga egresada con un sólido fundamento ético y científico en el abordaje del comportamiento humano.",
+    icon: <Heart size={28} strokeWidth={1.5} />,
+    title: "Enfoque para Mujeres",
+    text: "Acompañamiento profundo para soltar cargas, calmar la mente y volver a ti misma sin culpa.",
   },
   {
-    icon: <BrainCircuit size={28} strokeWidth={1.5} />,
-    title: "Terapias de 3ra Generación",
-    text: "Diplomado especializado. Enfoque en mindfulness, aceptación y compromiso (ACT) para resultados sostenibles.",
+    icon: <Building2 size={28} strokeWidth={1.5} />,
+    title: "Transformación Organizacional",
+    text: "Especialista en Talento Humano y SST. Transformamos el desgaste emocional en compromiso, comunicación y rendimiento.",
   }
 ];
 
@@ -33,7 +32,7 @@ export default function ProfessionalProfile() {
       className="py-24 md:py-32 px-6 bg-[#fcfdfa] relative overflow-hidden selection:bg-amber-200 selection:text-[#2b3d38]"
     >
       
-      {/* Fondo Decorativo Sutil */}
+      {/* Fondo Decorativo Sutil (Sin cuadrículas, diseño premium limpio) */}
       <div className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none z-0">
         <div className="absolute -top-[20%] right-[10%] w-[600px] h-[600px] rounded-full bg-gradient-to-bl from-[#2b3d38]/5 to-transparent blur-3xl opacity-60" />
       </div>
@@ -59,10 +58,9 @@ export default function ProfessionalProfile() {
                 viewport={{ once: true, margin: "0px 0px -100px 0px" }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
             >
-                {/* Variable de imagen actualizada */}
                 <Image 
                     src={janetprofessional} 
-                    alt="Dra. Janet Maritza Duque - Psicóloga Clínica"
+                    alt="Janet Duque - Psicóloga y Master Speaker"
                     fill
                     className="object-cover object-center transition-transform duration-1000 group-hover:scale-105 will-change-transform"
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -75,7 +73,7 @@ export default function ProfessionalProfile() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#2b3d38]/40 via-transparent to-transparent opacity-60 pointer-events-none" />
             </motion.div>
 
-            {/* --- SELLO DE ORO FLOTANTE (18 Años) --- */}
+            {/* --- SELLO DE ORO FLOTANTE (Adaptado al Método Exclusivo) --- */}
             <motion.div 
               className="absolute -bottom-8 -right-4 md:-right-12 z-20 bg-[#2b3d38] p-6 rounded-full w-36 h-36 flex flex-col items-center justify-center text-center shadow-xl border-4 border-[#fcfdfa] transform-gpu"
               initial={{ opacity: 0, rotate: -20, scale: 0.8 }}
@@ -84,15 +82,15 @@ export default function ProfessionalProfile() {
               transition={{ duration: 0.7, delay: 0.5, type: "spring", stiffness: 100 }}
             >
               <Sparkles className="text-amber-400 mb-1" size={20} />
-              <span className="text-3xl font-serif text-white leading-none mb-1">18</span>
-              <span className="text-[10px] text-amber-200 uppercase tracking-widest font-bold leading-tight">
-                Años de<br/>Experiencia
+              <span className="text-xl font-serif text-white leading-tight mb-1">Del Ser<br/>al Hacer</span>
+              <span className="text-[9px] text-amber-200 uppercase tracking-widest font-bold leading-tight mt-1">
+                Método<br/>RISOTA®
               </span>
             </motion.div>
           
         </div>
 
-        {/* --- COLUMNA DERECHA: CONTENIDO Y CREDENCIALES --- */}
+        {/* --- COLUMNA DERECHA: CONTENIDO Y CREDENCIALES DUALES --- */}
         <div className="lg:col-span-7 mt-8 lg:mt-0 lg:pl-8">
             
             <motion.div
@@ -109,10 +107,10 @@ export default function ProfessionalProfile() {
                 </div>
                 
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#2b3d38] mb-4 leading-tight">
-                  Dra. Janet Maritza Duque
+                  Janet Duque
                 </h2>
                 <h3 className="text-xl md:text-2xl text-stone-500 font-serif italic mb-8">
-                  Psicóloga Clínica
+                  Psicóloga & Especialista en Bienestar Emocional
                 </h3>
             </motion.div>
 
@@ -124,14 +122,14 @@ export default function ProfessionalProfile() {
                 transition={{ delay: 0.2, duration: 0.6 }}
             >
                 <p className="mb-4">
-                  El verdadero cambio comienza cuando decides dejar de sobrevivir y empiezas a comprenderte. A lo largo de mi trayectoria clínica, he comprobado que el dolor emocional no es una debilidad, sino una señal de que algo en tu interior pide ser atendido.
+                  Si por fuera pareces "la que puede con todo", pero por dentro sientes un cansancio que no se quita durmiendo, <strong>no estás fallando y no estás sola</strong>. Porque el verdadero cambio no está en hacer más, está en dejar de abandonarte.
                 </p>
                 <p>
-                  Mi compromiso es brindarte un espacio seguro, estructurado y libre de juicios. Un lugar donde la experiencia clínica se une con la empatía más profunda para trazar una ruta clara hacia tu bienestar mental y emocional.
+                  A nivel organizacional, mi visión es clara: <strong>no hay resultados sostenibles en una empresa si las personas están emocionalmente agotadas</strong>. A través del método clínico y práctico, ayudo a disminuir el desgaste de los colaboradores, impactando directamente en la productividad, el clima laboral y el liderazgo efectivo.
                 </p>
             </motion.div>
 
-            {/* --- LISTA DE CREDENCIALES PREMIUM --- */}
+            {/* --- LISTA DE CREDENCIALES --- */}
             <div className="flex flex-col gap-6 md:gap-8 mb-12 relative">
                 {/* Línea conectora vertical sutil */}
                 <div className="absolute left-6 top-6 bottom-6 w-[1px] bg-amber-200/50 hidden md:block" />
@@ -163,10 +161,9 @@ export default function ProfessionalProfile() {
                 ))}
             </div>
 
-            {/* --- CITA FINAL (ESTILO FIRMA) - CORREGIDA --- */}
+            {/* --- CITA FINAL (ESTILO FIRMA) --- */}
             <motion.div 
                 className="relative pl-8 border-l-2 border-amber-400"
-                // Aquí estaba el error. Ahora entra sutilmente desde la izquierda.
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -174,7 +171,7 @@ export default function ProfessionalProfile() {
             >
                 <Quote className="absolute -top-2 -left-3 text-[#fcfdfa] bg-amber-400 rounded-full p-1" size={24} />
                 <p className="text-[#2b3d38] font-serif text-lg md:text-xl leading-relaxed">
-                  "No se trata de borrar tu historia, sino de aprender a leerla con nuevos ojos para que deje de doler y empiece a impulsarte."
+                  "No viniste a este mundo solo a cumplir, sostener y resistir… viniste a sentirte en paz, a habitarte, a vivir con sentido."
                 </p>
             </motion.div>
 
