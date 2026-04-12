@@ -13,7 +13,7 @@ export default function Hero() {
 
   const handleScrollToEnfoque = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault(); 
-    const element = document.getElementById('proceso');
+    const element = document.getElementById('servicios');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
@@ -27,19 +27,23 @@ export default function Hero() {
       <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-[radial-gradient(circle,_rgba(245,158,11,0.1)_0%,_transparent_60%)] -z-10 pointer-events-none transform-gpu translate-z-0" />
 
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 lg:gap-32 items-center">
             
           {/* COLUMNA 1: TEXTO */}
           <div className={`text-center md:text-left z-10 relative transition-all duration-1000 ease-out transform-gpu ${
             isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
               
-            {/* TÍTULO DUAL */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-[4.2rem] font-medium tracking-tight text-stone-800 leading-[1.15] mb-6 relative">
-              Del Ser al Hacer: <br className="hidden lg:block" />
+            {/* TÍTULO DUAL Y OPTIMIZADO PARA NO DESBORDARSE */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight text-stone-800 leading-[1.15] mb-6 relative">
+              Del Ser al Hacer <br className="hidden lg:block" />
               
-              <span className="relative inline-block mt-2 md:mt-0 whitespace-nowrap">
+              {/* Contenedor del Highlight Animado */}
+              <span className="relative inline-block mt-2 md:mt-0">
+                {/* Texto Fantasma (sin whitespace-nowrap para permitir salto si es necesario) */}
                 <span className="invisible px-1 italic">Transformación emocional</span>
+                
+                {/* Texto Real Animado */}
                 <span 
                   className={`absolute top-0 left-0 px-1 italic text-[#4a675e] w-full h-full ${isMounted ? 'animate-text-reveal' : 'invisible'}`} 
                   style={{ animationDelay: '0.4s' }}
@@ -47,6 +51,7 @@ export default function Hero() {
                   Transformación emocional
                 </span>
                 
+                {/* Subrayado SVG */}
                 <svg 
                   className={`absolute w-full h-3 md:h-4 -bottom-1 left-0 text-amber-400 -z-10 opacity-60 ${isMounted ? 'animate-draw' : 'invisible'}`} 
                   style={{ animationDelay: '1.2s' }}
@@ -57,12 +62,16 @@ export default function Hero() {
               </span>
             </h1>
 
-            {/* PÁRRAFO DUAL: MUJERES Y EMPRESAS */}
-            <p className="text-lg md:text-xl text-stone-600 leading-relaxed font-medium mb-10 max-w-xl mx-auto md:mx-0 relative">
+            {/* PÁRRAFO DUAL OPTIMIZADO */}
+            <p className="text-lg md:text-xl text-stone-600 leading-relaxed font-medium mb-10 max-w-xl mx-auto md:max-w-lg md:mx-0 relative">
               Acompaño a mujeres a volver a sí mismas y a empresas a transformar el agotamiento emocional en{' '}
               
-              <span className="relative inline-block font-bold text-xl md:text-2xl whitespace-nowrap">
+              {/* Contenedor del Highlight Animado */}
+              <span className="relative inline-block font-bold text-xl md:text-2xl mt-1 sm:mt-0">
+                 {/* Texto Fantasma */}
                  <span className="invisible px-1 italic">bienestar productivo.</span>
+                 
+                 {/* Texto Real Animado */}
                  <span 
                   className={`absolute top-0 left-0 px-1 italic text-[#4a675e] w-full h-full ${isMounted ? 'animate-text-reveal' : 'invisible'}`} 
                   style={{ animationDelay: '1.6s' }}
@@ -70,6 +79,7 @@ export default function Hero() {
                    bienestar productivo.
                  </span>
                  
+                 {/* Subrayado SVG */}
                  <svg 
                   className={`absolute w-full h-2 md:h-3 -bottom-0.5 left-0 text-amber-400 -z-10 opacity-60 ${isMounted ? 'animate-draw' : 'invisible'}`} 
                   style={{ animationDelay: '2.4s' }}
@@ -103,6 +113,7 @@ export default function Hero() {
               
               <a 
                 href="#servicios" 
+                onClick={handleScrollToEnfoque} 
                 className="cursor-pointer px-8 py-4 rounded-full border-2 border-stone-200 hover:border-amber-400 bg-transparent text-stone-600 hover:text-[#4a675e] font-bold transition-colors w-full sm:w-auto text-center"
               >
                 Ver servicios
@@ -110,12 +121,12 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* COLUMNA 2: IMAGEN */}
+          {/* COLUMNA 2: IMAGEN CON ANCHO MÁXIMO AJUSTADO */}
           <div className={`relative flex justify-center lg:justify-end transition-all duration-1000 delay-300 ease-out transform-gpu mt-8 md:mt-0 ${
             isMounted ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
           }`}>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] md:w-[400px] md:h-[400px] bg-gradient-to-tr from-[#4a675e]/20 to-amber-200/30 rounded-full -z-10"></div>
-            <div className="relative w-full max-w-[450px] aspect-[4/5] md:aspect-auto md:h-[600px]"> 
+            <div className="relative w-full max-w-[450px] aspect-[4/5] md:aspect-auto md:h-[600px] md:max-w-[500px]"> 
               <Image
                 src={HeroJanet} 
                 alt="Janet Duque - Especialista en Bienestar Emocional y Talento Humano"
