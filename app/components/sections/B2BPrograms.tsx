@@ -89,7 +89,7 @@ export default function CorporatePrograms() {
   }, [selectedProgram]);
 
   return (
-    <section className="py-24 md:py-32 bg-[#2b3d38] relative overflow-hidden selection:bg-amber-400 selection:text-[#2b3d38]">
+    <section className="py-24 md:py-32 bg-[#2b3d38] relative overflow-hidden selection:bg-amber-400 selection:!text-[#2b3d38]">
       
       {/* Fondo Decorativo Sutil Oscuro */}
       <div className="absolute inset-0 pointer-events-none z-0">
@@ -109,7 +109,7 @@ export default function CorporatePrograms() {
             className="flex items-center justify-center gap-4 mb-6"
           >
             <span className="w-8 h-[1px] bg-amber-400/50"></span>
-            <span className="text-amber-400 font-bold tracking-[0.2em] text-xs uppercase">
+            <span className="!text-amber-400 font-bold tracking-[0.2em] text-xs uppercase">
               Soluciones Corporativas
             </span>
             <span className="w-8 h-[1px] bg-amber-400/50"></span>
@@ -120,9 +120,9 @@ export default function CorporatePrograms() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-serif text-white leading-tight mb-6"
+            className="text-4xl md:text-5xl font-serif !text-white leading-tight mb-6"
           >
-            Programas <span className="text-amber-400 italic">Premium</span>
+            Programas <span className="!text-amber-400 italic">Premium</span>
           </motion.h2>
           
           <motion.p 
@@ -130,7 +130,7 @@ export default function CorporatePrograms() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-stone-300 text-lg font-light"
+            className="!text-stone-300 text-lg font-light"
           >
             Intervenciones estructuradas con enfoque terapéutico y práctico, diseñadas para transformar el agotamiento emocional en resultados medibles y un liderazgo más humano.
           </motion.p>
@@ -157,21 +157,21 @@ export default function CorporatePrograms() {
                   <div className="w-14 h-14 rounded-2xl bg-[#25342f] flex items-center justify-center text-amber-400 shadow-inner border border-white/5 group-hover:scale-110 group-hover:bg-amber-400 group-hover:text-[#2b3d38] transition-all duration-500 transform-gpu">
                     <prog.icon size={26} strokeWidth={1.5} />
                   </div>
-                  <span className="text-[10px] uppercase tracking-widest font-bold text-stone-400 bg-white/5 px-3 py-1 rounded-full border border-white/5 group-hover:border-amber-400/20 group-hover:text-amber-300 transition-colors">
+                  <span className="text-[10px] uppercase tracking-widest font-bold !text-stone-400 bg-white/5 px-3 py-1 rounded-full border border-white/5 group-hover:border-amber-400/20 group-hover:!text-amber-300 transition-colors">
                     {prog.tag}
                   </span>
                 </div>
 
-                <h3 className="text-2xl font-serif text-white mb-4 group-hover:text-amber-400 transition-colors">
+                <h3 className="text-2xl font-serif !text-white mb-4 group-hover:!text-amber-400 transition-colors">
                   {prog.title}
                 </h3>
                 
-                <p className="text-stone-400 font-light leading-relaxed mb-8 flex-grow">
+                <p className="!text-stone-400 font-light leading-relaxed mb-8 flex-grow">
                   {prog.desc}
                 </p>
 
-                <div className="flex items-center gap-2 text-stone-300 font-medium text-sm group-hover:text-amber-400 transition-colors mt-auto w-fit">
-                  <span>Explorar programa</span>
+                <div className="flex items-center gap-2 !text-stone-300 font-medium text-sm group-hover:!text-amber-400 transition-colors mt-auto w-fit">
+                  <span className="!text-inherit">Explorar programa</span>
                   <ArrowRight size={16} className="transform group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
@@ -186,12 +186,12 @@ export default function CorporatePrograms() {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <p className="text-stone-400 font-serif italic mb-6">"Más que una capacitación, es una experiencia vivencial."</p>
+          <p className="!text-stone-400 font-serif italic mb-6">"Más que una capacitación, es una experiencia vivencial."</p>
           <a 
             href="https://wa.link/6vc76u"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-transparent border-2 border-amber-400/50 hover:border-amber-400 hover:bg-amber-400 text-white hover:text-[#2b3d38] font-bold text-sm tracking-wide transition-all duration-300"
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-transparent border-2 border-amber-400/50 hover:border-amber-400 hover:bg-amber-400 !text-white hover:!text-[#2b3d38] font-bold text-sm tracking-wide transition-all duration-300"
           >
             Agendar diagnóstico empresarial
           </a>
@@ -224,7 +224,7 @@ export default function CorporatePrograms() {
               {/* Cierre */}
               <button 
                 onClick={() => setSelectedProgram(null)}
-                className="absolute top-4 right-4 z-20 w-10 h-10 bg-black/20 hover:bg-black/40 text-stone-300 hover:text-white rounded-full flex items-center justify-center transition-colors shadow-sm"
+                className="absolute top-4 right-4 z-20 w-10 h-10 bg-black/20 hover:bg-black/40 !text-stone-300 hover:!text-white rounded-full flex items-center justify-center transition-colors shadow-sm"
               >
                 <X size={20} />
               </button>
@@ -236,13 +236,13 @@ export default function CorporatePrograms() {
                   <div className="w-12 h-12 rounded-xl bg-[#25342f] flex items-center justify-center text-amber-400 mb-6 border border-white/10">
                     <selectedProgram.icon size={24} />
                   </div>
-                  <span className="text-[10px] uppercase tracking-widest font-bold text-amber-400 mb-3 block">
+                  <span className="text-[10px] uppercase tracking-widest font-bold !text-amber-400 mb-3 block">
                     {selectedProgram.tag}
                   </span>
-                  <h3 className="text-3xl font-serif text-white mb-3">
+                  <h3 className="text-3xl font-serif !text-white mb-3">
                     {selectedProgram.title}
                   </h3>
-                  <p className="text-stone-300 font-light leading-relaxed">
+                  <p className="!text-stone-300 font-light leading-relaxed">
                     {selectedProgram.desc}
                   </p>
                 </div>
@@ -251,19 +251,19 @@ export default function CorporatePrograms() {
               {/* Cuerpo del Modal (Scrollable) */}
               <div className="p-8 md:p-10 overflow-y-auto custom-scrollbar">
                 <div className="mb-8">
-                  <h4 className="text-sm uppercase tracking-widest font-bold text-stone-400 mb-3">Dirigido a</h4>
-                  <p className="text-stone-200 font-light bg-black/20 p-5 rounded-xl border border-white/5">
+                  <h4 className="text-sm uppercase tracking-widest font-bold !text-stone-400 mb-3">Dirigido a</h4>
+                  <p className="!text-stone-200 font-light bg-black/20 p-5 rounded-xl border border-white/5">
                     {selectedProgram.details.target}
                   </p>
                 </div>
 
                 <div>
-                  <h4 className="text-sm uppercase tracking-widest font-bold text-stone-400 mb-5">Qué logrará la empresa</h4>
+                  <h4 className="text-sm uppercase tracking-widest font-bold !text-stone-400 mb-5">Qué logrará la empresa</h4>
                   <ul className="space-y-4">
                     {selectedProgram.details.benefits.map((benefit, idx) => (
-                      <li key={idx} className="flex items-start gap-4 text-stone-200 font-light">
+                      <li key={idx} className="flex items-start gap-4 !text-stone-200 font-light">
                         <CheckCircle2 size={20} className="text-amber-400 shrink-0 mt-0.5" />
-                        <span className="leading-relaxed">{benefit}</span>
+                        <span className="leading-relaxed !text-inherit">{benefit}</span>
                       </li>
                     ))}
                   </ul>
@@ -276,7 +276,7 @@ export default function CorporatePrograms() {
                   href="https://wa.link/6vc76u"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-7 py-3.5 rounded-full bg-amber-400 hover:bg-amber-300 text-[#2b3d38] font-bold text-sm tracking-wide transition-all shadow-sm"
+                  className="flex items-center gap-2 px-7 py-3.5 rounded-full bg-amber-400 hover:bg-amber-300 !text-[#2b3d38] font-bold text-sm tracking-wide transition-all shadow-sm"
                 >
                   Solicitar cotización
                   <ArrowRight size={18} />
