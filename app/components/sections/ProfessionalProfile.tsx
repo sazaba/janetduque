@@ -6,10 +6,9 @@ import { motion } from "framer-motion";
 import { Building2, Heart, Mic, Quote, Sparkles } from "lucide-react";
 
 // --- IMPORTACIÓN DE ASSETS ---
-// Asegúrate de guardar tus fotos en la carpeta assets con estos nombres o actualizarlos aquí
-import janetSpeaker from "../../assets/janetprofessional.webp"; // La foto de la conferencia (image_3)
-import grupoMujeres from "../../assets/grupomujeres1.webp"; // El abrazo en círculo (image_4)
-import grupoEmpresas from "../../assets/grupomujeres2.webp"; // El círculo liderado por ti (image_5)
+import janetSpeaker from "../../assets/janetprofessional.webp"; 
+import grupoMujeres from "../../assets/grupomujeres1.webp"; 
+import grupoEmpresas from "../../assets/grupomujeres2.webp"; 
 
 const credentials = [
   {
@@ -33,20 +32,20 @@ export default function ProfessionalProfile() {
   return (
     <section 
       id="sobre-mi" 
-      className="py-24 md:py-32 px-6 bg-[#fcfdfa] relative overflow-hidden selection:bg-amber-200 selection:text-[#2b3d38]"
+      // ELIMINADO: overflow-hidden de esta etiqueta para permitir el funcionamiento de sticky
+      className="py-24 md:py-32 px-6 bg-[#fcfdfa] relative selection:bg-amber-200 selection:text-[#2b3d38]"
     >
       
-      {/* Fondo Decorativo Sutil */}
-      <div className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none z-0">
+      {/* AISLAMIENTO DEL FONDO: Se crea un contenedor absoluto específico para cortar el fondo sin afectar el sticky */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         <div className="absolute -top-[20%] right-[10%] w-[600px] h-[600px] rounded-full bg-gradient-to-bl from-[#2b3d38]/5 to-transparent blur-3xl opacity-60" />
       </div>
 
-      {/* MODIFICACIÓN 1: Cambiado items-center por items-start */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-start relative z-10">
         
-        {/* --- COLUMNA IZQUIERDA: IMAGEN EDITORIAL (CONFERENCIA) --- */}
-        {/* MODIFICACIÓN 2: Agregado lg:sticky lg:top-32 */}
-        <div className="lg:col-span-5 relative w-full max-w-md mx-auto lg:max-w-full lg:mx-0 lg:sticky lg:top-32">
+        {/* --- COLUMNA IZQUIERDA: FIJA (STICKY) --- */}
+        {/* AÑADIDO: lg:sticky lg:top-32 self-start para garantizar que se fije en desktop */}
+        <div className="lg:col-span-5 relative w-full max-w-md mx-auto lg:max-w-full lg:mx-0 lg:sticky lg:top-32 self-start z-20">
             
             <motion.div 
               className="absolute -inset-4 md:-inset-6 border border-amber-500/30 rounded-t-full rounded-b-[3rem] z-0 hidden md:block"
@@ -91,7 +90,7 @@ export default function ProfessionalProfile() {
             </motion.div>
         </div>
 
-        {/* --- COLUMNA DERECHA: CONTENIDO --- */}
+        {/* --- COLUMNA DERECHA: SCROLLEABLE --- */}
         <div className="lg:col-span-7 mt-8 lg:mt-0 lg:pl-8">
             
             <motion.div
