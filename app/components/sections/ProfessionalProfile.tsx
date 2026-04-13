@@ -6,9 +6,10 @@ import { motion } from "framer-motion";
 import { Building2, Heart, Mic, Quote, Sparkles } from "lucide-react";
 
 // --- IMPORTACIÓN DE ASSETS ---
-import janetSpeaker from "../../assets/janetprofessional.webp"; 
-import grupoMujeres from "../../assets/grupomujeres1.webp"; 
-import grupoEmpresas from "../../assets/grupomujeres2.webp"; 
+// Asegúrate de guardar tus fotos en la carpeta assets con estos nombres o actualizarlos aquí
+import janetSpeaker from "../../assets/janetprofessional.webp"; // La foto de la conferencia (image_3)
+import grupoMujeres from "../../assets/grupomujeres1.webp"; // El abrazo en círculo (image_4)
+import grupoEmpresas from "../../assets/grupomujeres2.webp"; // El círculo liderado por ti (image_5)
 
 const credentials = [
   {
@@ -40,11 +41,11 @@ export default function ProfessionalProfile() {
         <div className="absolute -top-[20%] right-[10%] w-[600px] h-[600px] rounded-full bg-gradient-to-bl from-[#2b3d38]/5 to-transparent blur-3xl opacity-60" />
       </div>
 
-      {/* CAMBIO CLAVE: Cambié items-center por items-start para que el sticky funcione correctamente */}
+      {/* MODIFICACIÓN 1: Cambiado items-center por items-start */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-start relative z-10">
         
         {/* --- COLUMNA IZQUIERDA: IMAGEN EDITORIAL (CONFERENCIA) --- */}
-        {/* CAMBIO CLAVE: Agregué lg:sticky lg:top-32 para que baje con el scroll en desktop */}
+        {/* MODIFICACIÓN 2: Agregado lg:sticky lg:top-32 */}
         <div className="lg:col-span-5 relative w-full max-w-md mx-auto lg:max-w-full lg:mx-0 lg:sticky lg:top-32">
             
             <motion.div 
@@ -124,7 +125,7 @@ export default function ProfessionalProfile() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="my-8 relative w-full h-56 md:h-72 lg:h-80 rounded-3xl overflow-hidden shadow-lg border border-amber-100"
+                  className="my-8 relative w-full h-48 md:h-64 rounded-3xl overflow-hidden shadow-lg border border-amber-100"
                 >
                     <Image 
                       src={grupoMujeres} 
@@ -144,7 +145,7 @@ export default function ProfessionalProfile() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.1 }}
-                  className="my-8 relative w-full h-56 md:h-72 lg:h-80 rounded-3xl overflow-hidden shadow-lg border border-amber-100"
+                  className="my-8 relative w-full h-48 md:h-64 rounded-3xl overflow-hidden shadow-lg border border-amber-100"
                 >
                     <Image 
                       src={grupoEmpresas} 
