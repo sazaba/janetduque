@@ -9,10 +9,11 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   // Enlaces alineados a la propuesta dual
+ // Enlaces alineados a la estructura de page.tsx
   const links = [
     { name: "Inicio", href: "#inicio" },
-    { name: "Para Mujeres", href: "#mujeres" },
-    { name: "Para Empresas", href: "#empresas" },
+    { name: "Para Mujeres", href: "#servicios" }, 
+    { name: "Para Empresas", href: "#programas-corporativos" }, 
     { name: "Acerca de Mí", href: "#sobre-mi" },
   ];
 

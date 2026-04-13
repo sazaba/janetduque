@@ -41,14 +41,14 @@ export default function Hero() {
               {/* Contenedor del Highlight Animado */}
               <span className="relative inline-block mt-2 md:mt-0">
                 {/* Texto Fantasma (sin whitespace-nowrap para permitir salto si es necesario) */}
-                <span className="invisible px-1 italic">Transformación emocional</span>
+                <span className="invisible px-1 italic">Transformación Emocional</span>
                 
                 {/* Texto Real Animado */}
                 <span 
                   className={`absolute top-0 left-0 px-1 italic text-[#4a675e] w-full h-full ${isMounted ? 'animate-text-reveal' : 'invisible'}`} 
                   style={{ animationDelay: '0.4s' }}
                 >
-                  Transformación emocional
+                  Transformación Emocional
                 </span>
                 
                 {/* Subrayado SVG */}
