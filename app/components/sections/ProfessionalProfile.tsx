@@ -43,8 +43,8 @@ export default function ProfessionalProfile() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-start relative z-10">
         
         {/* --- COLUMNA IZQUIERDA: FIJA (STICKY) --- */}
-        {/* Se cambia self-start por h-fit para asegurar el cálculo estricto de la altura en CSS Grid */}
-        <div className="lg:col-span-5 relative w-full max-w-md mx-auto lg:max-w-full lg:mx-0 lg:sticky lg:top-32 h-fit z-20">
+        {/* Agregado self-start y mantenido h-fit para asegurar el funcionamiento del sticky en Grid */}
+        <div className="lg:col-span-5 relative w-full max-w-md mx-auto lg:max-w-full lg:mx-0 lg:sticky lg:top-32 self-start h-fit z-20">
             
             <motion.div 
               className="absolute -inset-4 md:-inset-6 border border-amber-500/30 rounded-t-full rounded-b-[3rem] z-0 hidden md:block"

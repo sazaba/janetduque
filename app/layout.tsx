@@ -54,12 +54,8 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es" className="scroll-smooth">
-      <body
-        /* IMPORTANTE: Se eliminó 'overflow-x-hidden'. 
-           Esta propiedad en el body anula los elementos 'sticky' en toda la página.
-        */
-        className="font-sans min-h-screen antialiased"
-      >
+      {/* CAMBIO CLAVE AQUÍ: overflow-x-clip en lugar de overflow-x-hidden */}
+      <body className="font-sans min-h-screen antialiased overflow-x-clip">
         <Providers>
             
             {/* FONDO DE LUCES PASTEL OPTIMIZADO PARA MÓVILES */}
@@ -68,13 +64,7 @@ export default function RootLayout({
                 <div className="absolute bottom-[-10%] right-[-5%] w-[60vw] h-[60vw] rounded-full bg-[radial-gradient(circle,_#fbf3d6_0%,_transparent_60%)]"></div>
             </div>
             
-            {/* Si necesitas evitar el scroll horizontal por animaciones, 
-                usa un contenedor hijo con overflow-clip o maneja el overflow 
-                directamente en las secciones que causen el problema.
-            */}
-            <div className="relative flex flex-col min-h-screen">
-              {children}
-            </div>
+            {children}
             
         </Providers>
       </body>
