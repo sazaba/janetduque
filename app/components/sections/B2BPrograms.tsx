@@ -142,7 +142,7 @@ export default function CorporatePrograms() {
         >
           <p className="text-stone-400 font-serif italic mb-6">"Más que una capacitación, es una experiencia vivencial."</p>
           <a 
-            href="https://wa.link/2x3i8s"
+            href="https://wa.link/6vc76u"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-transparent border-2 border-amber-400/50 hover:border-amber-400 hover:bg-amber-400 text-white hover:text-[#2b3d38] font-bold text-sm tracking-wide transition-all duration-300"

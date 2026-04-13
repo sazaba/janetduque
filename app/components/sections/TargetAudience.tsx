@@ -170,7 +170,7 @@ export default function DualServicesTarget() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                   <a 
-                    href="https://wa.link/2x3i8s"
+                    href="https://wa.link/6vc76u"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-amber-500 hover:bg-amber-400 text-[#2b3d38] font-bold text-base transition-all hover:scale-105 active:scale-95 shadow-xl shadow-amber-500/20 w-full sm:w-auto"
@@ -178,7 +178,7 @@ export default function DualServicesTarget() {
                     Hablemos de ti
                   </a>
                   <a 
-                    href="https://wa.link/2x3i8s"
+                    href="https://wa.link/6vc76u"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-base transition-all hover:scale-105 active:scale-95 w-full sm:w-auto backdrop-blur-sm"

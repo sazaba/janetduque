@@ -185,7 +185,7 @@ export default function PainPointsSafariFix() {
                     className="mt-6 text-center"
                 >
                     <a 
-                        href="https://wa.link/2x3i8s"
+                        href="https://wa.link/6vc76u"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-white text-[#4a675e] font-bold text-sm transition-all hover:bg-stone-50 hover:shadow-lg hover:-translate-y-0.5 w-fit group shadow-md"

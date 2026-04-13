@@ -163,7 +163,7 @@ export default function VirtualLocation() {
               transition={{ delay: 0.6, duration: 0.5 }}
             >
               <a 
-                  href="https://wa.link/2x3i8s"
+                  href="https://wa.link/6vc76u"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-amber-400 text-[#4a675e] font-bold text-sm tracking-wide transition-all hover:bg-amber-300 hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(251,191,36,0.25)] w-fit"

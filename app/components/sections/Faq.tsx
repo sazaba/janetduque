@@ -125,7 +125,7 @@ export default function FAQ() {
                 <div className="hidden lg:block p-8 bg-white rounded-3xl border border-stone-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
                     <p className="text-sm text-stone-600 font-medium mb-6">¿Quieres conversar sobre tu caso o tu equipo?</p>
                     <a 
-                        href="https://wa.link/2x3i8s"
+                        href="https://wa.link/6vc76u"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-3 px-6 py-4 rounded-full bg-[#4a675e] hover:bg-[#384e47] text-white font-semibold text-sm transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 w-full justify-center group"
@@ -217,7 +217,7 @@ export default function FAQ() {
             <div className="lg:hidden mt-8 p-8 bg-white rounded-3xl border border-stone-100 shadow-sm text-center">
                 <p className="text-sm text-stone-600 font-medium mb-6">¿Aún tienes dudas específicas?</p>
                 <a 
-                    href="https://wa.link/2x3i8s"
+                    href="https://wa.link/6vc76u"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#4a675e] text-white font-semibold text-sm transition-all shadow-md active:scale-95 w-full justify-center"
