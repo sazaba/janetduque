@@ -54,8 +54,8 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es" className="scroll-smooth">
-      {/* CAMBIO CLAVE AQUÍ: overflow-x-clip en lugar de overflow-x-hidden */}
-      <body className="font-sans min-h-screen antialiased overflow-x-clip">
+      {/* OVERFLOW ELIMINADO POR COMPLETO */}
+      <body className="font-sans min-h-screen antialiased">
         <Providers>
             
             {/* FONDO DE LUCES PASTEL OPTIMIZADO PARA MÓVILES */}

@@ -27,8 +27,7 @@
 
   html {
     scroll-behavior: smooth;
-    /* CAMBIO CLAVE: clip en lugar de hidden */
-    overflow-x: clip; 
+    /* OVERFLOW ELIMINADO POR COMPLETO */
     width: 100%;
   }
 
@@ -37,8 +36,7 @@
     color: rgb(var(--foreground));
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* CAMBIO CLAVE: clip en lugar de hidden */
-    overflow-x: clip;
+    /* OVERFLOW ELIMINADO POR COMPLETO */
     width: 100%;
     position: relative;
     min-height: 100vh;
