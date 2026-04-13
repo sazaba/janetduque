@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
 
-// --- IMPORTACIÓN DE IMÁGENES ---
-import iconImage from "./icon.webp"; 
-
 // --- SEO OPTIMIZADO PARA JANET DUQUE ---
 export const metadata: Metadata = {
   title: {
@@ -49,11 +46,8 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  icons: {
-    icon: iconImage.src, 
-    apple: iconImage.src,
-  },
+  }
+  // Se eliminó la propiedad 'icons' porque Next.js toma el archivo icon.ico automáticamente de la carpeta app/
 };
 
 export default function RootLayout({
