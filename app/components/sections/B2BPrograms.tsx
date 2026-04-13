@@ -219,7 +219,8 @@ export default function CorporatePrograms() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
               transition={{ type: "spring", duration: 0.5 }}
-              className="relative w-full max-w-2xl bg-[#2b3d38] border border-amber-400/20 rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[95vh] md:max-h-[90vh]"
+              /* CAMBIO CLAVE: max-h-[80vh] asegura un margen visible arriba y abajo en móviles */
+              className="relative w-full max-w-2xl bg-[#2b3d38] border border-amber-400/20 rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh] md:max-h-[85vh]"
             >
               {/* Cierre */}
               <button 
@@ -242,14 +243,15 @@ export default function CorporatePrograms() {
                   <h3 className="text-2xl md:text-3xl font-serif !text-white mb-2 md:mb-3">
                     {selectedProgram.title}
                   </h3>
-                  <p className="!text-stone-300 font-light leading-relaxed text-sm md:text-base">
+                  <p className="!text-stone-300 font-light leading-relaxed text-sm md:text-base line-clamp-3 md:line-clamp-none">
                     {selectedProgram.desc}
                   </p>
                 </div>
               </div>
 
               {/* Cuerpo del Modal (Scrollable - flex-1 asegura que tome el espacio disponible) */}
-              <div className="p-6 md:p-10 overflow-y-auto custom-scrollbar flex-1">
+              {/* overscroll-contain evita que se mueva la página principal al scrollear en el modal en móviles */}
+              <div className="p-6 md:p-10 overflow-y-auto custom-scrollbar flex-1 overscroll-contain">
                 <div className="mb-6 md:mb-8">
                   <h4 className="text-xs md:text-sm uppercase tracking-widest font-bold !text-stone-400 mb-3">Dirigido a</h4>
                   <p className="!text-stone-200 font-light bg-black/20 p-4 md:p-5 rounded-xl border border-white/5 text-sm md:text-base">
