@@ -5,7 +5,7 @@ import { Providers } from "./providers";
 // --- SEO OPTIMIZADO PARA JANET DUQUE ---
 export const metadata: Metadata = {
   title: {
-    default: "Janet Duque | Psicóloga Clínica y Psicoterapeuta Online",
+    default: "Janet Duque | Psicóloga y Psicoterapeuta Online",
     template: "%s | Janet Duque",
   },
   description: "Atención psicológica online y presencial. Psicoterapia enfocada en el bienestar emocional mediante terapias contextuales de tercera generación y Terapia de Aceptación y Compromiso (ACT).",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Janet Duque" }],
   creator: "Janet Duque",
   openGraph: {
-    title: "Janet Duque | Psicóloga Clínica y Psicoterapeuta",
+    title: "Janet Duque | Psicóloga y Psicoterapeuta",
     description: "Psicoterapia presencial y online mediante terapias contextuales de tercera generación y Terapia de Aceptación y Compromiso.",
     url: "https://psicologajanetduque.com",
     siteName: "Janet Duque Psicóloga",
