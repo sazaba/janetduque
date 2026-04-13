@@ -147,11 +147,11 @@ export default function CorporatePrograms() {
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
               onClick={() => setSelectedProgram(prog)}
-              className="group relative bg-white rounded-[2rem] p-8 md:p-10 border border-gray-200 shadow-sm hover:shadow-xl hover:border-[#2b3d38]/20 transition-all duration-500 overflow-hidden cursor-pointer"
+              className="group relative bg-white rounded-[2rem] p-8 md:p-10 border border-gray-200 shadow-sm hover:shadow-xl hover:border-[#2b3d38]/20 transition-all duration-500 overflow-hidden cursor-pointer flex flex-col"
             >
               <div className={`absolute inset-0 bg-gradient-to-br from-[#2b3d38]/[0.02] to-transparent opacity-0 transition-opacity duration-500 ${hoveredIndex === index ? 'opacity-100' : ''}`} />
 
-              <div className="relative z-10 flex flex-col h-full pointer-events-none">
+              <div className="relative z-10 flex-grow pointer-events-none">
                 <div className="flex justify-between items-start mb-8">
                   <div className="w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center text-[#2b3d38] border border-gray-100 group-hover:scale-110 group-hover:bg-[#2b3d38] group-hover:text-white transition-all duration-500 transform-gpu">
                     <prog.icon size={26} strokeWidth={1.5} />
@@ -165,14 +165,28 @@ export default function CorporatePrograms() {
                   {prog.title}
                 </h3>
                 
-                <p className="text-gray-600 font-light leading-relaxed mb-8 flex-grow">
+                <p className="text-gray-600 font-light leading-relaxed mb-8">
                   {prog.desc}
                 </p>
+              </div>
 
-                <div className="flex items-center gap-2 text-[#2b3d38] font-bold text-sm group-hover:text-amber-500 transition-colors mt-auto w-fit">
-                  <span>Explorar programa</span>
+              {/* FOOTER DE LA TARJETA CON ENLACE A WHATSAPP */}
+              <div className="relative z-10 flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
+                <span className="text-gray-500 font-medium text-sm group-hover:text-[#2b3d38] transition-colors">
+                  Ver detalles
+                </span>
+                
+                {/* Enlace directo a WhatsApp (Evita abrir el modal) */}
+                <a 
+                  href="https://wa.link/6vc76u"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()} 
+                  className="flex items-center gap-2 text-amber-600 font-bold text-sm hover:text-amber-700 transition-colors bg-amber-50 hover:bg-amber-100 px-4 py-2 rounded-full"
+                >
+                  <span>WhatsApp</span>
                   <ArrowRight size={16} className="transform group-hover:translate-x-1 transition-transform" />
-                </div>
+                </a>
               </div>
             </motion.div>
           ))}
@@ -272,7 +286,7 @@ export default function CorporatePrograms() {
               {/* Footer del Modal */}
               <div className="p-6 bg-gray-50 border-t border-gray-100 flex justify-end">
                 <a 
-                  href={`https://wa.me/57XXXXXXXXX?text=Hola,%20me%20interesa%20información%20sobre%20el%20programa:%20${encodeURIComponent(selectedProgram.title)}`}
+                  href="https://wa.link/6vc76u"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-7 py-3.5 rounded-full bg-amber-400 hover:bg-amber-500 text-gray-900 font-bold text-sm tracking-wide transition-all shadow-sm"
