@@ -109,7 +109,7 @@ export default function CorporatePrograms() {
             className="flex items-center justify-center gap-4 mb-6"
           >
             <span className="w-8 h-[1px] bg-amber-400/50"></span>
-            <span className="!text-amber-400 font-bold tracking-[0.2em] text-xs uppercase">
+            <span className="!text-amber-400 font-bold tracking-[0.2em] text-xs uppercase text-center">
               Soluciones Corporativas
             </span>
             <span className="w-8 h-[1px] bg-amber-400/50"></span>
@@ -154,10 +154,10 @@ export default function CorporatePrograms() {
 
               <div className="relative z-10 flex flex-col h-full pointer-events-none">
                 <div className="flex justify-between items-start mb-8">
-                  <div className="w-14 h-14 rounded-2xl bg-[#25342f] flex items-center justify-center text-amber-400 shadow-inner border border-white/5 group-hover:scale-110 group-hover:bg-amber-400 group-hover:text-[#2b3d38] transition-all duration-500 transform-gpu">
+                  <div className="w-14 h-14 rounded-2xl bg-[#25342f] flex items-center justify-center text-amber-400 shadow-inner border border-white/5 group-hover:scale-110 group-hover:bg-amber-400 group-hover:text-[#2b3d38] transition-all duration-500 transform-gpu shrink-0">
                     <prog.icon size={26} strokeWidth={1.5} />
                   </div>
-                  <span className="text-[10px] uppercase tracking-widest font-bold !text-stone-400 bg-white/5 px-3 py-1 rounded-full border border-white/5 group-hover:border-amber-400/20 group-hover:!text-amber-300 transition-colors">
+                  <span className="text-[10px] uppercase tracking-widest font-bold !text-stone-400 bg-white/5 px-3 py-1 rounded-full border border-white/5 group-hover:border-amber-400/20 group-hover:!text-amber-300 transition-colors ml-4 text-right">
                     {prog.tag}
                   </span>
                 </div>
@@ -191,7 +191,7 @@ export default function CorporatePrograms() {
             href="https://wa.link/6vc76u"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-transparent border-2 border-amber-400/50 hover:border-amber-400 hover:bg-amber-400 !text-white hover:!text-[#2b3d38] font-bold text-sm tracking-wide transition-all duration-300"
+            className="inline-flex flex-col sm:flex-row items-center justify-center gap-3 px-8 py-4 rounded-full bg-transparent border-2 border-amber-400/50 hover:border-amber-400 hover:bg-amber-400 !text-white hover:!text-[#2b3d38] font-bold text-sm tracking-wide transition-all duration-300 w-full sm:w-auto"
           >
             Agendar diagnóstico empresarial
           </a>
@@ -219,50 +219,50 @@ export default function CorporatePrograms() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
               transition={{ type: "spring", duration: 0.5 }}
-              className="relative w-full max-w-2xl bg-[#2b3d38] border border-amber-400/20 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+              className="relative w-full max-w-2xl bg-[#2b3d38] border border-amber-400/20 rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[95vh] md:max-h-[90vh]"
             >
               {/* Cierre */}
               <button 
                 onClick={() => setSelectedProgram(null)}
-                className="absolute top-4 right-4 z-20 w-10 h-10 bg-black/20 hover:bg-black/40 !text-stone-300 hover:!text-white rounded-full flex items-center justify-center transition-colors shadow-sm"
+                className="absolute top-3 right-3 md:top-4 md:right-4 z-20 w-9 h-9 md:w-10 md:h-10 bg-black/20 hover:bg-black/40 !text-stone-300 hover:!text-white rounded-full flex items-center justify-center transition-colors shadow-sm"
               >
-                <X size={20} />
+                <X size={18} className="md:w-5 md:h-5" />
               </button>
 
-              {/* Encabezado del Modal */}
-              <div className="p-8 md:p-10 pb-8 bg-[#314640] border-b border-white/5 relative overflow-hidden">
+              {/* Encabezado del Modal (shrink-0 asegura que no colapse) */}
+              <div className="p-6 md:p-10 pb-5 md:pb-8 bg-[#314640] border-b border-white/5 relative overflow-hidden shrink-0">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-[radial-gradient(circle,_rgba(251,191,36,0.1)_0%,_transparent_70%)] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-                <div className="relative z-10">
-                  <div className="w-12 h-12 rounded-xl bg-[#25342f] flex items-center justify-center text-amber-400 mb-6 border border-white/10">
-                    <selectedProgram.icon size={24} />
+                <div className="relative z-10 pr-6 md:pr-0">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-[#25342f] flex items-center justify-center text-amber-400 mb-4 md:mb-6 border border-white/10">
+                    <selectedProgram.icon size={20} className="md:w-6 md:h-6" />
                   </div>
-                  <span className="text-[10px] uppercase tracking-widest font-bold !text-amber-400 mb-3 block">
+                  <span className="text-[10px] uppercase tracking-widest font-bold !text-amber-400 mb-2 md:mb-3 block">
                     {selectedProgram.tag}
                   </span>
-                  <h3 className="text-3xl font-serif !text-white mb-3">
+                  <h3 className="text-2xl md:text-3xl font-serif !text-white mb-2 md:mb-3">
                     {selectedProgram.title}
                   </h3>
-                  <p className="!text-stone-300 font-light leading-relaxed">
+                  <p className="!text-stone-300 font-light leading-relaxed text-sm md:text-base">
                     {selectedProgram.desc}
                   </p>
                 </div>
               </div>
 
-              {/* Cuerpo del Modal (Scrollable) */}
-              <div className="p-8 md:p-10 overflow-y-auto custom-scrollbar">
-                <div className="mb-8">
-                  <h4 className="text-sm uppercase tracking-widest font-bold !text-stone-400 mb-3">Dirigido a</h4>
-                  <p className="!text-stone-200 font-light bg-black/20 p-5 rounded-xl border border-white/5">
+              {/* Cuerpo del Modal (Scrollable - flex-1 asegura que tome el espacio disponible) */}
+              <div className="p-6 md:p-10 overflow-y-auto custom-scrollbar flex-1">
+                <div className="mb-6 md:mb-8">
+                  <h4 className="text-xs md:text-sm uppercase tracking-widest font-bold !text-stone-400 mb-3">Dirigido a</h4>
+                  <p className="!text-stone-200 font-light bg-black/20 p-4 md:p-5 rounded-xl border border-white/5 text-sm md:text-base">
                     {selectedProgram.details.target}
                   </p>
                 </div>
 
                 <div>
-                  <h4 className="text-sm uppercase tracking-widest font-bold !text-stone-400 mb-5">Qué logrará la empresa</h4>
+                  <h4 className="text-xs md:text-sm uppercase tracking-widest font-bold !text-stone-400 mb-4 md:mb-5">Qué logrará la empresa</h4>
                   <ul className="space-y-4">
                     {selectedProgram.details.benefits.map((benefit, idx) => (
-                      <li key={idx} className="flex items-start gap-4 !text-stone-200 font-light">
-                        <CheckCircle2 size={20} className="text-amber-400 shrink-0 mt-0.5" />
+                      <li key={idx} className="flex items-start gap-3 md:gap-4 !text-stone-200 font-light text-sm md:text-base">
+                        <CheckCircle2 size={18} className="text-amber-400 shrink-0 mt-0.5 md:w-5 md:h-5" />
                         <span className="leading-relaxed !text-inherit">{benefit}</span>
                       </li>
                     ))}
@@ -270,13 +270,13 @@ export default function CorporatePrograms() {
                 </div>
               </div>
 
-              {/* Footer del Modal */}
-              <div className="p-6 bg-[#25342f] border-t border-white/5 flex justify-end">
+              {/* Footer del Modal (shrink-0 asegura que el botón siempre se vea) */}
+              <div className="p-4 md:p-6 bg-[#25342f] border-t border-white/5 flex justify-end shrink-0">
                 <a 
                   href="https://wa.link/6vc76u"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-7 py-3.5 rounded-full bg-amber-400 hover:bg-amber-300 !text-[#2b3d38] font-bold text-sm tracking-wide transition-all shadow-sm"
+                  className="flex items-center justify-center gap-2 px-6 md:px-7 py-3 md:py-3.5 rounded-full bg-amber-400 hover:bg-amber-300 !text-[#2b3d38] font-bold text-sm tracking-wide transition-all shadow-sm w-full md:w-auto"
                 >
                   Solicitar cotización
                   <ArrowRight size={18} />
